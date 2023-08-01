@@ -12,6 +12,7 @@ class Business extends _i1.TableRow {
   Business({
     int? id,
     required this.fullName,
+    required this.businessName,
     required this.phone,
     required this.address,
     required this.email,
@@ -28,6 +29,8 @@ class Business extends _i1.TableRow {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       fullName: serializationManager
           .deserialize<String>(jsonSerialization['fullName']),
+      businessName: serializationManager
+          .deserialize<String>(jsonSerialization['businessName']),
       phone:
           serializationManager.deserialize<String>(jsonSerialization['phone']),
       address: serializationManager
@@ -45,6 +48,8 @@ class Business extends _i1.TableRow {
   static final t = BusinessTable();
 
   String fullName;
+
+  String businessName;
 
   String phone;
 
@@ -65,6 +70,7 @@ class Business extends _i1.TableRow {
     return {
       'id': id,
       'fullName': fullName,
+      'businessName': businessName,
       'phone': phone,
       'address': address,
       'email': email,
@@ -79,6 +85,7 @@ class Business extends _i1.TableRow {
     return {
       'id': id,
       'fullName': fullName,
+      'businessName': businessName,
       'phone': phone,
       'address': address,
       'email': email,
@@ -93,6 +100,7 @@ class Business extends _i1.TableRow {
     return {
       'id': id,
       'fullName': fullName,
+      'businessName': businessName,
       'phone': phone,
       'address': address,
       'email': email,
@@ -113,6 +121,9 @@ class Business extends _i1.TableRow {
         return;
       case 'fullName':
         fullName = value;
+        return;
+      case 'businessName':
+        businessName = value;
         return;
       case 'phone':
         phone = value;
@@ -258,6 +269,8 @@ class BusinessTable extends _i1.Table {
 
   final fullName = _i1.ColumnString('fullName');
 
+  final businessName = _i1.ColumnString('businessName');
+
   final phone = _i1.ColumnString('phone');
 
   final address = _i1.ColumnString('address');
@@ -274,6 +287,7 @@ class BusinessTable extends _i1.Table {
   List<_i1.Column> get columns => [
         id,
         fullName,
+        businessName,
         phone,
         address,
         email,

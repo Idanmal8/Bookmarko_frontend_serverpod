@@ -5,7 +5,7 @@ import 'package:bookmarko_flutter/screens/log_in/log_in_screen.dart';
 import 'package:bookmarko_flutter/screens/nav_bar/nav_bar_widget.dart';
 import 'package:provider/provider.dart';
 // import 'package:bookmarko/screens/log_in/log_in_screen.dart';
-import 'package:bookmarko_flutter/screens/registration/registration.dart';
+// import 'package:bookmarko_flutter/screens/registration/registration.dart';
 
 import 'theme.dart';
 

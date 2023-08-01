@@ -24,6 +24,7 @@ ALTER TABLE ONLY "appointments"
 CREATE TABLE "business_owners" (
   "id" serial,
   "fullName" text NOT NULL,
+  "businessName" text NOT NULL,
   "phone" text NOT NULL,
   "address" text NOT NULL,
   "email" text NOT NULL,

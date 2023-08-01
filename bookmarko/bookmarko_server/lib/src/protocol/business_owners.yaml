@@ -3,6 +3,7 @@ table: business_owners
 
 fields:
   fullName: String
+  businessName: String
   phone: String
   address: String
   email: String

@@ -1,0 +1,8 @@
+class: User
+table: user
+
+fields:
+  email: String
+  phone: String
+  fullName: String
+  joined: DateTime

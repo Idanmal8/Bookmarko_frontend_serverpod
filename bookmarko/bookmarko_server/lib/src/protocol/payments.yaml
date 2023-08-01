@@ -1,0 +1,9 @@
+class: Payment
+table: payments
+
+fields:
+  businessId: int
+  userId: int
+  dateAndTime: DateTime
+  serviceId: int
+  amount: double

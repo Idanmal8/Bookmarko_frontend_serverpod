@@ -1,0 +1,11 @@
+class: Appointment
+table: appointments
+
+fields:
+  businessId: int
+  userId: int
+  serviceName: String
+  serviceId: int
+  status: String
+  dateAndTime: DateTime
+  paid: bool

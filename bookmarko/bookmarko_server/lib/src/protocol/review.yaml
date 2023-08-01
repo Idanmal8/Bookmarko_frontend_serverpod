@@ -1,0 +1,9 @@
+class: Review
+table: reviews
+
+fields:
+  businessId: int
+  userId: int
+  stars: int
+  review: String?
+  datePublished: DateTime

@@ -1,0 +1,8 @@
+class: Service
+table: services
+
+fields:
+  businessId: int
+  serviceName: String
+  serviceDuration: int
+  servicePrice: double

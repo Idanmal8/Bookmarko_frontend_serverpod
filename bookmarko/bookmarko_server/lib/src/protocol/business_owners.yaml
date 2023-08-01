@@ -1,0 +1,11 @@
+class: Business
+table: business_owners
+
+fields:
+  fullName: String
+  phone: String
+  address: String
+  email: String
+  proffesion: String
+  joined: DateTime
+  bio: String?

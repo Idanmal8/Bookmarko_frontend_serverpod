@@ -1,0 +1,8 @@
+class: Subscription
+table: subscriptions
+
+fields:
+  businessId: int
+  userId: int
+  dateAndTime: DateTime
+  

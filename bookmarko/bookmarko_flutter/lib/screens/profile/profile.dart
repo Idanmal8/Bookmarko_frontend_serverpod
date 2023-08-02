@@ -10,27 +10,8 @@ import 'package:bookmarko_flutter/componenets/profile/Business_services/services
 import 'package:bookmarko_flutter/componenets/profile/operating_hours/operating_hours.dart';
 import 'package:provider/provider.dart';
 
-class Profile extends StatefulWidget {
+class Profile extends StatelessWidget {
   const Profile({super.key});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _ProfileState createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

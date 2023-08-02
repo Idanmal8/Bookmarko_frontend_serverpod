@@ -2,7 +2,7 @@ import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:bookmarko_flutter/componenets/buttons/log_in_button.dart';
+import 'package:bookmarko_flutter/componenets/buttons/primary_blue_button.dart';
 
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
@@ -99,7 +99,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                         ),
                         const SizedBox(height: 20), // Add space
-                        LogInButton(
+                        PrimaryBlueButton(
                             buttonText: 'Get code',
                             onPressed: context.read<AuthController>().logIn),
                       ],

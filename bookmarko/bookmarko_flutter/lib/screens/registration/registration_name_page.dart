@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:bookmarko_flutter/componenets/buttons/log_in_button.dart';
+import 'package:bookmarko_flutter/componenets/buttons/primary_blue_button.dart';
 import 'package:bookmarko_flutter/componenets/buttons/go_back_button.dart';
 
-class RegistrationForm extends StatelessWidget {
-  const RegistrationForm({super.key});
+class RegistrationNamePage extends StatelessWidget {
+  const RegistrationNamePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       body: Stack(
         children: [
-          Image.asset('assets/backgrounds/abstract_bookmarko_background.png'),
+          Positioned.fill(
+            child: Image.asset('assets/backgrounds/abstract_bookmarko_background.png', fit: BoxFit.cover),
+          ),
           Padding(
             padding: const EdgeInsets.all(20),
             child: SafeArea(
@@ -44,7 +47,7 @@ class RegistrationForm extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  LogInButton(onPressed: () {}, buttonText: 'Next')
+                  PrimaryBlueButton(onPressed: () {}, buttonText: 'Next')
                 ],
               ),
             ),

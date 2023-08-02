@@ -5,14 +5,6 @@ class PersonalInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PersonalInformationBox();
-  }
-}
-
-class PersonalInformationBox extends StatelessWidget {
-  const PersonalInformationBox({super.key});
-  @override
-  Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width - 20,

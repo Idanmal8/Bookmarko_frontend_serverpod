@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         home: Builder(builder: (homeGatewayContext) {
           return homeGatewayContext.watch<AuthController>().isLogged
               ? const NavBar()
-              : ProffesionRegistrationPage();
+              : const LogInScreen();
         }),
       ),
     );

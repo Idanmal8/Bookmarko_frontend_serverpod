@@ -28,8 +28,9 @@ class _DropdownButtonExampleState extends State<DropDownButtonWidget> {
         color: Colors.deepPurpleAccent,
       ),
       onChanged: (String? value) {
-        if (value == null)
+        if (value == null) {
           return; // Add this line (or check for null in some other way
+        }
         // This is called when the user selects an item.
         setState(() {
           dropdownValue = value;

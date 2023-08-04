@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:bookmarko_flutter/componenets/buttons/primary_blue_button.dart';
 import 'package:bookmarko_flutter/componenets/buttons/go_back_button.dart';
-import 'package:bookmarko_flutter/componenets/Registration/dropdown_button.dart';
+// import 'package:bookmarko_flutter/componenets/Registration/dropdown_button.dart';
 
 class ProffesionRegistrationPage extends StatelessWidget {
   final List<String> professionList = [

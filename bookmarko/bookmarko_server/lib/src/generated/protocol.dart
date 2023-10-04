@@ -490,7 +490,13 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String',
         ),
         _i2.ColumnDefinition(
-          name: 'fullName',
+          name: 'firstName',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'lastName',
           columnType: _i2.ColumnType.text,
           isNullable: false,
           dartType: 'String',

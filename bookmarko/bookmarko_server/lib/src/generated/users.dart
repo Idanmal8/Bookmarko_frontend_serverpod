@@ -13,7 +13,8 @@ class User extends _i1.TableRow {
     int? id,
     required this.email,
     required this.phone,
-    required this.fullName,
+    required this.firstName,
+    required this.lastName,
     required this.joined,
   }) : super(id);
 
@@ -27,8 +28,10 @@ class User extends _i1.TableRow {
           serializationManager.deserialize<String>(jsonSerialization['email']),
       phone:
           serializationManager.deserialize<String>(jsonSerialization['phone']),
-      fullName: serializationManager
-          .deserialize<String>(jsonSerialization['fullName']),
+      firstName: serializationManager
+          .deserialize<String>(jsonSerialization['firstName']),
+      lastName: serializationManager
+          .deserialize<String>(jsonSerialization['lastName']),
       joined: serializationManager
           .deserialize<DateTime>(jsonSerialization['joined']),
     );
@@ -40,7 +43,9 @@ class User extends _i1.TableRow {
 
   String phone;
 
-  String fullName;
+  String firstName;
+
+  String lastName;
 
   DateTime joined;
 
@@ -53,7 +58,8 @@ class User extends _i1.TableRow {
       'id': id,
       'email': email,
       'phone': phone,
-      'fullName': fullName,
+      'firstName': firstName,
+      'lastName': lastName,
       'joined': joined,
     };
   }
@@ -64,7 +70,8 @@ class User extends _i1.TableRow {
       'id': id,
       'email': email,
       'phone': phone,
-      'fullName': fullName,
+      'firstName': firstName,
+      'lastName': lastName,
       'joined': joined,
     };
   }
@@ -75,7 +82,8 @@ class User extends _i1.TableRow {
       'id': id,
       'email': email,
       'phone': phone,
-      'fullName': fullName,
+      'firstName': firstName,
+      'lastName': lastName,
       'joined': joined,
     };
   }
@@ -95,8 +103,11 @@ class User extends _i1.TableRow {
       case 'phone':
         phone = value;
         return;
-      case 'fullName':
-        fullName = value;
+      case 'firstName':
+        firstName = value;
+        return;
+      case 'lastName':
+        lastName = value;
         return;
       case 'joined':
         joined = value;
@@ -229,7 +240,9 @@ class UserTable extends _i1.Table {
 
   final phone = _i1.ColumnString('phone');
 
-  final fullName = _i1.ColumnString('fullName');
+  final firstName = _i1.ColumnString('firstName');
+
+  final lastName = _i1.ColumnString('lastName');
 
   final joined = _i1.ColumnDateTime('joined');
 
@@ -238,7 +251,8 @@ class UserTable extends _i1.Table {
         id,
         email,
         phone,
-        fullName,
+        firstName,
+        lastName,
         joined,
       ];
 }

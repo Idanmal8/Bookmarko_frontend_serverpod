@@ -4,5 +4,6 @@ table: user
 fields:
   email: String
   phone: String
-  fullName: String
+  firstName: String
+  lastName: String
   joined: DateTime

@@ -126,7 +126,8 @@ CREATE TABLE "user" (
   "id" serial,
   "email" text NOT NULL,
   "phone" text NOT NULL,
-  "fullName" text NOT NULL,
+  "firstName" text NOT NULL,
+  "lastName" text NOT NULL,
   "joined" timestamp without time zone NOT NULL
 );
 

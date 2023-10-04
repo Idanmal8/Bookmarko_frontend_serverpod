@@ -49,10 +49,7 @@ class _NavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) =>
-          ProfileController(context.read<AuthController>().userId ?? ''),
-      child: Scaffold(
+    return Scaffold(
         bottomNavigationBar: NavigationBar(
           height: 52,
           backgroundColor: const Color.fromARGB(0, 255, 255, 255),
@@ -135,7 +132,7 @@ class _NavBarState extends State<NavBar> {
           const Calendar(),
           const Profile(),
         ][currentPageIndex],
-      ),
-    );
+      );
+    
   }
 }

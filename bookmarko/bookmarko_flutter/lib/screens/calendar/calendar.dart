@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import 'package:bookmarko_flutter/componenets/appointment/appointments.dart';
+import 'package:bookmarko_flutter/widgets/appointment/appointments.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});

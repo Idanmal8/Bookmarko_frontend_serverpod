@@ -41,6 +41,7 @@ class Subscription extends _i1.TableRow {
 
   @override
   String get tableName => 'subscriptions';
+
   @override
   Map<String, dynamic> toJson() {
     return {

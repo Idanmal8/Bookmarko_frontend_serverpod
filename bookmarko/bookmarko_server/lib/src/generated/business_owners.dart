@@ -65,6 +65,7 @@ class Business extends _i1.TableRow {
 
   @override
   String get tableName => 'business_owners';
+
   @override
   Map<String, dynamic> toJson() {
     return {

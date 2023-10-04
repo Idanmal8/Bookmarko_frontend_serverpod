@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:bookmarko_flutter/componenets/backgrounds/background_widget.dart';
-import 'package:bookmarko_flutter/componenets/inputs/digits_catcher.dart';
+import 'package:bookmarko_flutter/widgets/backgrounds/background_widget.dart';
+import 'package:bookmarko_flutter/widgets/inputs/digits_catcher.dart';
 
 // ignore: camel_case_types
-class Log_in_code_screen extends StatefulWidget {
-  const Log_in_code_screen({
+class Log_in_otp_screen extends StatefulWidget {
+  const Log_in_otp_screen({
     super.key,
   });
 
   @override
-  State<Log_in_code_screen> createState() => _LogInCodeScreen();
+  State<Log_in_otp_screen> createState() => _LogInCodeScreen();
 }
 
 // ignore: camel_case_types
-class _LogInCodeScreen extends State<Log_in_code_screen> {
+class _LogInCodeScreen extends State<Log_in_otp_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

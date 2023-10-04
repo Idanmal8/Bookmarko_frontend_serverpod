@@ -50,6 +50,7 @@ class Review extends _i1.TableRow {
 
   @override
   String get tableName => 'reviews';
+
   @override
   Map<String, dynamic> toJson() {
     return {

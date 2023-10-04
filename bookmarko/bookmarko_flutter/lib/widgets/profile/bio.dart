@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:bookmarko_flutter/componenets/buttons/follow_button.dart';
-import 'package:bookmarko_flutter/componenets/buttons/messege_button.dart';
-import 'package:bookmarko_flutter/componenets/buttons/options_button.dart';
+import 'package:bookmarko_flutter/widgets/buttons/follow_button.dart';
+import 'package:bookmarko_flutter/widgets/buttons/messege_button.dart';
+import 'package:bookmarko_flutter/widgets/buttons/options_button.dart';
 
 class BioField extends StatelessWidget {
   const BioField({super.key});

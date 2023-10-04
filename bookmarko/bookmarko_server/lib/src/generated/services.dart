@@ -46,6 +46,7 @@ class Service extends _i1.TableRow {
 
   @override
   String get tableName => 'services';
+
   @override
   Map<String, dynamic> toJson() {
     return {

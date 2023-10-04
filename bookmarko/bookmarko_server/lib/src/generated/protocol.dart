@@ -18,6 +18,8 @@ import 'review.dart' as _i8;
 import 'services.dart' as _i9;
 import 'subscriptions.dart' as _i10;
 import 'users.dart' as _i11;
+import 'package:bookmarko_server/src/generated/operating_hours.dart' as _i12;
+import 'package:bookmarko_server/src/generated/services.dart' as _i13;
 export 'appointments.dart';
 export 'business_owners.dart';
 export 'example.dart';
@@ -585,6 +587,15 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == _i1.getType<_i11.User?>()) {
       return (data != null ? _i11.User.fromJson(data, this) : null) as T;
+    }
+    if (t == List<_i12.OperatingHours?>) {
+      return (data as List)
+          .map((e) => deserialize<_i12.OperatingHours?>(e))
+          .toList() as dynamic;
+    }
+    if (t == List<_i13.Service?>) {
+      return (data as List).map((e) => deserialize<_i13.Service?>(e)).toList()
+          as dynamic;
     }
     try {
       return _i2.Protocol().deserialize<T>(data, t);

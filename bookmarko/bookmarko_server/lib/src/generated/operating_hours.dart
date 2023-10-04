@@ -45,6 +45,7 @@ class OperatingHours extends _i1.TableRow {
 
   @override
   String get tableName => 'operating_hours';
+
   @override
   Map<String, dynamic> toJson() {
     return {

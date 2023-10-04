@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:bookmarko_flutter/componenets/screens/main_screen_view.dart';
+import 'package:bookmarko_flutter/widgets/screens/main_screen_view.dart';
 import 'package:bookmarko_flutter/controllers/profile_controller.dart';
 // import 'package:bookmarko_flutter/models/badge_model.dart';
 
-import 'package:bookmarko_flutter/componenets/profile/bio.dart';
-import 'package:bookmarko_flutter/componenets/profile/personal_information.dart';
-import 'package:bookmarko_flutter/componenets/profile/Badges/badge_creation.dart';
-import 'package:bookmarko_flutter/componenets/profile/Business_services/services_widget.dart';
-import 'package:bookmarko_flutter/componenets/profile/operating_hours/operating_hours.dart';
+import 'package:bookmarko_flutter/widgets/profile/bio.dart';
+import 'package:bookmarko_flutter/widgets/profile/personal_information.dart';
+import 'package:bookmarko_flutter/widgets/profile/Badges/badge_creation.dart';
+import 'package:bookmarko_flutter/widgets/profile/Business_services/services_widget.dart';
+import 'package:bookmarko_flutter/widgets/profile/operating_hours/operating_hours.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {

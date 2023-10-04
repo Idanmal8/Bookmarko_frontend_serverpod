@@ -60,6 +60,7 @@ class Appointment extends _i1.TableRow {
 
   @override
   String get tableName => 'appointments';
+
   @override
   Map<String, dynamic> toJson() {
     return {

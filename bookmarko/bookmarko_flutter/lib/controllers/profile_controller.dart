@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
 class ProfileController extends ChangeNotifier {
-  final String _userId;
+  final String _userPhone;
   final List<BadgeModel> _badges = const [
     BadgeModel(
       name: 'Beginner',
@@ -18,7 +18,7 @@ class ProfileController extends ChangeNotifier {
       color: Color(0xFFE0E0E0),
     ),
   ];
-  ProfileController(String userId) : _userId = userId;
+  ProfileController(String userPhone) : _userPhone = userPhone;
 
   List<BadgeModel> get badges => [..._badges];
 }

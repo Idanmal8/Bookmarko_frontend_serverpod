@@ -17,6 +17,8 @@ import 'review.dart' as _i7;
 import 'services.dart' as _i8;
 import 'subscriptions.dart' as _i9;
 import 'users.dart' as _i10;
+import 'package:bookmarko_client/src/protocol/operating_hours.dart' as _i11;
+import 'package:bookmarko_client/src/protocol/services.dart' as _i12;
 export 'appointments.dart';
 export 'business_owners.dart';
 export 'example.dart';
@@ -100,6 +102,15 @@ class Protocol extends _i1.SerializationManager {
     }
     if (t == _i1.getType<_i10.User?>()) {
       return (data != null ? _i10.User.fromJson(data, this) : null) as T;
+    }
+    if (t == List<_i11.OperatingHours?>) {
+      return (data as List)
+          .map((e) => deserialize<_i11.OperatingHours?>(e))
+          .toList() as dynamic;
+    }
+    if (t == List<_i12.Service?>) {
+      return (data as List).map((e) => deserialize<_i12.Service?>(e)).toList()
+          as dynamic;
     }
     return super.deserialize<T>(data, t);
   }

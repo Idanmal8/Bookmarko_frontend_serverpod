@@ -46,6 +46,7 @@ class User extends _i1.TableRow {
 
   @override
   String get tableName => 'user';
+
   @override
   Map<String, dynamic> toJson() {
     return {

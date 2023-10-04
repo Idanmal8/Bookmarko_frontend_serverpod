@@ -19,7 +19,8 @@ class LogInScreen extends StatelessWidget {
           LoginScreenController(authController: context.read<AuthController>()),
       child: Builder(
         builder: (context) {
-          return Stack(
+          return Scaffold(
+              body: Stack(
             children: [
               Image.asset(
                 'assets/backgrounds/abstract_bookmarko_background.png',
@@ -77,7 +78,21 @@ class LogInScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 20), // Add space
                               PrimaryBlueButton(
-                                  buttonText: 'Get code', onPressed: () => {}),
+                                  buttonText: 'Get code',
+                                  onPressed: () =>
+                                      {print("Connect")}),
+                              const SizedBox(height: 20), // Add space
+                              Center(
+                                child: InkWell(
+                                  onTap: () => {print("Not a user? Sign up")},
+                                  child: const Text(
+                                    'Not a user? Sign up',
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -87,7 +102,7 @@ class LogInScreen extends StatelessWidget {
                 ),
               ),
             ],
-          );
+          ));
         },
       ),
     );

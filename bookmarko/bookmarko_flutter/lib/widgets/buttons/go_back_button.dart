@@ -7,7 +7,10 @@ class GoBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Icon(Icons.arrow_back_ios_outlined,
-        color: Colors.black, size: 25);
+    return InkWell(
+      onTap: onPressed,
+      child: const Icon(Icons.arrow_back_ios_outlined,
+          color: Colors.black, size: 25),
+    );
   }
 }

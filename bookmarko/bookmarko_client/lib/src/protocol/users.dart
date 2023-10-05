@@ -13,7 +13,8 @@ class User extends _i1.SerializableEntity {
     this.id,
     required this.email,
     required this.phone,
-    required this.fullName,
+    required this.firstName,
+    required this.lastName,
     required this.joined,
   });
 
@@ -27,8 +28,10 @@ class User extends _i1.SerializableEntity {
           serializationManager.deserialize<String>(jsonSerialization['email']),
       phone:
           serializationManager.deserialize<String>(jsonSerialization['phone']),
-      fullName: serializationManager
-          .deserialize<String>(jsonSerialization['fullName']),
+      firstName: serializationManager
+          .deserialize<String>(jsonSerialization['firstName']),
+      lastName: serializationManager
+          .deserialize<String>(jsonSerialization['lastName']),
       joined: serializationManager
           .deserialize<DateTime>(jsonSerialization['joined']),
     );
@@ -43,7 +46,9 @@ class User extends _i1.SerializableEntity {
 
   String phone;
 
-  String fullName;
+  String firstName;
+
+  String lastName;
 
   DateTime joined;
 
@@ -53,7 +58,8 @@ class User extends _i1.SerializableEntity {
       'id': id,
       'email': email,
       'phone': phone,
-      'fullName': fullName,
+      'firstName': firstName,
+      'lastName': lastName,
       'joined': joined,
     };
   }

@@ -6,6 +6,10 @@ To run your server, you first need to start Postgres and Redis. It's easiest to 
 
     docker compose up --build --detach
 
+To run tables script do this:
+
+docker compose -f docker-compose-deploy.yaml run -T --rm postgres env PGPASSWORD="MJhDm5mHr7_KswU48AiWKczMGywA6N-I" psql -h postgres -U postgres -d bookmarko < generated/tables-serverpod.pgsql
+
 Then you can start the Serverpod server.
 
     dart bin/main.dart

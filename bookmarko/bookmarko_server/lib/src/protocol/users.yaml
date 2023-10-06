@@ -1,5 +1,5 @@
 class: User
-table: user
+table: users
 
 fields:
   email: String

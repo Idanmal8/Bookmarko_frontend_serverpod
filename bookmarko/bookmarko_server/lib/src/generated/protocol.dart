@@ -467,7 +467,7 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
-      name: 'user',
+      name: 'users',
       schema: 'public',
       columns: [
         _i2.ColumnDefinition(
@@ -475,7 +475,7 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int?',
-          columnDefault: 'nextval(\'user_id_seq\'::regclass)',
+          columnDefault: 'nextval(\'users_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'email',
@@ -511,7 +511,7 @@ class Protocol extends _i1.SerializationManagerServer {
       foreignKeys: [],
       indexes: [
         _i2.IndexDefinition(
-          indexName: 'user_pkey',
+          indexName: 'users_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(

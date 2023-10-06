@@ -119,10 +119,10 @@ ALTER TABLE ONLY "subscriptions"
 
 
 --
--- Class User as table user
+-- Class User as table users
 --
 
-CREATE TABLE "user" (
+CREATE TABLE "users" (
   "id" serial,
   "email" text NOT NULL,
   "phone" text NOT NULL,
@@ -131,7 +131,7 @@ CREATE TABLE "user" (
   "joined" timestamp without time zone NOT NULL
 );
 
-ALTER TABLE ONLY "user"
-  ADD CONSTRAINT user_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY "users"
+  ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 

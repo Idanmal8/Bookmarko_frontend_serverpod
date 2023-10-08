@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:bookmarko_flutter/utils/register_form_mixin.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
+import 'package:bookmarko_flutter/screens/otp_screen/otp_screen.dart';
 
 class RegistrationScreenController extends ChangeNotifier
     with RegisterFormStateMixin {
@@ -20,6 +21,14 @@ class RegistrationScreenController extends ChangeNotifier
     Navigator.of(context).pop();
   }
 
+  Future<void> goToOtpScreen(BuildContext context) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const OtpScreen(),
+      ),
+    );
+  }
+
   Future<void> onRegisterButton(BuildContext context) async {
     String firstName = '';
     String lastName = '';
@@ -29,7 +38,7 @@ class RegistrationScreenController extends ChangeNotifier
     isLoading = true;
     notifyListeners();
 
-    switch (userPhoneNumberController.text.length) {
+    switch (userFullNameController.text.split(' ').length) {
       case 2:
         firstName = userFullNameController.text.split(' ')[0];
         lastName = userFullNameController.text.split(' ')[1];
@@ -43,21 +52,21 @@ class RegistrationScreenController extends ChangeNotifier
     }
 
     final response = await _connectionController.client?.users.addUser(
-      User(
-        firstName: firstName,
-        lastName: lastName,
-        phone: userPhoneNumberController.text,
-        email: userEmailController.text,
-        joined: DateTime.now(),
-      ),
-    ) ?? false;
+          User(
+            firstName: firstName,
+            lastName: lastName,
+            phone: userPhoneNumberController.text,
+            email: userEmailController.text,
+            joined: DateTime.now(),
+          ),
+        ) ??
+        false;
 
     isLoading = false;
     notifyListeners();
 
     if (response == false) {
-      _errorMessage = 'Registration failed, please try again later.';
-      print('try again');
+      _errorMessage = 'This email is already in use';
       notifyListeners();
       return;
     }

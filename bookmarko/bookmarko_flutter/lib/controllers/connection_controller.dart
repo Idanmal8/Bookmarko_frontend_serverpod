@@ -11,13 +11,13 @@ class ConnectionController extends ChangeNotifier {
 
   ConnectionController() {
     if (kIsWeb) {
-      _client = Client('http://localhost:8080/',
+      _client = Client('http://127.0.0.1:5051/',
           authenticationKeyManager: FlutterAuthenticationKeyManager())
         ..connectivityMonitor = FlutterConnectivityMonitor();
       return;
     }
     _client = Client(
-        Platform.isAndroid ? 'http://10.0.2.2:8080/' : 'http://localhost:8080/',
+        Platform.isAndroid ? 'http://10.0.2.2:5051/' : 'http://127.0.0.1:5051/',
         authenticationKeyManager: FlutterAuthenticationKeyManager())
       ..connectivityMonitor = FlutterConnectivityMonitor();
   }

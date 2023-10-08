@@ -30,6 +30,7 @@ class RegistrationNamePage extends StatelessWidget {
                 ),
                 Consumer<RegistrationScreenController>(
                   builder: (context, controller, _) {
+                    final errorMessage = controller.errorMessage;
                     return Padding(
                       padding: const EdgeInsets.all(20),
                       child: SafeArea(
@@ -37,7 +38,11 @@ class RegistrationNamePage extends StatelessWidget {
                           children: <Widget>[
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: [GoBackButton(onPressed: () => controller.goToLoginScreen(context))],
+                              children: [
+                                GoBackButton(
+                                    onPressed: () =>
+                                        controller.goToLoginScreen(context))
+                              ],
                             ),
                             const SizedBox(height: 20),
                             Center(
@@ -55,10 +60,37 @@ class RegistrationNamePage extends StatelessWidget {
                             RegistrationForm(
                                 controller: context
                                     .read<RegistrationScreenController>()),
-                          
+                            if (errorMessage != null)
+                              Column(
+                                children: [
+                                  SizedBox(
+                                    height: 24,
+                                    child: errorMessage == null
+                                        ? null
+                                        : Row(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0),
+                                                child: Text(
+                                                  errorMessage,
+                                                  style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .error),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                  ),
+                                ],
+                              ),
                             const SizedBox(height: 20),
                             PrimaryBlueButton(
-                                onPressed: () => controller.onRegisterButton(context), buttonText: 'Next'),
+                                onPressed: () =>
+                                    controller.goToOtpScreen(context),
+                                buttonText: 'Next'),
                           ],
                         ),
                       ),

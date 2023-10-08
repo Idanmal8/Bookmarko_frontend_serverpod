@@ -9,7 +9,7 @@ import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 
 import 'package:provider/provider.dart';
-import 'theme.dart';
+// import 'theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

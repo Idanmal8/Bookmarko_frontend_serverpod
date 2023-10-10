@@ -63,9 +63,8 @@ class LogInScreen extends StatelessWidget {
                                   children: [
                                     Material(
                                       child: IntlPhoneField(
-                                        controller: context
-                                            .read<LoginScreenController>()
-                                            .phoneNumberController,
+                                        controller:
+                                            controller.phoneNumberController,
                                         dropdownTextStyle: const TextStyle(
                                             fontFamily: 'Poppins'),
                                         disableLengthCheck: true,
@@ -84,7 +83,7 @@ class LogInScreen extends StatelessWidget {
                                     PrimaryBlueButton(
                                       buttonText: 'Get code',
                                       onPressed: () =>
-                                          controller.goToSignUpScreen(context),
+                                          controller.onLoginButton(),
                                     ),
                                     const SizedBox(height: 20), // Add space
                                     Center(

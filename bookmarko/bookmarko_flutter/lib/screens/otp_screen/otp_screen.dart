@@ -1,3 +1,4 @@
+import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,11 @@ import 'package:bookmarko_flutter/widgets/buttons/go_back_button.dart';
 import '../../widgets/buttons/primary_blue_button.dart';
 
 class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key});
+  final User user;
+  const OtpScreen({
+    required this.user,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +77,7 @@ class OtpScreen extends StatelessWidget {
                           const SizedBox(height: 50),
                           PrimaryBlueButton(
                             buttonText: 'Confirm',
-                            onPressed: () =>
-                                controller.goToDashBoard(context),
+                            onPressed: () => controller.goToDashBoard(context),
                           ),
                         ],
                       ),

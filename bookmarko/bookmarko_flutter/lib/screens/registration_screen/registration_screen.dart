@@ -89,7 +89,7 @@ class RegistrationNamePage extends StatelessWidget {
                             const SizedBox(height: 20),
                             PrimaryBlueButton(
                                 onPressed: () =>
-                                    controller.goToOtpScreen(context),
+                                    controller.onRegisterButton(context),
                                 buttonText: 'Next'),
                           ],
                         ),

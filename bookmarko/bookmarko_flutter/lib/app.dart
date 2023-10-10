@@ -1,9 +1,9 @@
+import 'package:bookmarko_flutter/screens/nav_bar/nav_bar_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookmarko_flutter/screens/log_in/log_in_screen.dart';
 // import 'package:bookmarko_flutter/screens/nav_bar/nav_bar_widget.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 
 import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
                 builder: (context, controller, child) {
                   return controller.isLogIn
                       ? const LogInScreen()
-                      : const LogInScreen();
+                      : NavBarScreen();
                 },
                 child: const LogInScreen(),
               ),

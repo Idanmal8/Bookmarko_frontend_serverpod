@@ -17,14 +17,14 @@ class LoginScreenController extends ChangeNotifier {
   String? get errorMessage => _errorMessage == null ? null : '$_errorMessage';
 
   void onLoginButton() async {
+    print('response: ${phoneNumberController.text}');
+
     if (formkey.currentState?.validate() != true) return;
 
     isLoading = true;
     notifyListeners();
 
-    final response = await authController.login(
-      phoneNumberController.text
-    );
+    final response = await authController.login(phoneNumberController.text);
 
     _errorMessage = response != true ? 'מספר פלאפון שגוי' : null;
     isLoading = false;
@@ -33,9 +33,7 @@ class LoginScreenController extends ChangeNotifier {
 
   Future<void> goToSignUpScreen(BuildContext context) async {
     await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const RegistrationNamePage()
-        ),
+      MaterialPageRoute(builder: (context) => const RegistrationNamePage()),
     );
   }
 }

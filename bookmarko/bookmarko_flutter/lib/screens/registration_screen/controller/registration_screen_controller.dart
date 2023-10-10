@@ -21,14 +21,6 @@ class RegistrationScreenController extends ChangeNotifier
     Navigator.of(context).pop();
   }
 
-  Future<void> goToOtpScreen(BuildContext context) async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const OtpScreen(),
-      ),
-    );
-  }
-
   Future<void> onRegisterButton(BuildContext context) async {
     String firstName = '';
     String lastName = '';

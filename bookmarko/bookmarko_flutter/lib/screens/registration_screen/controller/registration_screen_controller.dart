@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:bookmarko_flutter/utils/register_form_mixin.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
-import 'package:bookmarko_flutter/screens/otp_screen/otp_screen.dart';
 
 class RegistrationScreenController extends ChangeNotifier
     with RegisterFormStateMixin {

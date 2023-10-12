@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:bookmarko_flutter/widgets/buttons/follow_button.dart';
-import 'package:bookmarko_flutter/widgets/buttons/messege_button.dart';
-import 'package:bookmarko_flutter/widgets/buttons/options_button.dart';
+import 'package:bookmarko_flutter/screens/profile/widget/follow_button.dart';
+import 'package:bookmarko_flutter/screens/profile/widget/messege_button.dart';
+import 'package:bookmarko_flutter/screens/profile/widget/options_button.dart';
 
 class BioField extends StatelessWidget {
   const BioField({super.key});
@@ -20,8 +20,7 @@ class BioBox extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width - 20,
-      child: Column(mainAxisAlignment: MainAxisAlignment.start,
-      children: [
+      child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         Column(
           children: [
             const Text(
@@ -71,14 +70,14 @@ class BioBox extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-         const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              FollowButton(),
-              MessegeButton(),
-              OptionButton(),
-            ],
-          ),
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            FollowButton(),
+            MessegeButton(),
+            OptionButton(),
+          ],
+        ),
         const SizedBox(height: 10),
         const Text(
           'As a kid i followed a dream of becoming a software engineer, now i am a software engineer and i am following a dream of becoming a barber.',

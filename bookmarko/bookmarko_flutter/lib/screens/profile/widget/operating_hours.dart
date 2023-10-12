@@ -5,17 +5,7 @@ class OperatingHours extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const OperatingHoursBox();
-  }
-}
-
-class OperatingHoursBox extends StatelessWidget {
-  const OperatingHoursBox({super.key});
-
-  @override
-  Widget build(BuildContext context) {
     return Container(
-      decoration: _separationLine(),
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width - 20,
       child: Padding(
@@ -59,16 +49,5 @@ class OperatingHoursBox extends StatelessWidget {
             Text(hours)
           ],
         ));
-  }
-
-  BoxDecoration _separationLine() {
-    return const BoxDecoration(
-      border: Border(
-        top: BorderSide(
-          color: Color.fromARGB(255, 143, 143, 143), // Border color
-          width: 0.1, // Border width
-        ),
-      ),
-    );
   }
 }

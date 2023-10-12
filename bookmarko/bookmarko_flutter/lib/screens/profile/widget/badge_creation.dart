@@ -19,7 +19,11 @@ class Badges extends StatelessWidget {
           runAlignment: WrapAlignment.start,
           spacing: 8.0, // Horizontal spacing between badges
           runSpacing: 8.0, // Vertical spacing between rows
-          children: badgesList.map((badgeTitle) => Badge(badgeTitle)).toList(),
+          children: badgesList
+              .map((badgeTitle) => Badge(
+                    badge: badgeTitle,
+                  ))
+              .toList(),
         ),
       ),
     );
@@ -29,7 +33,10 @@ class Badges extends StatelessWidget {
 class Badge extends StatelessWidget {
   final BadgeModel badge;
 
-  const Badge(this.badge, {super.key});
+  const Badge({
+    super.key,
+    required this.badge,
+  });
 
   @override
   Widget build(BuildContext context) {

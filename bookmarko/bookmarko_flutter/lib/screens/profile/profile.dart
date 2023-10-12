@@ -1,75 +1,53 @@
-import 'package:flutter/material.dart';
-import 'package:bookmarko_flutter/widgets/screens/main_screen_view.dart';
-import 'package:bookmarko_flutter/controllers/profile_controller.dart';
-// import 'package:bookmarko_flutter/models/badge_model.dart';
-
-import 'package:bookmarko_flutter/widgets/profile/bio.dart';
-import 'package:bookmarko_flutter/widgets/profile/personal_information.dart';
-import 'package:bookmarko_flutter/widgets/profile/Badges/badge_creation.dart';
-import 'package:bookmarko_flutter/widgets/profile/Business_services/services_widget.dart';
-import 'package:bookmarko_flutter/widgets/profile/operating_hours/operating_hours.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+
+import 'package:bookmarko_flutter/screens/profile/widget/profile_background_banner.dart';
+import 'package:bookmarko_flutter/screens/profile/widget/profile_picture.dart';
+
+import 'package:bookmarko_flutter/screens/profile/widget/personal_information.dart';
+import 'package:bookmarko_flutter/screens/profile/widget/operating_hours.dart';
+import 'package:bookmarko_flutter/screens/profile/widget/services_widget.dart';
+import 'package:bookmarko_flutter/screens/profile/widget/bio.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ProfileController controller = context.watch<ProfileController>();
-    return MainScreenView(
-      child: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 2.9,
-            child: Stack(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height / 4,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/backgrounds/backgroundGradient.png',
-                      ),
-                      fit: BoxFit.cover,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 2.9,
+              child: Stack(
+                children: [
+                  ProfileBackgroundBanner(
+                    onPressed: () => {
+                      print("sd"),
+                    },
+                  ),
+                  Positioned(
+                    top: MediaQuery.of(context).size.height / 4 - 75,
+                    left: MediaQuery.of(context).size.width / 2 - 75,
+                    child: ProfilePicture(
+                      onPressed: () => {
+                        print("sd2"),
+                      },
                     ),
                   ),
-                ),
-                Positioned(
-                  top: MediaQuery.of(context).size.height / 4 - 75,
-                  left: MediaQuery.of(context).size.width / 2 - 75,
-                  child: Container(
-                    width: 150,
-                    height: 150,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: ClipOval(
-                        child: Image.asset(
-                          'assets/profile/idan_profile.png',
-                          width: 140,
-                          height: 140,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const BioBox(),
-          const Divider(),
-          const PersonalInformation(),
-          const Divider(),
-          Badges(badgesList: controller.badges),
-          const Divider(),
-          const Services(),
-          const Divider(),
-          const OperatingHoursBox(),
-        ],
+            const BioBox(),
+            const Divider(),
+            const PersonalInformation(),
+            const Divider(),
+            const Services(),
+            const Divider(),
+            const OperatingHours(),
+          ],
+        ),
       ),
     );
   }

@@ -1,24 +1,17 @@
+import 'package:bookmarko_client/bookmarko_client.dart';
+import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 import 'package:bookmarko_flutter/models/badge_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
 class ProfileController extends ChangeNotifier {
-  final String _userPhone;
-  final List<BadgeModel> _badges = const [
-    BadgeModel(
-      name: 'Beginner',
-      color: Color(0xFFE0E0E0),
-    ),
-    BadgeModel(
-      name: 'Intermediate',
-      color: Color(0xFFE0E0E0),
-    ),
-    BadgeModel(
-      name: 'Advanced',
-      color: Color(0xFFE0E0E0),
-    ),
-  ];
-  ProfileController(String userPhone) : _userPhone = userPhone;
+  final ConnectionController _connectionController;
+  final User userDetails;
 
-  List<BadgeModel> get badges => [..._badges];
+  bool isLoading = false;
+
+  ProfileController({
+    required ConnectionController connectionController,
+    required this.userDetails,
+  }) : _connectionController = connectionController;
 }

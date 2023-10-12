@@ -1,5 +1,5 @@
 import 'package:bookmarko_flutter/controllers/auth_controller.dart';
-import 'package:bookmarko_flutter/controllers/profile_controller.dart';
+import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -50,89 +50,88 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: NavigationBar(
-          height: 52,
-          backgroundColor: const Color.fromARGB(0, 255, 255, 255),
-          labelBehavior: labelBehavior,
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPageIndex = index;
-            });
-          },
-          indicatorColor: Colors.transparent,
-          selectedIndex: currentPageIndex,
-          destinations: <Widget>[
-            NavigationDestination(
-              selectedIcon: ColorFiltered(
-                colorFilter:
-                    ColorFilter.mode(selectedColorPurple, BlendMode.srcIn),
-                child: analytics,
-              ),
-              icon: analytics,
-              label: 'Analytics',
+      bottomNavigationBar: NavigationBar(
+        height: 52,
+        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+        labelBehavior: labelBehavior,
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        indicatorColor: Colors.transparent,
+        selectedIndex: currentPageIndex,
+        destinations: <Widget>[
+          NavigationDestination(
+            selectedIcon: ColorFiltered(
+              colorFilter:
+                  ColorFilter.mode(selectedColorPurple, BlendMode.srcIn),
+              child: analytics,
             ),
-            NavigationDestination(
-              selectedIcon: ColorFiltered(
-                colorFilter:
-                    ColorFilter.mode(selectedColorPurple, BlendMode.srcIn),
-                child: customers,
-              ),
-              icon: customers,
-              label: 'Customers',
+            icon: analytics,
+            label: 'Analytics',
+          ),
+          NavigationDestination(
+            selectedIcon: ColorFiltered(
+              colorFilter:
+                  ColorFilter.mode(selectedColorPurple, BlendMode.srcIn),
+              child: customers,
             ),
-            NavigationDestination(
-              selectedIcon: SizedBox(
-                child: Icon(
-                  Icons.add_box,
-                  color: selectedColorPurple,
-                ),
+            icon: customers,
+            label: 'Customers',
+          ),
+          NavigationDestination(
+            selectedIcon: SizedBox(
+              child: Icon(
+                Icons.add_box,
+                color: selectedColorPurple,
               ),
-              icon: const Icon(
-                Icons.add_box_outlined,
-                size: 30,
-              ),
-              label: 'schedual',
             ),
-            NavigationDestination(
-              selectedIcon: ColorFiltered(
-                colorFilter:
-                    ColorFilter.mode(selectedColorPurple, BlendMode.srcIn),
-                child: calendar,
-              ),
-              icon: calendar,
-              label: 'Calendar',
+            icon: const Icon(
+              Icons.add_box_outlined,
+              size: 30,
             ),
-            NavigationDestination(
-              selectedIcon: ColorFiltered(
-                colorFilter:
-                    ColorFilter.mode(selectedColorPurple, BlendMode.srcIn),
-                child: user,
-              ),
-              icon: user,
-              label: 'User',
+            label: 'schedual',
+          ),
+          NavigationDestination(
+            selectedIcon: ColorFiltered(
+              colorFilter:
+                  ColorFilter.mode(selectedColorPurple, BlendMode.srcIn),
+              child: calendar,
             ),
-          ],
+            icon: calendar,
+            label: 'Calendar',
+          ),
+          NavigationDestination(
+            selectedIcon: ColorFiltered(
+              colorFilter:
+                  ColorFilter.mode(selectedColorPurple, BlendMode.srcIn),
+              child: user,
+            ),
+            icon: user,
+            label: 'User',
+          ),
+        ],
+      ),
+      body: <Widget>[
+        Container(
+          color: Colors.red,
+          alignment: Alignment.center,
+          child: const Text('Page 1'),
         ),
-        body: <Widget>[
-          Container(
-            color: Colors.red,
-            alignment: Alignment.center,
-            child: const Text('Page 1'),
-          ),
-          Container(
-            color: Colors.green,
-            alignment: Alignment.center,
-            child: const Text('Page 2'),
-          ),
-          Container(
-            color: Colors.blue,
-            alignment: Alignment.center,
-            child: const Text('Page 3'),
-          ),
-          const Calendar(),
-          const Profile(),
-        ][currentPageIndex],
-      );
-    
+        Container(
+          color: Colors.green,
+          alignment: Alignment.center,
+          child: const Text('Page 2'),
+        ),
+        Container(
+          color: Colors.blue,
+          alignment: Alignment.center,
+          child: const Text('Page 3'),
+        ),
+        const Calendar(),
+        const Profile(),
+      ][currentPageIndex],
+    );
   }
 }

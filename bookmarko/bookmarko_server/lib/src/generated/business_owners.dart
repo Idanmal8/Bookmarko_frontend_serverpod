@@ -11,7 +11,8 @@ import 'package:serverpod/serverpod.dart' as _i1;
 class Business extends _i1.TableRow {
   Business({
     int? id,
-    required this.fullName,
+    required this.firstName,
+    required this.lastName,
     required this.businessName,
     required this.phone,
     required this.address,
@@ -27,8 +28,10 @@ class Business extends _i1.TableRow {
   ) {
     return Business(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      fullName: serializationManager
-          .deserialize<String>(jsonSerialization['fullName']),
+      firstName: serializationManager
+          .deserialize<String>(jsonSerialization['firstName']),
+      lastName: serializationManager
+          .deserialize<String>(jsonSerialization['lastName']),
       businessName: serializationManager
           .deserialize<String>(jsonSerialization['businessName']),
       phone:
@@ -47,7 +50,9 @@ class Business extends _i1.TableRow {
 
   static final t = BusinessTable();
 
-  String fullName;
+  String firstName;
+
+  String lastName;
 
   String businessName;
 
@@ -70,7 +75,8 @@ class Business extends _i1.TableRow {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'fullName': fullName,
+      'firstName': firstName,
+      'lastName': lastName,
       'businessName': businessName,
       'phone': phone,
       'address': address,
@@ -85,7 +91,8 @@ class Business extends _i1.TableRow {
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
-      'fullName': fullName,
+      'firstName': firstName,
+      'lastName': lastName,
       'businessName': businessName,
       'phone': phone,
       'address': address,
@@ -100,7 +107,8 @@ class Business extends _i1.TableRow {
   Map<String, dynamic> allToJson() {
     return {
       'id': id,
-      'fullName': fullName,
+      'firstName': firstName,
+      'lastName': lastName,
       'businessName': businessName,
       'phone': phone,
       'address': address,
@@ -120,8 +128,11 @@ class Business extends _i1.TableRow {
       case 'id':
         id = value;
         return;
-      case 'fullName':
-        fullName = value;
+      case 'firstName':
+        firstName = value;
+        return;
+      case 'lastName':
+        lastName = value;
         return;
       case 'businessName':
         businessName = value;
@@ -268,7 +279,9 @@ class BusinessTable extends _i1.Table {
   /// the id will be null.
   final id = _i1.ColumnInt('id');
 
-  final fullName = _i1.ColumnString('fullName');
+  final firstName = _i1.ColumnString('firstName');
+
+  final lastName = _i1.ColumnString('lastName');
 
   final businessName = _i1.ColumnString('businessName');
 
@@ -287,7 +300,8 @@ class BusinessTable extends _i1.Table {
   @override
   List<_i1.Column> get columns => [
         id,
-        fullName,
+        firstName,
+        lastName,
         businessName,
         phone,
         address,

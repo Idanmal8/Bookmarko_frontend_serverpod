@@ -42,16 +42,20 @@ class RegistrationScreenController extends ChangeNotifier
         break;
     }
 
-    final response = await _connectionController.client?.users.addUser(
-          User(
-            firstName: firstName,
-            lastName: lastName,
-            phone: userPhoneNumberController.text,
-            email: userEmailController.text,
-            joined: DateTime.now(),
-          ),
-        ) ??
-        false;
+    final response =
+        await _connectionController.client?.businessOwners.addBusiness(
+              Business(
+                  firstName: firstName,
+                  lastName: lastName,
+                  businessName: userBusinessNameController.text,
+                  phone: userPhoneNumberController.text,
+                  address: userAddressController.text,
+                  email: userEmailController.text,
+                  proffesion: "",
+                  joined: DateTime.now(),
+                  bio: ""),
+            ) ??
+            false;
 
     isLoading = false;
     notifyListeners();

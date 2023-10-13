@@ -23,7 +23,8 @@ ALTER TABLE ONLY "appointments"
 
 CREATE TABLE "business_owners" (
   "id" serial,
-  "fullName" text NOT NULL,
+  "firstName" text NOT NULL,
+  "lastName" text NOT NULL,
   "businessName" text NOT NULL,
   "phone" text NOT NULL,
   "address" text NOT NULL,
@@ -116,6 +117,22 @@ CREATE TABLE "subscriptions" (
 
 ALTER TABLE ONLY "subscriptions"
   ADD CONSTRAINT subscriptions_pkey PRIMARY KEY (id);
+
+
+--
+-- Class ImageAsset as table user_assets
+--
+
+CREATE TABLE "user_assets" (
+  "id" serial,
+  "image_kind" text NOT NULL,
+  "image_s3_id" text NOT NULL,
+  "uploaded_timestamp" timestamp without time zone NOT NULL,
+  "user_id" integer NOT NULL
+);
+
+ALTER TABLE ONLY "user_assets"
+  ADD CONSTRAINT user_assets_pkey PRIMARY KEY (id);
 
 
 --

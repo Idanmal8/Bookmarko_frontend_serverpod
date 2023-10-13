@@ -1,4 +1,3 @@
-
 import 'package:bookmarko_flutter/utils/authentication_key_manager.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 import 'package:bookmarko_client/bookmarko_client.dart';

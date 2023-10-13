@@ -1,4 +1,4 @@
-import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:bookmarko_flutter/utils/regex_login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +20,9 @@ class LogInScreen extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return Scaffold(
-              resizeToAvoidBottomInset: false, // add this line
-              body: Consumer<LoginScreenController>(
-                  builder: (context, controller, _) {
+            resizeToAvoidBottomInset: false, // add this line
+            body: Consumer<LoginScreenController>(
+              builder: (context, controller, _) {
                 return Stack(
                   children: [
                     Image.asset(
@@ -61,22 +61,30 @@ class LogInScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: [
-                                    Material(
-                                      child: IntlPhoneField(
+                                    Form(
+                                      key: controller.formkey,
+                                      child: TextFormField(
                                         controller:
                                             controller.phoneNumberController,
-                                        dropdownTextStyle: const TextStyle(
-                                            fontFamily: 'Poppins'),
-                                        disableLengthCheck: true,
-                                        autofocus: true,
+                                        keyboardType: TextInputType.phone,
+                                        maxLength: 10,
                                         decoration: const InputDecoration(
-                                          //decoration for Input Field
-                                          labelText: 'Phone Number',
-                                          border: OutlineInputBorder(
-                                            borderSide: BorderSide(),
-                                          ),
+                                          counterText: "",
+                                          labelText: 'Phone number',
+                                          border: OutlineInputBorder(),
                                         ),
-                                        initialCountryCode: 'IL',
+                                        validator: (value) {
+                                          if (value == null ||
+                                              value.isEmpty ||
+                                              value.length < 10) {
+                                            return 'Please enter a valid phone number';
+                                          }
+                                          if (!RegexLogIn.phoneRegex
+                                              .hasMatch(value)) {
+                                            return 'Please enter a valid phone number that start with 05';
+                                          }
+                                          return null;
+                                        },
                                       ),
                                     ),
                                     const SizedBox(height: 20), // Add space
@@ -91,7 +99,7 @@ class LogInScreen extends StatelessWidget {
                                         onTap: () => controller
                                             .goToSignUpScreen(context),
                                         child: const Text(
-                                          'Not a user? Sign up',
+                                          'Not a user? join us here',
                                           style: TextStyle(
                                             color: Colors.blue,
                                           ),
@@ -108,7 +116,9 @@ class LogInScreen extends StatelessWidget {
                     ),
                   ],
                 );
-              }));
+              },
+            ),
+          );
         },
       ),
     );

@@ -1,0 +1,8 @@
+class: ImageAsset
+table: user_assets
+
+fields:
+  image_kind: String
+  image_s3_id: String
+  uploaded_timestamp: DateTime
+  user_id: int

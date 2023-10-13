@@ -9,17 +9,19 @@ library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixe
 
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'appointments.dart' as _i2;
-import 'business_owners.dart' as _i3;
-import 'example.dart' as _i4;
-import 'operating_hours.dart' as _i5;
-import 'payments.dart' as _i6;
-import 'review.dart' as _i7;
-import 'services.dart' as _i8;
-import 'subscriptions.dart' as _i9;
-import 'users.dart' as _i10;
-import 'package:bookmarko_client/src/protocol/operating_hours.dart' as _i11;
-import 'package:bookmarko_client/src/protocol/services.dart' as _i12;
+import 'assets.dart' as _i3;
+import 'business_owners.dart' as _i4;
+import 'example.dart' as _i5;
+import 'operating_hours.dart' as _i6;
+import 'payments.dart' as _i7;
+import 'review.dart' as _i8;
+import 'services.dart' as _i9;
+import 'subscriptions.dart' as _i10;
+import 'users.dart' as _i11;
+import 'package:bookmarko_client/src/protocol/operating_hours.dart' as _i12;
+import 'package:bookmarko_client/src/protocol/services.dart' as _i13;
 export 'appointments.dart';
+export 'assets.dart';
 export 'business_owners.dart';
 export 'example.dart';
 export 'operating_hours.dart';
@@ -51,65 +53,72 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i2.Appointment) {
       return _i2.Appointment.fromJson(data, this) as T;
     }
-    if (t == _i3.Business) {
-      return _i3.Business.fromJson(data, this) as T;
+    if (t == _i3.ImageAsset) {
+      return _i3.ImageAsset.fromJson(data, this) as T;
     }
-    if (t == _i4.Example) {
-      return _i4.Example.fromJson(data, this) as T;
+    if (t == _i4.Business) {
+      return _i4.Business.fromJson(data, this) as T;
     }
-    if (t == _i5.OperatingHours) {
-      return _i5.OperatingHours.fromJson(data, this) as T;
+    if (t == _i5.Example) {
+      return _i5.Example.fromJson(data, this) as T;
     }
-    if (t == _i6.Payment) {
-      return _i6.Payment.fromJson(data, this) as T;
+    if (t == _i6.OperatingHours) {
+      return _i6.OperatingHours.fromJson(data, this) as T;
     }
-    if (t == _i7.Review) {
-      return _i7.Review.fromJson(data, this) as T;
+    if (t == _i7.Payment) {
+      return _i7.Payment.fromJson(data, this) as T;
     }
-    if (t == _i8.Service) {
-      return _i8.Service.fromJson(data, this) as T;
+    if (t == _i8.Review) {
+      return _i8.Review.fromJson(data, this) as T;
     }
-    if (t == _i9.Subscription) {
-      return _i9.Subscription.fromJson(data, this) as T;
+    if (t == _i9.Service) {
+      return _i9.Service.fromJson(data, this) as T;
     }
-    if (t == _i10.User) {
-      return _i10.User.fromJson(data, this) as T;
+    if (t == _i10.Subscription) {
+      return _i10.Subscription.fromJson(data, this) as T;
+    }
+    if (t == _i11.User) {
+      return _i11.User.fromJson(data, this) as T;
     }
     if (t == _i1.getType<_i2.Appointment?>()) {
       return (data != null ? _i2.Appointment.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i3.Business?>()) {
-      return (data != null ? _i3.Business.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i3.ImageAsset?>()) {
+      return (data != null ? _i3.ImageAsset.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i4.Example?>()) {
-      return (data != null ? _i4.Example.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i4.Business?>()) {
+      return (data != null ? _i4.Business.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i5.OperatingHours?>()) {
-      return (data != null ? _i5.OperatingHours.fromJson(data, this) : null)
+    if (t == _i1.getType<_i5.Example?>()) {
+      return (data != null ? _i5.Example.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i6.OperatingHours?>()) {
+      return (data != null ? _i6.OperatingHours.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i6.Payment?>()) {
-      return (data != null ? _i6.Payment.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i7.Payment?>()) {
+      return (data != null ? _i7.Payment.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i7.Review?>()) {
-      return (data != null ? _i7.Review.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i8.Review?>()) {
+      return (data != null ? _i8.Review.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i8.Service?>()) {
-      return (data != null ? _i8.Service.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i9.Service?>()) {
+      return (data != null ? _i9.Service.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i9.Subscription?>()) {
-      return (data != null ? _i9.Subscription.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i10.Subscription?>()) {
+      return (data != null ? _i10.Subscription.fromJson(data, this) : null)
+          as T;
     }
-    if (t == _i1.getType<_i10.User?>()) {
-      return (data != null ? _i10.User.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i11.User?>()) {
+      return (data != null ? _i11.User.fromJson(data, this) : null) as T;
     }
-    if (t == List<_i11.OperatingHours?>) {
+    if (t == List<_i12.OperatingHours?>) {
       return (data as List)
-          .map((e) => deserialize<_i11.OperatingHours?>(e))
+          .map((e) => deserialize<_i12.OperatingHours?>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i12.Service?>) {
-      return (data as List).map((e) => deserialize<_i12.Service?>(e)).toList()
+    if (t == List<_i13.Service?>) {
+      return (data as List).map((e) => deserialize<_i13.Service?>(e)).toList()
           as dynamic;
     }
     return super.deserialize<T>(data, t);
@@ -120,28 +129,31 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i2.Appointment) {
       return 'Appointment';
     }
-    if (data is _i3.Business) {
+    if (data is _i3.ImageAsset) {
+      return 'ImageAsset';
+    }
+    if (data is _i4.Business) {
       return 'Business';
     }
-    if (data is _i4.Example) {
+    if (data is _i5.Example) {
       return 'Example';
     }
-    if (data is _i5.OperatingHours) {
+    if (data is _i6.OperatingHours) {
       return 'OperatingHours';
     }
-    if (data is _i6.Payment) {
+    if (data is _i7.Payment) {
       return 'Payment';
     }
-    if (data is _i7.Review) {
+    if (data is _i8.Review) {
       return 'Review';
     }
-    if (data is _i8.Service) {
+    if (data is _i9.Service) {
       return 'Service';
     }
-    if (data is _i9.Subscription) {
+    if (data is _i10.Subscription) {
       return 'Subscription';
     }
-    if (data is _i10.User) {
+    if (data is _i11.User) {
       return 'User';
     }
     return super.getClassNameForObject(data);
@@ -152,29 +164,32 @@ class Protocol extends _i1.SerializationManager {
     if (data['className'] == 'Appointment') {
       return deserialize<_i2.Appointment>(data['data']);
     }
+    if (data['className'] == 'ImageAsset') {
+      return deserialize<_i3.ImageAsset>(data['data']);
+    }
     if (data['className'] == 'Business') {
-      return deserialize<_i3.Business>(data['data']);
+      return deserialize<_i4.Business>(data['data']);
     }
     if (data['className'] == 'Example') {
-      return deserialize<_i4.Example>(data['data']);
+      return deserialize<_i5.Example>(data['data']);
     }
     if (data['className'] == 'OperatingHours') {
-      return deserialize<_i5.OperatingHours>(data['data']);
+      return deserialize<_i6.OperatingHours>(data['data']);
     }
     if (data['className'] == 'Payment') {
-      return deserialize<_i6.Payment>(data['data']);
+      return deserialize<_i7.Payment>(data['data']);
     }
     if (data['className'] == 'Review') {
-      return deserialize<_i7.Review>(data['data']);
+      return deserialize<_i8.Review>(data['data']);
     }
     if (data['className'] == 'Service') {
-      return deserialize<_i8.Service>(data['data']);
+      return deserialize<_i9.Service>(data['data']);
     }
     if (data['className'] == 'Subscription') {
-      return deserialize<_i9.Subscription>(data['data']);
+      return deserialize<_i10.Subscription>(data['data']);
     }
     if (data['className'] == 'User') {
-      return deserialize<_i10.User>(data['data']);
+      return deserialize<_i11.User>(data['data']);
     }
     return super.deserializeByClassName(data);
   }

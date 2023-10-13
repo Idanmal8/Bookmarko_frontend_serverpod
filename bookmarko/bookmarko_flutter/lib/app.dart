@@ -49,8 +49,8 @@ class MyApp extends StatelessWidget {
               home: Consumer<AuthController>(
                 builder: (context, controller, child) {
                   return controller.isLogIn
-                      ? const LogInScreen()
-                      : NavBarScreen();
+                      ? NavBarScreen()
+                      : const LogInScreen();
                 },
                 child: const LogInScreen(),
               ),

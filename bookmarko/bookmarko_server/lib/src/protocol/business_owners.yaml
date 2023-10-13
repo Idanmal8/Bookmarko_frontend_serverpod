@@ -2,7 +2,8 @@ class: Business
 table: business_owners
 
 fields:
-  fullName: String
+  firstName: String
+  lastName: String
   businessName: String
   phone: String
   address: String

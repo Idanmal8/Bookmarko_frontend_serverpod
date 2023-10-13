@@ -22,21 +22,26 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<bool> login(String phone) async {
-    if (tokenKey != null) await logout();
-    final response =
-        await connectionController.client?.auth.login(phone);
-    if (response == null) return false;
+    try {
+      if (tokenKey != null) await logout();
+      final response = await connectionController.client?.auth.login(phone);
+      if (response == null) return false;
 
-    _tokenKey = response;
+      _tokenKey = response;
 
-    await connectionController.client?.authenticationKeyManager?.put(response);
+      await connectionController.client?.authenticationKeyManager
+          ?.put(response);
 
-    await connectionController.client
-        ?.updateStreamingConnectionAuthenticationKey(response);
+      await connectionController.client
+          ?.updateStreamingConnectionAuthenticationKey(response);
 
-    _isAdmin = await connectionController.client?.auth.isAdmin();
+      _isAdmin = await connectionController.client?.auth.isAdmin();
 
-    notifyListeners();
-    return true;
+      notifyListeners();
+      return true;
+    } catch (error) {
+      print('Error during login: $error');
+      return false;
+    }
   }
 }

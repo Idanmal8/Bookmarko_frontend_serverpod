@@ -145,6 +145,84 @@ class RegistrationForm extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              textAlign: TextAlign.left,
+              controller: controller.userAddressController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter address';
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                hintText: 'Address',
+                hintStyle: TextStyle(
+                  color: Color.fromARGB(255, 114, 114, 114),
+                  fontSize: 14,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(255, 91, 91, 91)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(174, 88, 47, 254)),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(173, 255, 18, 38)),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(174, 88, 47, 254)),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              textAlign: TextAlign.left,
+              controller: controller.userBusinessNameController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter address';
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                hintText: 'Business name',
+                hintStyle: TextStyle(
+                  color: Color.fromARGB(255, 114, 114, 114),
+                  fontSize: 14,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(255, 91, 91, 91)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(174, 88, 47, 254)),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(173, 255, 18, 38)),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(174, 88, 47, 254)),
+                ),
+              ),
+            ),
           ],
         ));
   }

@@ -42,6 +42,7 @@ flutter:
   assets:
       - assets/logo.png
       - assets/backgrounds/abstract_bookmarko_background.png
+      - assets/backgrounds/abstract_bookmarko_background_horizon.png
       - assets/nav_bar_Assets/analytics.svg
       - assets/nav_bar_Assets/book-reader.svg
       - assets/nav_bar_Assets/calender.svg

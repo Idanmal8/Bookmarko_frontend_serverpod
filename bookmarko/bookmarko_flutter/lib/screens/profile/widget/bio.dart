@@ -1,3 +1,4 @@
+import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookmarko_flutter/screens/profile/widget/follow_button.dart';
@@ -5,16 +6,13 @@ import 'package:bookmarko_flutter/screens/profile/widget/messege_button.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/options_button.dart';
 
 class BioField extends StatelessWidget {
-  const BioField({super.key});
+  final Business business;
 
-  @override
-  Widget build(BuildContext context) {
-    return const BioBox();
-  }
-}
+  const BioField({
+    required this.business,
+    super.key,
+  });
 
-class BioBox extends StatelessWidget {
-  const BioBox({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,27 +21,27 @@ class BioBox extends StatelessWidget {
       child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         Column(
           children: [
-            const Text(
-              'Idan malka',
-              style: TextStyle(
+            Text(
+              business.businessName ?? '',
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'barber',
-                  style: TextStyle(
+                  business.proffesion ?? '',
+                  style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 Text(
-                  'Joined march 2023',
-                  style: TextStyle(
+                  business.joined.toString() ?? '',
+                  style: const TextStyle(
                     fontSize: 10,
                   ),
                 ),
@@ -59,12 +57,12 @@ class BioBox extends StatelessWidget {
                   height: 25,
                 ),
                 const SizedBox(width: 20),
-                const Text(
-                  '4.9',
-                  style: TextStyle(
-                    fontSize: 10,
-                  ),
-                ),
+                // const Text(
+                //   '4.9',
+                //   style: TextStyle(
+                //     fontSize: 10,
+                //   ),
+                // ),
               ],
             ),
           ],

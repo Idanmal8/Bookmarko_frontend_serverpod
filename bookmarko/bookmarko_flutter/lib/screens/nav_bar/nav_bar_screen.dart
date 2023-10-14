@@ -1,3 +1,5 @@
+import 'package:bookmarko_flutter/controllers/auth_controller.dart';
+import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,9 +9,7 @@ import 'package:bookmarko_flutter/screens/calendar/calendar.dart';
 import 'package:bookmarko_flutter/screens/profile/profile.dart';
 
 class NavBarScreen extends StatelessWidget {
-  // final User user;
   NavBarScreen({
-    // required this.user,
     super.key,
   });
 
@@ -40,9 +40,12 @@ class NavBarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<NavBarController>(
-      create: (context) => NavBarController(),
+      create: (context) => NavBarController(
+        connectionController: context.read<ConnectionController>(),
+        authController: context.read<AuthController>(),
+      ),
       child: Consumer<NavBarController>(
-        builder: (context, controller, child) {
+        builder: (context, controller, _) {
           return Scaffold(
             body: <Widget>[
               Container(
@@ -61,7 +64,7 @@ class NavBarScreen extends StatelessWidget {
                 child: const Text('Page 3'),
               ),
               const Calendar(),
-              const Profile(),
+              Profile(business: controller.businessOwner),
             ][controller.currentPageIndex],
             bottomNavigationBar: NavigationBar(
               height: 58,

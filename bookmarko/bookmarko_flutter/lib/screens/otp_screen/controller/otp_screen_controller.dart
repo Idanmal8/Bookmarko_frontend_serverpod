@@ -2,10 +2,9 @@ import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
-import 'package:bookmarko_flutter/screens/nav_bar/nav_bar_widget.dart';
+import 'package:bookmarko_flutter/screens/nav_bar/nav_bar_screen.dart';
 
-
-class OtpScreenController extends ChangeNotifier{
+class OtpScreenController extends ChangeNotifier {
   final ConnectionController _connectionController;
 
   String? _errorMessage;
@@ -22,10 +21,7 @@ class OtpScreenController extends ChangeNotifier{
 
   Future<void> goToDashBoard(BuildContext context) async {
     await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const NavBar()
-        ),
+      MaterialPageRoute(builder: (context) => NavBarScreen()),
     );
   }
-  
 }

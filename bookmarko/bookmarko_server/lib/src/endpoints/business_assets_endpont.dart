@@ -29,30 +29,16 @@ class BusinessAssetsEndpoint extends Endpoint {
     return true;
   }
 
-  Future<ImageAsset?> getAsset(
-      Session session, int id, String kindOfAsset) async {
-    final businessId = await session.auth.authenticatedUserId;
-
-    if (businessId == null) {
-      return null;
+  Future<List<ImageAsset>?> getAssets(Session session, int businessId) async {
+    // Fetch the assets based on the kindOfAsset and businessId
+    final assets = await ImageAsset.find(session,
+        where: (asset) => asset.user_id.equals(businessId));
+    print('assets: $assets');
+    // If no assets are found, return an empty list
+    if (assets.isEmpty) {
+      return [];
     }
 
-    final asset = await session.db.findById<ImageAsset>(id);
-
-    if (asset == null) {
-      return null;
-    }
-
-    if (asset.image_kind != kindOfAsset) {
-      return null;
-    }
-
-    return ImageAsset(
-      id: asset.id,
-      image_kind: asset.image_kind,
-      image_s3_id: asset.image_s3_id,
-      uploaded_timestamp: asset.uploaded_timestamp,
-      user_id: asset.user_id,
-    );
+    return assets;
   }
 }

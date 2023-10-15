@@ -17,7 +17,6 @@ class ServicesEndpoint extends Endpoint {
 
       await session.db.insert(service);
       return true;
-
     } catch (e) {
       session.log('Error adding service: $e');
       return false;
@@ -26,7 +25,7 @@ class ServicesEndpoint extends Endpoint {
 
   Future<bool> removeService(Session session, int id) async {
     final service = await session.db.findById<Service>(id);
-    if(service == null){
+    if (service == null) {
       return false;
     }
     await session.db.deleteRow(service);
@@ -49,8 +48,10 @@ class ServicesEndpoint extends Endpoint {
     return true;
   }
 
-  Future<List<Service?>> getService(Session session, int id) async {
-    return await session.db.find<Service>();
-  }
+  Future<List<Service>> getServices(Session session, int businessId) async {
+    final services = await Service.find(session,
+        where: (service) => service.businessId.equals(businessId));
 
+    return services;
+  }
 }

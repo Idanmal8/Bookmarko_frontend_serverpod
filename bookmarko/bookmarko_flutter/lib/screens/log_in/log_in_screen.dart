@@ -87,6 +87,15 @@ class LogInScreen extends StatelessWidget {
                                         },
                                       ),
                                     ),
+                                    if (controller.errorMessage != null) ...[
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        controller.errorMessage ?? '',
+                                        style: const TextStyle(
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ],
                                     const SizedBox(height: 20), // Add space
                                     PrimaryBlueButton(
                                       buttonText: 'Get code',

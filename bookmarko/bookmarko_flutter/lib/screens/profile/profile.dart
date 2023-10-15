@@ -8,16 +8,20 @@ import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/profile_background_banner.dart';
 import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/personal_information.dart';
-import 'package:bookmarko_flutter/screens/profile/widget/profile_picture.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/operating_hours.dart';
+import 'package:bookmarko_flutter/screens/profile/widget/profile_picture.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/services_widget.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/bio.dart';
 
 class Profile extends StatelessWidget {
   final Business business;
+  final List<Service> services;
+  final List<OperatingHours> operatingHours;
 
   const Profile({
+    required this.operatingHours,
     required this.business,
+    required this.services,
     super.key,
   });
 
@@ -62,11 +66,22 @@ class Profile extends StatelessWidget {
                       ),
                       BioField(business: business),
                       const Divider(),
-                      const PersonalInformation(),
+                      PersonalInformation(business: business),
                       const Divider(),
-                      const Services(),
+                      OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.black,
+                        ),
+                        label: const Text(
+                          'Add Service',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                      Services(services: services),
                       const Divider(),
-                      // const OperatingHours(),
+                      OperatingHoursWidget(operatingHours: operatingHours),
                     ],
                   ),
                 );

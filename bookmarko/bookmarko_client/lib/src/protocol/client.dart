@@ -67,17 +67,11 @@ class _EndpointBusinessAssets extends _i1.EndpointRef {
         {'asset': asset},
       );
 
-  _i2.Future<_i3.ImageAsset?> getAsset(
-    int id,
-    String kindOfAsset,
-  ) =>
-      caller.callServerEndpoint<_i3.ImageAsset?>(
+  _i2.Future<List<_i3.ImageAsset>?> getAssets(int businessId) =>
+      caller.callServerEndpoint<List<_i3.ImageAsset>?>(
         'businessAssets',
-        'getAsset',
-        {
-          'id': id,
-          'kindOfAsset': kindOfAsset,
-        },
+        'getAssets',
+        {'businessId': businessId},
       );
 }
 
@@ -168,11 +162,11 @@ class _EndpointOperatingHours extends _i1.EndpointRef {
         {'hours': hours},
       );
 
-  _i2.Future<List<_i5.OperatingHours?>> getHours(int id) =>
-      caller.callServerEndpoint<List<_i5.OperatingHours?>>(
+  _i2.Future<List<_i5.OperatingHours>> getHours(int businessId) =>
+      caller.callServerEndpoint<List<_i5.OperatingHours>>(
         'operatingHours',
         'getHours',
-        {'id': id},
+        {'businessId': businessId},
       );
 }
 
@@ -202,11 +196,11 @@ class _EndpointServices extends _i1.EndpointRef {
         {'service': service},
       );
 
-  _i2.Future<List<_i6.Service?>> getService(int id) =>
-      caller.callServerEndpoint<List<_i6.Service?>>(
+  _i2.Future<List<_i6.Service>> getServices(int businessId) =>
+      caller.callServerEndpoint<List<_i6.Service>>(
         'services',
-        'getService',
-        {'id': id},
+        'getServices',
+        {'businessId': businessId},
       );
 }
 

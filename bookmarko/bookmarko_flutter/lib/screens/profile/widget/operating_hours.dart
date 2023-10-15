@@ -1,7 +1,13 @@
+import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:flutter/material.dart';
 
-class OperatingHours extends StatelessWidget {
-  const OperatingHours({super.key});
+class OperatingHoursWidget extends StatelessWidget {
+  final List<OperatingHours> operatingHours;
+
+  const OperatingHoursWidget({
+    required this.operatingHours,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +27,9 @@ class OperatingHours extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 12.0),
               child: Column(children: [
-                dayCreation('Sunday', '08:00 - 16:00'),
-                dayCreation('Monday', '08:00 - 20:00'),
-                dayCreation('Tuesday', '08:00 - 17:30'),
-                dayCreation('Wednesday', '08:00 - 17:30'),
-                dayCreation('Thursday', '08:00 - 18:00'),
-                dayCreation('Friday', 'Closed'),
-                dayCreation('Saturday', '08:00 - 10:00'),
+                for (var operatingHour in operatingHours)
+                  dayCreation(operatingHour.day, operatingHour.openTime,
+                      operatingHour.closeTime)
               ]),
             )
           ],
@@ -36,18 +38,25 @@ class OperatingHours extends StatelessWidget {
     );
   }
 
-  Padding dayCreation(String day, String hours) {
+  Padding dayCreation(String day, DateTime open, DateTime close) {
     return Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              day,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(hours)
+      padding: const EdgeInsets.all(12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            day,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          if (open.year == 2000)
+            const Text('Closed')
+          else ...[
+            Text(open.toString()),
+            const Text(' - '),
+            Text(close.toString()),
           ],
-        ));
+        ],
+      ),
+    );
   }
 }

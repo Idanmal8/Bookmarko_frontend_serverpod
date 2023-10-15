@@ -19,8 +19,9 @@ import 'review.dart' as _i9;
 import 'services.dart' as _i10;
 import 'subscriptions.dart' as _i11;
 import 'users.dart' as _i12;
-import 'package:bookmarko_server/src/generated/operating_hours.dart' as _i13;
-import 'package:bookmarko_server/src/generated/services.dart' as _i14;
+import 'package:bookmarko_server/src/generated/assets.dart' as _i13;
+import 'package:bookmarko_server/src/generated/operating_hours.dart' as _i14;
+import 'package:bookmarko_server/src/generated/services.dart' as _i15;
 export 'appointments.dart';
 export 'assets.dart';
 export 'business_owners.dart';
@@ -662,13 +663,18 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i12.User?>()) {
       return (data != null ? _i12.User.fromJson(data, this) : null) as T;
     }
-    if (t == List<_i13.OperatingHours?>) {
+    if (t == _i1.getType<List<_i13.ImageAsset>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i13.ImageAsset>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == List<_i14.OperatingHours>) {
       return (data as List)
-          .map((e) => deserialize<_i13.OperatingHours?>(e))
+          .map((e) => deserialize<_i14.OperatingHours>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i14.Service?>) {
-      return (data as List).map((e) => deserialize<_i14.Service?>(e)).toList()
+    if (t == List<_i15.Service>) {
+      return (data as List).map((e) => deserialize<_i15.Service>(e)).toList()
           as dynamic;
     }
     try {

@@ -47,25 +47,30 @@ class NavBarScreen extends StatelessWidget {
       child: Consumer<NavBarController>(
         builder: (context, controller, _) {
           return Scaffold(
-            body: <Widget>[
-              Container(
-                color: Colors.red,
-                alignment: Alignment.center,
-                child: const Text('Page 1'),
-              ),
-              Container(
-                color: Colors.green,
-                alignment: Alignment.center,
-                child: const Text('Page 2'),
-              ),
-              Container(
-                color: Colors.blue,
-                alignment: Alignment.center,
-                child: const Text('Page 3'),
-              ),
-              const Calendar(),
-              Profile(business: controller.businessOwner),
-            ][controller.currentPageIndex],
+            body: controller.doneLoading
+                ? <Widget>[
+                    Container(
+                      color: Colors.red,
+                      alignment: Alignment.center,
+                      child: const Text('Page 1'),
+                    ),
+                    Container(
+                      color: Colors.green,
+                      alignment: Alignment.center,
+                      child: const Text('Page 2'),
+                    ),
+                    Container(
+                      color: Colors.blue,
+                      alignment: Alignment.center,
+                      child: const Text('Page 3'),
+                    ),
+                    const Calendar(),
+                    Profile(
+                        operatingHours: controller.businessOperatingHours,
+                        business: controller.businessOwner,
+                        services: controller.businessServices),
+                  ][controller.currentPageIndex]
+                : const Center(child: CircularProgressIndicator()),
             bottomNavigationBar: NavigationBar(
               height: 58,
               selectedIndex: controller.currentPageIndex,

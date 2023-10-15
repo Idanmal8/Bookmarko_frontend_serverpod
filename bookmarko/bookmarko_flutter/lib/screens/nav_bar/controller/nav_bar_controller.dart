@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:bookmarko_client/bookmarko_client.dart';
+
 import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
-import 'package:flutter/material.dart';
 
 class NavBarController extends ChangeNotifier {
   final selectedColorPurple = const Color.fromARGB(255, 87, 47, 254);
@@ -10,8 +11,10 @@ class NavBarController extends ChangeNotifier {
 
   int currentPageIndex = 0;
   Business? _businessDetails;
-  List<ImageAsset>? _businessImages;
+  List<ImageAsset>? _businessImages = [];
   List<Service>? _businessServices;
+  List<OperatingHours>? _businessOperatingHours;
+
   bool _isLoading = false;
 
   NavigationDestinationLabelBehavior labelBehavior =
@@ -38,23 +41,12 @@ class NavBarController extends ChangeNotifier {
     return business;
   }
 
-  List<ImageAsset> get businessImages {
-    final images = _businessImages;
+  List<ImageAsset> get businessImages => [..._businessImages ?? []];
 
-    if (images == null || images.isEmpty) {
-      throw Exception('Images list is null or empty');
-    }
-    return images;
-  }
+  List<Service> get businessServices => [..._businessServices ?? []];
 
-  List<Service> get businessServices {
-    final services = _businessServices;
-
-    if (services == null || services.isEmpty) {
-      throw Exception('Services list is null or empty');
-    }
-    return services;
-  }
+  List<OperatingHours> get businessOperatingHours =>
+      [..._businessOperatingHours ?? []];
 
   Future<bool> _init() async {
     _isLoading = true;
@@ -63,6 +55,16 @@ class NavBarController extends ChangeNotifier {
     _businessDetails = await _connectionController
         .client?.businessOwnersInformation
         .getBusinessInformation();
+
+    _businessImages = await _connectionController.client?.businessAssets
+        .getAssets(_businessDetails?.id ?? 0);
+
+    _businessOperatingHours = (await _connectionController
+        .client?.operatingHours
+        .getHours(_businessDetails?.id ?? 0));
+
+    _businessServices = (await _connectionController.client?.services
+        .getServices(_businessDetails?.id ?? 0));
 
     if (_businessDetails == null) {
       _isLoading = false;

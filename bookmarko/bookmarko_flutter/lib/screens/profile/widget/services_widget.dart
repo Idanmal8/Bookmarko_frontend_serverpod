@@ -1,29 +1,33 @@
+import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:flutter/material.dart';
 
 class Services extends StatelessWidget {
-  const Services({super.key});
+  final List<Service> services;
+
+  const Services({
+    required this.services,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      width: MediaQuery.of(context).size.width - 20,
       child: Padding(
-        padding: const EdgeInsets.only(top: 12.0),
+        padding: services.isEmpty
+            ? const EdgeInsets.all(0)
+            : const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: ServiceGeneration(context: context, serviceName: 'Haircut', serviceDuration: 30, servicePrice: 20.0),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: ServiceGeneration(context: context, serviceName: 'Haircut + Stash', serviceDuration: 120, servicePrice: 30.0),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: ServiceGeneration(context: context, serviceName: 'Oval', serviceDuration: 150, servicePrice: 75.0),
-            ),
+            for (var service in services)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: ServiceGeneration(
+                    context: context,
+                    serviceName: service.serviceName,
+                    serviceDuration: service.serviceDuration,
+                    servicePrice: service.servicePrice),
+              ),
           ],
         ),
       ),

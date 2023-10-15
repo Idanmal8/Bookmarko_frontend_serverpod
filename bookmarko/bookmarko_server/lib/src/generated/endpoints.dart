@@ -177,29 +177,23 @@ class Endpoints extends _i1.EndpointDispatch {
             params['asset'],
           ),
         ),
-        'getAsset': _i1.MethodConnector(
-          name: 'getAsset',
+        'getAssets': _i1.MethodConnector(
+          name: 'getAssets',
           params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
+            'businessId': _i1.ParameterDescription(
+              name: 'businessId',
               type: _i1.getType<int>(),
               nullable: false,
-            ),
-            'kindOfAsset': _i1.ParameterDescription(
-              name: 'kindOfAsset',
-              type: _i1.getType<String>(),
-              nullable: false,
-            ),
+            )
           },
           call: (
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
               (endpoints['businessAssets'] as _i3.BusinessAssetsEndpoint)
-                  .getAsset(
+                  .getAssets(
             session,
-            params['id'],
-            params['kindOfAsset'],
+            params['businessId'],
           ),
         ),
       },
@@ -391,8 +385,8 @@ class Endpoints extends _i1.EndpointDispatch {
         'getHours': _i1.MethodConnector(
           name: 'getHours',
           params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
+            'businessId': _i1.ParameterDescription(
+              name: 'businessId',
               type: _i1.getType<int>(),
               nullable: false,
             )
@@ -404,7 +398,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['operatingHours'] as _i7.OperatingHoursEndpoint)
                   .getHours(
             session,
-            params['id'],
+            params['businessId'],
           ),
         ),
       },
@@ -467,11 +461,11 @@ class Endpoints extends _i1.EndpointDispatch {
             params['service'],
           ),
         ),
-        'getService': _i1.MethodConnector(
-          name: 'getService',
+        'getServices': _i1.MethodConnector(
+          name: 'getServices',
           params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
+            'businessId': _i1.ParameterDescription(
+              name: 'businessId',
               type: _i1.getType<int>(),
               nullable: false,
             )
@@ -480,9 +474,9 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['services'] as _i8.ServicesEndpoint).getService(
+              (endpoints['services'] as _i8.ServicesEndpoint).getServices(
             session,
-            params['id'],
+            params['businessId'],
           ),
         ),
       },

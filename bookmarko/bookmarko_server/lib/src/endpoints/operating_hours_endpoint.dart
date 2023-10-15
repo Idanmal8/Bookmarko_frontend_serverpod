@@ -50,8 +50,40 @@ class OperatingHoursEndpoint extends Endpoint {
     return true;
   }
 
-  Future<List<OperatingHours?>> getHours(Session session, int id) async {
-    return await session.db.find<OperatingHours>();
-  }
+  Future<List<OperatingHours>> getHours(Session session, int businessId) async {
+    List<String> days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
 
+    // Fetch existing hours from the database.
+    final fetchedHours = await OperatingHours.find(session,
+        where: (hours) => hours.businessId.equals(businessId));
+
+    // Convert fetched hours into a map for easy lookup.
+    var fetchedHoursMap = {for (var hour in fetchedHours) hour.day: hour};
+
+    // Prepare the final list.
+    List<OperatingHours> finalHours = [];
+
+    for (var day in days) {
+      if (fetchedHoursMap.containsKey(day)) {
+        finalHours.add(fetchedHoursMap[day]!);
+      } else {
+        finalHours.add(OperatingHours(
+          businessId: businessId,
+          day: day,
+          openTime: DateTime(2000, 1, 1, 0, 0), // Placeholder
+          closeTime: DateTime(2000, 1, 1, 0, 0), // Placeholder
+        ));
+      }
+    }
+
+    return finalHours;
+  }
 }

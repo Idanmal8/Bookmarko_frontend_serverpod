@@ -23,7 +23,7 @@ class LoginScreenController extends ChangeNotifier {
     notifyListeners();
 
     final response = await authController.login(phoneNumberController.text);
-    _errorMessage = response != true ? 'מספר פלאפון שגוי' : null;
+    _errorMessage = response != true ? 'מספר פלאפון לא נמצא' : null;
 
     isLoading = false;
     notifyListeners();

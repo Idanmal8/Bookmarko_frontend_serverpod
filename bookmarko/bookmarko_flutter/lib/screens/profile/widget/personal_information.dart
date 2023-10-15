@@ -1,7 +1,13 @@
+import 'package:bookmarko_client/bookmarko_client.dart';
+
 import 'package:flutter/material.dart';
 
 class PersonalInformation extends StatelessWidget {
-  const PersonalInformation({super.key});
+  final Business business;
+  const PersonalInformation({
+    required this.business,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -9,17 +15,17 @@ class PersonalInformation extends StatelessWidget {
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width - 20,
       child: Padding(
-        padding: const EdgeInsets.only(top: 12),
+        padding: const EdgeInsets.all(12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Column(
               children: [
-                informationWrapper('Email', 'Idanmal8@gmail.com'),
+                informationWrapper('Email', business.email),
                 const SizedBox(height: 5),
-                informationWrapper('Phone', '+972523067197'),
+                informationWrapper('Phone', business.phone),
                 const SizedBox(height: 5),
-                informationWrapper('Address', 'Dov Hoz 11'),
+                informationWrapper('Address', business.address),
               ],
             )
           ],

@@ -71,61 +71,72 @@ class NavBarScreen extends StatelessWidget {
                         services: controller.businessServices),
                   ][controller.currentPageIndex]
                 : const Center(child: CircularProgressIndicator()),
-            bottomNavigationBar: NavigationBar(
-              height: 58,
-              selectedIndex: controller.currentPageIndex,
-              onDestinationSelected: controller.onDestinationSelected,
-              destinations: <Widget>[
-                NavigationDestination(
-                  selectedIcon: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                        controller.selectedColorPurple, BlendMode.srcIn),
-                    child: analytics,
+            bottomNavigationBar: Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: Colors.grey, // Color of the border
+                    width: 0.5, // Width of the border
                   ),
-                  icon: analytics,
-                  label: 'Analytics',
                 ),
-                NavigationDestination(
-                  selectedIcon: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                        controller.selectedColorPurple, BlendMode.srcIn),
-                    child: customers,
-                  ),
-                  icon: customers,
-                  label: 'Customers',
-                ),
-                NavigationDestination(
-                  selectedIcon: SizedBox(
-                    child: Icon(
-                      Icons.add_box,
-                      color: controller.selectedColorPurple,
+              ),
+              child: NavigationBar(
+                height: 58,
+                surfaceTintColor: const Color.fromARGB(255, 255, 255, 255),
+                selectedIndex: controller.currentPageIndex,
+                onDestinationSelected: controller.onDestinationSelected,
+                destinations: <Widget>[
+                  NavigationDestination(
+                    selectedIcon: ColorFiltered(
+                      colorFilter: ColorFilter.mode(
+                          controller.selectedColorPurple, BlendMode.srcIn),
+                      child: analytics,
                     ),
+                    icon: analytics,
+                    label: 'Analytics',
                   ),
-                  icon: const Icon(
-                    Icons.add_box_outlined,
-                    size: 30,
+                  NavigationDestination(
+                    selectedIcon: ColorFiltered(
+                      colorFilter: ColorFilter.mode(
+                          controller.selectedColorPurple, BlendMode.srcIn),
+                      child: customers,
+                    ),
+                    icon: customers,
+                    label: 'Customers',
                   ),
-                  label: 'schedual',
-                ),
-                NavigationDestination(
-                  selectedIcon: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                        controller.selectedColorPurple, BlendMode.srcIn),
-                    child: calendar,
+                  NavigationDestination(
+                    selectedIcon: SizedBox(
+                      child: Icon(
+                        Icons.add_box,
+                        color: controller.selectedColorPurple,
+                      ),
+                    ),
+                    icon: const Icon(
+                      Icons.add_box_outlined,
+                      size: 30,
+                    ),
+                    label: 'schedual',
                   ),
-                  icon: calendar,
-                  label: 'Calendar',
-                ),
-                NavigationDestination(
-                  selectedIcon: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                        controller.selectedColorPurple, BlendMode.srcIn),
-                    child: user,
+                  NavigationDestination(
+                    selectedIcon: ColorFiltered(
+                      colorFilter: ColorFilter.mode(
+                          controller.selectedColorPurple, BlendMode.srcIn),
+                      child: calendar,
+                    ),
+                    icon: calendar,
+                    label: 'Calendar',
                   ),
-                  icon: user,
-                  label: 'User',
-                ),
-              ],
+                  NavigationDestination(
+                    selectedIcon: ColorFiltered(
+                      colorFilter: ColorFilter.mode(
+                          controller.selectedColorPurple, BlendMode.srcIn),
+                      child: user,
+                    ),
+                    icon: user,
+                    label: 'User',
+                  ),
+                ],
+              ),
             ),
           );
         },

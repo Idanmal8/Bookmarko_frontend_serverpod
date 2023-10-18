@@ -64,10 +64,11 @@ class Profile extends StatelessWidget {
                           ],
                         ),
                       ),
-                      BioField(business: business),
+                      BioField(business: business, controller: controller),
                       const Divider(),
                       PersonalInformation(business: business),
                       const Divider(),
+                      Services(services: services),
                       OutlinedButton.icon(
                         onPressed: () => {},
                         icon: const Icon(
@@ -79,7 +80,6 @@ class Profile extends StatelessWidget {
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
-                      Services(services: services),
                       const Divider(),
                       OperatingHoursWidget(operatingHours: operatingHours),
                     ],

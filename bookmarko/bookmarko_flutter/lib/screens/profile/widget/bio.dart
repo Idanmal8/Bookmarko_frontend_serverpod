@@ -1,4 +1,5 @@
 import 'package:bookmarko_client/bookmarko_client.dart';
+import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookmarko_flutter/screens/profile/widget/follow_button.dart';
@@ -7,9 +8,11 @@ import 'package:bookmarko_flutter/screens/profile/widget/options_button.dart';
 
 class BioField extends StatelessWidget {
   final Business business;
+  final ProfileController controller;
 
   const BioField({
     required this.business,
+    required this.controller,
     super.key,
   });
 
@@ -68,12 +71,12 @@ class BioField extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            FollowButton(),
-            MessegeButton(),
-            OptionButton(),
+            const FollowButton(),
+            const MessegeButton(),
+            OptionButton(controller: controller),
           ],
         ),
         const SizedBox(height: 10),

@@ -1,84 +1,76 @@
+import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.dart';
+
 import 'package:flutter/material.dart';
 
 class OptionButton extends StatelessWidget {
+  final ProfileController controller;
+
   const OptionButton({
+    required this.controller,
     super.key,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    return const OptionButtonInteractive();
-  }
-}
-
-class OptionButtonInteractive extends StatefulWidget {
-  const OptionButtonInteractive({super.key});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _OptionButtonState createState() => _OptionButtonState();
-}
-
-class _OptionButtonState extends State<OptionButtonInteractive> {
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
       child: OutlinedButton(
         onPressed: () {
-          // Add your desired functionality here
           showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return SizedBox(
-                  height: MediaQuery.of(context).size.height / 2,
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0), // Add horizontal padding
-                        child: OutlinedButton(
-                          onPressed: () {
-                            // print("Report");
-                          },
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .start, // Center the content horizontally
-                            children: [
-                              Icon(Icons.report), // Use your desired icon
-                              SizedBox(
-                                  width:
-                                      8.0), // Add some spacing between the icon and text
-                              Text("Report"),
-                            ],
-                          ),
-                        ),
-                      ),
-                      OutlinedButton(
-                          onPressed: () {
-                            // print("Report");
-                          },
-                          child: const Text("Report")),
-                      OutlinedButton(
-                          onPressed: () {
-                            // print("Report");
-                          },
-                          child: const Text("Report")),
-                    ],
-                  ),
-                );
-              });
+            context: context,
+            isScrollControlled: true,
+            builder: (BuildContext context) {
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    buttonCreation('Services', const Icon(Icons.room_service),
+                        () => controller.goToServicesPage(context))
+                  ],
+                ),
+              );
+            },
+          );
         },
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-                5), // Adjust the border radius to match the container
+                5),
           ),
         ),
-        child: const Text('More',
+        child: const Text('Options',
             style: TextStyle(color: Colors.black, fontSize: 12)),
+      ),
+    );
+  }
+
+  Widget buttonCreation(String label, Icon icon, Function() onPressed) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: 8.0, vertical: 12.0), // Adjust vertical padding as needed
+      child: TextButton(
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.all(16.0),
+          alignment: Alignment.centerLeft,
+          backgroundColor: Colors.grey
+              .shade100, // Assuming a light grey background similar to the image, adjust as needed
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        ),
+        onPressed: onPressed,
+        child: Row(
+          children: [
+            Icon(icon.icon, color: Colors.black),
+            const SizedBox(width: 16.0), // Spacing between icon and text
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16.0), // Adjust fontSize as needed
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

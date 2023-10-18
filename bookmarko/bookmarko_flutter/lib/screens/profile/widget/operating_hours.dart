@@ -15,7 +15,7 @@ class OperatingHoursWidget extends StatelessWidget {
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width - 20,
       child: Padding(
-        padding: const EdgeInsets.only(top: 12.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
             const SizedBox(
@@ -24,14 +24,31 @@ class OperatingHoursWidget extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: Column(children: [
-                for (var operatingHour in operatingHours)
-                  dayCreation(operatingHour.day, operatingHour.openTime,
-                      operatingHour.closeTime)
-              ]),
-            )
+            Column(
+              children: [
+                if (operatingHours.isEmpty) ...[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.black,
+                        ),
+                        label: const Text(
+                          'Change operating hours',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ]
+                else ...[
+                    for (var operatingHour in operatingHours)
+                      dayCreation(operatingHour.day, operatingHour.openTime,
+                          operatingHour.closeTime)
+                  ],
+              ],
+            ),
           ],
         ),
       ),

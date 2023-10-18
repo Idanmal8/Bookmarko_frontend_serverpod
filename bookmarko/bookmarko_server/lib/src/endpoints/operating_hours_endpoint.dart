@@ -65,6 +65,9 @@ class OperatingHoursEndpoint extends Endpoint {
     final fetchedHours = await OperatingHours.find(session,
         where: (hours) => hours.businessId.equals(businessId));
 
+    if (fetchedHours.isEmpty){
+      return [];
+    }
     // Convert fetched hours into a map for easy lookup.
     var fetchedHoursMap = {for (var hour in fetchedHours) hour.day: hour};
 

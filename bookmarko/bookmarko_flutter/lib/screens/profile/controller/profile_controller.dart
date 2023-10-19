@@ -1,28 +1,66 @@
+import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 
 import 'package:bookmarko_flutter/screens/services_screen/services_edit_screen.dart';
+import 'package:bookmarko_flutter/utils/services_form_mixin.dart';
 import 'package:flutter/material.dart';
 
-class ProfileController extends ChangeNotifier {
+class ProfileController extends ChangeNotifier with ServicesFormMixin {
   final ConnectionController _connectionController;
   final AuthController _authController;
+  final int businessId;
 
+  List<Service>? _businessServices;
   bool _isLoading = false;
 
   ProfileController({
     required AuthController authController,
     required ConnectionController connectionController,
+    required this.businessId,
   })  : _connectionController = connectionController,
-        _authController = authController;
+        _authController = authController {
+    _init();
+  }
 
   bool get doneLoading => isLoading == false;
   bool get isLoading => _isLoading;
+  List<Service> get businessServices => [..._businessServices ?? []];
+
+  Future<void> _init() async {
+    _isLoading = true;
+    notifyListeners();
+
+    _businessServices =
+        (await _connectionController.client?.services.getServices(businessId));
+
+    _isLoading = false;
+    notifyListeners();
+  }
 
   Future<void> goToServicesPage(BuildContext context) async {
     await Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => const ServicesEditScreen()),
     );
+  }
+
+  void addService() async {
+    _isLoading = true;
+    notifyListeners();
+
+    await _connectionController.client?.services.addService(
+      Service(
+        businessId: businessId,
+        serviceName: serviceNameController.text,
+        serviceDuration: selectedServiceDuration ?? 0,
+        servicePrice: double.parse(servicePriceController.text),
+      ),
+    );
+
+    _init();
+
+    _isLoading = false;
+    notifyListeners();
   }
 
   void logOut() async {

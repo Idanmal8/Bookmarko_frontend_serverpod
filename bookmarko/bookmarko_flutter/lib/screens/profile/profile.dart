@@ -1,4 +1,5 @@
 import 'package:bookmarko_client/bookmarko_client.dart';
+import 'package:bookmarko_flutter/screens/profile/widget/service_shortcut_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.
 import 'package:bookmarko_flutter/screens/profile/widget/personal_information.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/operating_hours.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/profile_picture.dart';
-import 'package:bookmarko_flutter/screens/profile/widget/services_widget.dart';
+import 'package:bookmarko_flutter/screens/profile/widget/services_display_widget.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/bio.dart';
 
 class Profile extends StatelessWidget {
@@ -31,6 +32,7 @@ class Profile extends StatelessWidget {
       create: (context) => ProfileController(
         connectionController: context.read<ConnectionController>(),
         authController: context.read<AuthController>(),
+        businessId: business.id ?? 0,
       ),
       child: Builder(
         builder: (context) {
@@ -68,18 +70,8 @@ class Profile extends StatelessWidget {
                       const Divider(),
                       PersonalInformation(business: business),
                       const Divider(),
-                      Services(services: services),
-                      OutlinedButton.icon(
-                        onPressed: () => {},
-                        icon: const Icon(
-                          Icons.add,
-                          color: Colors.black,
-                        ),
-                        label: const Text(
-                          'Add Service',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
+                      Services(services: controller.businessServices),
+                      ServiceShortcutAddition(controller: controller),
                       const Divider(),
                       OperatingHoursWidget(operatingHours: operatingHours),
                     ],

@@ -16,7 +16,7 @@ class Services extends StatelessWidget {
       child: Padding(
         padding: services.isEmpty
             ? const EdgeInsets.all(0)
-            : const EdgeInsets.all(12.0),
+            : const EdgeInsets.only(top:12.0, left: 12.0, right: 12.0),
         child: Column(
           children: [
             for (var service in services)

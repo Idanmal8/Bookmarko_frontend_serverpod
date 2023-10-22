@@ -37,16 +37,21 @@ class OperatingHoursEndpoint extends Endpoint {
     return true;
   }
 
-  Future<bool> editHours(Session session, OperatingHours hours) async {
-    final oldHours = await OperatingHours.findSingleRow(session,
-        where: (oldHours) =>
-            oldHours.id.equals(hours.id ?? 0) & oldHours.day.equals(hours.day));
+  Future<bool> editHours(
+      Session session, List<OperatingHours> operatingHoursList) async {
+    for (var day in operatingHoursList) {
+      final oldHour = await OperatingHours.findSingleRow(
+        session,
+        where: (oldHour) => oldHour.day.equals(day.day),
+      );
 
-    if (oldHours == null) {
-      return false;
+      oldHour == null ? await session.db.insert(day) : await session.db.update(day);
     }
 
-    await session.db.update(hours);
+    if (operatingHoursList.isEmpty) {
+      return false;
+    }
+    
     return true;
   }
 
@@ -65,7 +70,7 @@ class OperatingHoursEndpoint extends Endpoint {
     final fetchedHours = await OperatingHours.find(session,
         where: (hours) => hours.businessId.equals(businessId));
 
-    if (fetchedHours.isEmpty){
+    if (fetchedHours.isEmpty) {
       return [];
     }
     // Convert fetched hours into a map for easy lookup.

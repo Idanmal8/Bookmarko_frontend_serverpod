@@ -366,9 +366,9 @@ class Endpoints extends _i1.EndpointDispatch {
         'editHours': _i1.MethodConnector(
           name: 'editHours',
           params: {
-            'hours': _i1.ParameterDescription(
-              name: 'hours',
-              type: _i1.getType<_i12.OperatingHours>(),
+            'operatingHoursList': _i1.ParameterDescription(
+              name: 'operatingHoursList',
+              type: _i1.getType<List<_i12.OperatingHours>>(),
               nullable: false,
             )
           },
@@ -379,7 +379,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['operatingHours'] as _i7.OperatingHoursEndpoint)
                   .editHours(
             session,
-            params['hours'],
+            params['operatingHoursList'],
           ),
         ),
         'getHours': _i1.MethodConnector(

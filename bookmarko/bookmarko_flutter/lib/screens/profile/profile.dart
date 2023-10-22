@@ -37,6 +37,16 @@ class Profile extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return Scaffold(
+            appBar: AppBar(
+              elevation: 1.0,
+              title: Text(
+                business.businessName,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             body: Consumer<ProfileController>(
               builder: (context, controller, child) {
                 return SingleChildScrollView(
@@ -73,7 +83,7 @@ class Profile extends StatelessWidget {
                       Services(services: controller.businessServices),
                       ServiceShortcutAddition(controller: controller),
                       const Divider(),
-                      OperatingHoursWidget(operatingHours: operatingHours),
+                      OperatingHoursWidget(operatingHours: operatingHours, controller: controller,),
                     ],
                   ),
                 );

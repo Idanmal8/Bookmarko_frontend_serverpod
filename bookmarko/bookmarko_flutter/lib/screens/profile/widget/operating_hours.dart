@@ -1,11 +1,15 @@
-import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:flutter/material.dart';
+import 'package:bookmarko_client/bookmarko_client.dart';
+
+import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.dart';
 
 class OperatingHoursWidget extends StatelessWidget {
   final List<OperatingHours> operatingHours;
+  final ProfileController controller;
 
   const OperatingHoursWidget({
     required this.operatingHours,
+    required this.controller,
     super.key,
   });
 
@@ -27,26 +31,25 @@ class OperatingHoursWidget extends StatelessWidget {
             Column(
               children: [
                 if (operatingHours.isEmpty) ...[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: OutlinedButton.icon(
-                        onPressed: () => {},
-                        icon: const Icon(
-                          Icons.add,
-                          color: Colors.black,
-                        ),
-                        label: const Text(
-                          'Change operating hours',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: OutlinedButton.icon(
+                      onPressed: () => controller.goToOperatingHoursScreen(context),
+                      icon: const Icon(
+                        Icons.add,
+                        color: Colors.black,
+                      ),
+                      label: const Text(
+                        'Add operating hours',
+                        style: TextStyle(color: Colors.black),
                       ),
                     ),
-                  ]
-                else ...[
-                    for (var operatingHour in operatingHours)
-                      dayCreation(operatingHour.day, operatingHour.openTime,
-                          operatingHour.closeTime)
-                  ],
+                  ),
+                ] else ...[
+                  for (var operatingHour in operatingHours)
+                    dayCreation(operatingHour.day, operatingHour.openTime,
+                        operatingHour.closeTime)
+                ],
               ],
             ),
           ],

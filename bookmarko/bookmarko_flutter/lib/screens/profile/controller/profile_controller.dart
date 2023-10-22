@@ -3,6 +3,8 @@ import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 
 import 'package:bookmarko_flutter/screens/services_screen/services_edit_screen.dart';
+import 'package:bookmarko_flutter/screens/operating_hours_screen/operating_hours_screen.dart';
+
 import 'package:bookmarko_flutter/utils/services_form_mixin.dart';
 import 'package:flutter/material.dart';
 
@@ -61,6 +63,12 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
 
     _isLoading = false;
     notifyListeners();
+  }
+
+  Future<void> goToOperatingHoursScreen(BuildContext context) async {
+      await Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const OperatingHoursScreen()),
+    );
   }
 
   void logOut() async {

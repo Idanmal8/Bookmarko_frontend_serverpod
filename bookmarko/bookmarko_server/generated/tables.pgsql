@@ -46,8 +46,8 @@ CREATE TABLE "operating_hours" (
   "id" serial,
   "businessId" integer NOT NULL,
   "day" text NOT NULL,
-  "openTime" timestamp without time zone NOT NULL,
-  "closeTime" timestamp without time zone NOT NULL
+  "openTime" timestamp without time zone,
+  "closeTime" timestamp without time zone
 );
 
 ALTER TABLE ONLY "operating_hours"

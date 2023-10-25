@@ -58,7 +58,7 @@ class OperatingHoursWidget extends StatelessWidget {
     );
   }
 
-  Padding dayCreation(String day, DateTime open, DateTime close) {
+  Padding dayCreation(String day, DateTime? open, DateTime? close) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Row(
@@ -68,7 +68,7 @@ class OperatingHoursWidget extends StatelessWidget {
             day,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          if (open.year == 2000)
+          if (open == null || close == null)
             const Text('Closed')
           else ...[
             Text(open.toString()),

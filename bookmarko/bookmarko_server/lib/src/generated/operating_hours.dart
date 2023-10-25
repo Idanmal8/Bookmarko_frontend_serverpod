@@ -13,8 +13,8 @@ class OperatingHours extends _i1.TableRow {
     int? id,
     required this.businessId,
     required this.day,
-    required this.openTime,
-    required this.closeTime,
+    this.openTime,
+    this.closeTime,
   }) : super(id);
 
   factory OperatingHours.fromJson(
@@ -27,9 +27,9 @@ class OperatingHours extends _i1.TableRow {
           .deserialize<int>(jsonSerialization['businessId']),
       day: serializationManager.deserialize<String>(jsonSerialization['day']),
       openTime: serializationManager
-          .deserialize<DateTime>(jsonSerialization['openTime']),
+          .deserialize<DateTime?>(jsonSerialization['openTime']),
       closeTime: serializationManager
-          .deserialize<DateTime>(jsonSerialization['closeTime']),
+          .deserialize<DateTime?>(jsonSerialization['closeTime']),
     );
   }
 
@@ -39,9 +39,9 @@ class OperatingHours extends _i1.TableRow {
 
   String day;
 
-  DateTime openTime;
+  DateTime? openTime;
 
-  DateTime closeTime;
+  DateTime? closeTime;
 
   @override
   String get tableName => 'operating_hours';

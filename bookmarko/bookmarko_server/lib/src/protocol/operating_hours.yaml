@@ -4,5 +4,5 @@ table: operating_hours
 fields: 
   businessId: int
   day: String
-  openTime: DateTime
-  closeTime: DateTime
+  openTime: DateTime?
+  closeTime: DateTime?

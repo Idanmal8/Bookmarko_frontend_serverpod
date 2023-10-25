@@ -67,7 +67,7 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
 
   Future<void> goToOperatingHoursScreen(BuildContext context) async {
       await Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => const OperatingHoursScreen()),
+      MaterialPageRoute(builder: (context) => OperatingHoursScreen(businessId: businessId)),
     );
   }
 

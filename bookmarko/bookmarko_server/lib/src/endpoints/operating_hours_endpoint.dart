@@ -86,8 +86,8 @@ class OperatingHoursEndpoint extends Endpoint {
         finalHours.add(OperatingHours(
           businessId: businessId,
           day: day,
-          openTime: DateTime(2000, 1, 1, 0, 0), // Placeholder
-          closeTime: DateTime(2000, 1, 1, 0, 0), // Placeholder
+          openTime: null, // Placeholder
+          closeTime: null, // Placeholder
         ));
       }
     }

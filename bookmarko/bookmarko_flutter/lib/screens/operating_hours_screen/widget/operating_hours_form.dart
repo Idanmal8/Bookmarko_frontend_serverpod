@@ -2,13 +2,13 @@ import 'package:bookmarko_flutter/screens/operating_hours_screen/controller/oper
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bookmarko_flutter/utils/operating_hours_form_mixin.dart';
-
 class OperatingHoursForm extends StatelessWidget {
   final OperatingHoursController controller;
+  final int businessId;
 
   const OperatingHoursForm({
     required this.controller,
+    required this.businessId,
     super.key,
   });
 
@@ -31,6 +31,11 @@ class OperatingHoursForm extends StatelessWidget {
               controller.selectedFridayCloseTime, controller),
           buildDayRow('Saturday', controller.selectedSaturdayOpenTime,
               controller.selectedSaturdayCloseTime, controller),
+          const SizedBox(height: 60),
+          OutlinedButton(
+            child: const Text('Confirm', style: TextStyle(color: Colors.black)),
+            onPressed: () => {controller.saveOperatingHours(businessId)},
+          ),
         ],
       ),
     );
@@ -41,7 +46,8 @@ class OperatingHoursForm extends StatelessWidget {
   }
 
   Widget buildDayRow(String day, DateTime? openTime, DateTime? closeTime,
-      OperatingHoursMixin controller) {
+      OperatingHoursController controller) {
+    bool isClosed = controller.dayClosedStatus[day] ?? false;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -54,14 +60,13 @@ class OperatingHoursForm extends StatelessWidget {
                 day,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  // Adjust the font size if necessary
                   fontSize: 14,
                 ),
               ),
             ),
           ),
           Expanded(
-            child: DropdownButton<DateTime>(
+            child: DropdownButton(
               value: openTime,
               underline: Container(),
               items: controller.hoursToChoose.map((DateTime time) {
@@ -70,13 +75,17 @@ class OperatingHoursForm extends StatelessWidget {
                   child: Text(formatTime(time)),
                 );
               }).toList(),
-              onChanged: controller.updateOpenTimeForDay(day, openTime),
+              onChanged: isClosed
+                  ? (DateTime? newValue) {
+                      controller.updateOpenTimeForDay(newValue, day);
+                    }
+                  : null,
               hint: const Text('Open'),
               isExpanded: false,
             ),
           ),
           Expanded(
-            child: DropdownButton<DateTime>(
+            child: DropdownButton(
               value: closeTime,
               underline: Container(),
               items: controller.hoursToChoose.map((DateTime time) {
@@ -85,12 +94,21 @@ class OperatingHoursForm extends StatelessWidget {
                   child: Text(formatTime(time)),
                 );
               }).toList(),
-              onChanged: controller.updateCloseTimeForDay(day, openTime),
+              onChanged: isClosed
+                  ? (DateTime? newValue) {
+                      controller.updateCloseTimeForDay(newValue, day);
+                    }
+                  : null,
               hint: const Text('Close'),
               isExpanded: false,
             ),
           ),
-          CupertinoSwitch(value: false, onChanged: (value) => {})
+          CupertinoSwitch(
+            value: isClosed,
+            onChanged: (value) {
+              controller.toggleClosedStatusForDay(day);
+            },
+          ),
         ],
       ),
     );

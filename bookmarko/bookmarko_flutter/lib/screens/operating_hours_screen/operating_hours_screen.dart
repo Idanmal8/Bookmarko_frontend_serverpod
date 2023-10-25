@@ -1,3 +1,4 @@
+import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,12 @@ import 'package:bookmarko_flutter/screens/operating_hours_screen/widget/operatin
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 
 class OperatingHoursScreen extends StatelessWidget {
-  const OperatingHoursScreen({super.key});
+  final int businessId;
+
+  const OperatingHoursScreen({
+    required this.businessId,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,7 @@ class OperatingHoursScreen extends StatelessWidget {
               builder: (context, controller, _) {
                 return Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: OperatingHoursForm(controller: controller),
+                  child: OperatingHoursForm(controller: controller, businessId: businessId),
                 );
               },
             ),

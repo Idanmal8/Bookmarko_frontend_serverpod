@@ -185,7 +185,8 @@ class ServiceShortcutAddition extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         OutlinedButton(
-                          child: const Text('Add service'),
+                          child: const Text('Add service',
+                              style: TextStyle(color: Colors.black)),
                           onPressed: () => {
                             controller.addService(),
                             Navigator.pop(context)

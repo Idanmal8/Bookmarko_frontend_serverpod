@@ -155,11 +155,11 @@ class _EndpointOperatingHours extends _i1.EndpointRef {
         {'id': id},
       );
 
-  _i2.Future<bool> editHours(_i5.OperatingHours hours) =>
+  _i2.Future<bool> editHours(List<_i5.OperatingHours> operatingHoursList) =>
       caller.callServerEndpoint<bool>(
         'operatingHours',
         'editHours',
-        {'hours': hours},
+        {'operatingHoursList': operatingHoursList},
       );
 
   _i2.Future<List<_i5.OperatingHours>> getHours(int businessId) =>

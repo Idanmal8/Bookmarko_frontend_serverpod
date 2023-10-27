@@ -1,5 +1,8 @@
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+import 'package:bookmarko_flutter/screens/nav_bar/nav_bar_screen.dart';
 
 class AuthController extends ChangeNotifier {
   ConnectionController connectionController;

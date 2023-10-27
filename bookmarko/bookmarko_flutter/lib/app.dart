@@ -52,7 +52,6 @@ class MyApp extends StatelessWidget {
                       ? NavBarScreen()
                       : const LogInScreen();
                 },
-                child: const LogInScreen(),
               ),
             ),
           );

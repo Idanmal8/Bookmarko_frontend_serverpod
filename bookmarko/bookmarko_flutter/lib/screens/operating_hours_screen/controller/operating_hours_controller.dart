@@ -33,6 +33,11 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
   bool get isLoading => _isLoading == false;
   List<OperatingHours> get operatingHours => _operatingHours ?? [];
 
+  void setOperatingHours(List<OperatingHours> newHours) {
+    _operatingHours = newHours;
+    notifyListeners();
+  }
+
   Future<void> _init() async {
     _isLoading = true;
     notifyListeners();

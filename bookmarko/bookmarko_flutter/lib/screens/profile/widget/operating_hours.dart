@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bookmarko_client/bookmarko_client.dart';
 
 import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.dart';
+import 'package:intl/intl.dart';
 
 class OperatingHoursWidget extends StatelessWidget {
   final List<OperatingHours> operatingHours;
@@ -34,7 +35,8 @@ class OperatingHoursWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: OutlinedButton.icon(
-                      onPressed: () => controller.goToOperatingHoursScreen(context),
+                      onPressed: () =>
+                          controller.goToOperatingHoursScreen(context),
                       icon: const Icon(
                         Icons.add,
                         color: Colors.black,
@@ -47,7 +49,7 @@ class OperatingHoursWidget extends StatelessWidget {
                   ),
                 ] else ...[
                   for (var operatingHour in operatingHours)
-                    dayCreation(operatingHour.day, operatingHour.openTime,
+                    dayCreation(operatingHour.dayInWeek, operatingHour.openTime,
                         operatingHour.closeTime)
                 ],
               ],
@@ -71,9 +73,11 @@ class OperatingHoursWidget extends StatelessWidget {
           if (open == null || close == null)
             const Text('Closed')
           else ...[
-            Text(open.toString()),
-            const Text(' - '),
-            Text(close.toString()),
+            Row(children: [
+              Text(DateFormat('HH:mm').format(open)),
+              const Text(' - '),
+              Text(DateFormat('HH:mm').format(close)),
+            ])
           ],
         ],
       ),

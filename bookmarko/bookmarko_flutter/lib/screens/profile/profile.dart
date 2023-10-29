@@ -83,7 +83,7 @@ class Profile extends StatelessWidget {
                       Services(services: controller.businessServices),
                       ServiceShortcutAddition(controller: controller),
                       const Divider(),
-                      OperatingHoursWidget(operatingHours: operatingHours, controller: controller,),
+                      OperatingHoursWidget(operatingHours: controller.operatingHours, controller: controller,),
                     ],
                   ),
                 );

@@ -3,6 +3,6 @@ table: operating_hours
 
 fields: 
   businessId: int
-  day: String
+  dayInWeek: String
   openTime: DateTime?
   closeTime: DateTime?

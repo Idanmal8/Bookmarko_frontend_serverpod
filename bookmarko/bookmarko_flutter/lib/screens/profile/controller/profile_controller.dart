@@ -14,6 +14,7 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
   final int businessId;
 
   List<Service>? _businessServices;
+  List<OperatingHours>? _operatingHours;
   bool _isLoading = false;
 
   ProfileController({
@@ -28,17 +29,34 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
   bool get doneLoading => isLoading == false;
   bool get isLoading => _isLoading;
   List<Service> get businessServices => [..._businessServices ?? []];
+  List<OperatingHours> get operatingHours => [..._operatingHours ?? []];
+
+  void setOperatingHours(List<OperatingHours> newHours) {
+    _operatingHours = newHours;
+    notifyListeners();
+  }
 
   Future<void> _init() async {
     _isLoading = true;
     notifyListeners();
 
-    _businessServices =
-        (await _connectionController.client?.services.getServices(businessId));
+    _businessServices = await _connectionController.client?.services.getServices(businessId);
 
+    _operatingHours?.clear();
+    
+    final hours = await _connectionController.client?.operatingHours.getHours(businessId) ?? [];
+    if (_operatingHours == null) {
+        _operatingHours = hours;
+    } else {
+        _operatingHours?.addAll(hours);
+    }
+
+    print("This is the new operating hours: $_operatingHours");
+    
     _isLoading = false;
     notifyListeners();
-  }
+}
+
 
   Future<void> goToServicesPage(BuildContext context) async {
     await Navigator.of(context).push(
@@ -66,9 +84,12 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
   }
 
   Future<void> goToOperatingHoursScreen(BuildContext context) async {
-      await Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => OperatingHoursScreen(businessId: businessId)),
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => OperatingHoursScreen(businessId: businessId)),
     );
+
+    _init();
   }
 
   void logOut() async {

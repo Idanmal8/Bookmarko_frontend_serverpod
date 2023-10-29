@@ -7,7 +7,7 @@ class OperatingHoursEndpoint extends Endpoint {
     try {
       final checkHours = await OperatingHours.findSingleRow(session,
           where: (checkHours) =>
-              checkHours.day.equals(hours.day) &
+              checkHours.dayInWeek.equals(hours.dayInWeek) &
                   ((checkHours.openTime > (hours.openTime)) &
                       (checkHours.openTime < (hours.closeTime)) &
                       (checkHours.closeTime < (hours.closeTime))) |
@@ -39,19 +39,28 @@ class OperatingHoursEndpoint extends Endpoint {
 
   Future<bool> editHours(
       Session session, List<OperatingHours> operatingHoursList) async {
-    for (var day in operatingHoursList) {
-      final oldHour = await OperatingHours.findSingleRow(
+    print("This is the list : $operatingHoursList");
+    for (var object in operatingHoursList) {
+      final dayDetail = await OperatingHours.findSingleRow(
         session,
-        where: (oldHour) => oldHour.day.equals(day.day),
+        where: (oldHour) =>
+            oldHour.dayInWeek.equals(object.dayInWeek) &
+            oldHour.businessId.equals(object.businessId),
       );
 
-      oldHour == null ? await session.db.insert(day) : await session.db.update(day);
+      if (dayDetail == null) {
+        await session.db.insert(object);
+      } else {
+        dayDetail.openTime = object.openTime;
+        dayDetail.closeTime = object.closeTime;
+        session.db.update(dayDetail);
+      }
     }
 
     if (operatingHoursList.isEmpty) {
       return false;
     }
-    
+
     return true;
   }
 
@@ -74,7 +83,7 @@ class OperatingHoursEndpoint extends Endpoint {
       return [];
     }
     // Convert fetched hours into a map for easy lookup.
-    var fetchedHoursMap = {for (var hour in fetchedHours) hour.day: hour};
+    var fetchedHoursMap = {for (var hour in fetchedHours) hour.dayInWeek: hour};
 
     // Prepare the final list.
     List<OperatingHours> finalHours = [];
@@ -85,7 +94,7 @@ class OperatingHoursEndpoint extends Endpoint {
       } else {
         finalHours.add(OperatingHours(
           businessId: businessId,
-          day: day,
+          dayInWeek: day,
           openTime: null, // Placeholder
           closeTime: null, // Placeholder
         ));

@@ -1,15 +1,16 @@
-import 'dart:ffi';
-
 import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
+import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.dart';
 import 'package:bookmarko_flutter/utils/operating_hours_form_mixin.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
   final ConnectionController _connectionController;
+  final int businessId;
 
   bool _isLoading = false;
-  List<OperatingHours> _operatingHours = [];
+  List<OperatingHours>? _operatingHours = [];
 
   // Inside the OperatingHoursController class
   Map<String, bool> dayClosedStatus = {
@@ -24,10 +25,37 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
 
   OperatingHoursController({
     required ConnectionController connectionController,
-  }) : _connectionController = connectionController;
+    required this.businessId,
+  }) : _connectionController = connectionController {
+    _init();
+  }
 
   bool get isLoading => _isLoading == false;
-  List<OperatingHours> get operatingHours => _operatingHours;
+  List<OperatingHours> get operatingHours => _operatingHours ?? [];
+
+  Future<void> _init() async {
+    _isLoading = true;
+    notifyListeners();
+
+    _operatingHours = (await _connectionController.client?.operatingHours
+        .getHours(businessId));
+
+    print(_operatingHours);
+
+    // Initialize dayClosedStatus based on the retrieved operating hours
+    for (var hours in _operatingHours ?? []) {
+      if (hours.openTime == null && hours.closeTime == null) {
+        dayClosedStatus[hours.dayInWeek] = false;
+      } else {
+        dayClosedStatus[hours.dayInWeek] = true;
+        updateOpenTimeForDay(hours.openTime, hours.dayInWeek);
+        updateCloseTimeForDay(hours.closeTime, hours.dayInWeek);
+      }
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
 
   void updateOpenTimeForDay(DateTime? time, String selectedDay) {
     if (time == null) return;
@@ -104,31 +132,17 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
   void toggleClosedStatusForDay(String day) {
     dayClosedStatus[day] = dayClosedStatus[day] ?? false ? false : true;
     if (dayClosedStatus[day] ?? false) {
-      // Set the times to 00:00 if closed
       updateOpenTimeForDay(null, day);
       updateCloseTimeForDay(null, day);
     }
     notifyListeners();
   }
 
-  void saveOperatingHours(int businessId) async {
+  Future<bool> saveOperatingHours(BuildContext context, int businessId) async {
     _isLoading = true;
     notifyListeners();
-    print(dayClosedStatus);
-    print(selectedSundayOpenTime);
-    print(selectedSundayCloseTime);
-    print(selectedMondayOpenTime);
-    print(selectedMondayCloseTime);
-    print(selectedTuesdayOpenTime);
-    print(selectedTuesdayCloseTime);
-    print(selectedWednesdayOpenTime);
-    print(selectedWednesdayCloseTime);
-    print(selectedThursdayOpenTime);
-    print(selectedThursdayCloseTime);
-    print(selectedFridayOpenTime);
-    print(selectedFridayCloseTime);
-    print(selectedSaturdayOpenTime);
-    print(selectedSaturdayCloseTime);
+
+    _operatingHours?.clear();
 
     Map<String, DateTime?> openTimes = {
       'Sunday': selectedSundayOpenTime,
@@ -153,16 +167,28 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
     for (var day in dayClosedStatus.keys) {
       operatingHours.add(OperatingHours(
         businessId: businessId,
-        day: day,
+        dayInWeek: day,
         openTime: openTimes[day],
         closeTime: closeTimes[day],
       ));
     }
 
-    await _connectionController.client?.operatingHours
-        .editHours(operatingHours);
+    final response = await _connectionController.client?.operatingHours
+            .editHours(operatingHours) ??
+        false;
 
     _isLoading = false;
     notifyListeners();
+
+    if (context.mounted) {
+      if (response) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('שעות שונו בהצלחה')));
+        FocusManager.instance.primaryFocus?.unfocus();
+        Navigator.pop(context);
+      }
+    }
+
+    return response;
   }
 }

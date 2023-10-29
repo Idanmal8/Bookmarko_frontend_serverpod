@@ -34,7 +34,9 @@ class OperatingHoursForm extends StatelessWidget {
           const SizedBox(height: 60),
           OutlinedButton(
             child: const Text('Confirm', style: TextStyle(color: Colors.black)),
-            onPressed: () => {controller.saveOperatingHours(businessId)},
+            onPressed: () => {
+              controller.saveOperatingHours(context,businessId),
+            },
           ),
         ],
       ),

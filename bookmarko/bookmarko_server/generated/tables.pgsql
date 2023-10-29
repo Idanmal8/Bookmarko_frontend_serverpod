@@ -45,7 +45,7 @@ ALTER TABLE ONLY "business_owners"
 CREATE TABLE "operating_hours" (
   "id" serial,
   "businessId" integer NOT NULL,
-  "day" text NOT NULL,
+  "dayInWeek" text NOT NULL,
   "openTime" timestamp without time zone,
   "closeTime" timestamp without time zone
 );

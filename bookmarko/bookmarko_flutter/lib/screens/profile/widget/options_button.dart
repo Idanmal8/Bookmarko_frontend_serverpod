@@ -24,7 +24,17 @@ class OptionButton extends StatelessWidget {
                 child: Column(
                   children: [
                     buttonCreation('Services', const Icon(Icons.room_service),
-                        () => controller.goToServicesPage(context))
+                        () => controller.goToServicesPage(context)),
+                    buttonCreation(
+                        'Operating hours',
+                        const Icon(Icons.timelapse),
+                        () {
+                              Navigator.of(context).pop(); 
+                              controller.goToOperatingHoursScreen(context);
+                            }),
+                    const SizedBox(
+                      height: 30,
+                    ),
                   ],
                 ),
               );
@@ -33,8 +43,7 @@ class OptionButton extends StatelessWidget {
         },
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                5),
+            borderRadius: BorderRadius.circular(5),
           ),
         ),
         child: const Text('Options',
@@ -46,7 +55,7 @@ class OptionButton extends StatelessWidget {
   Widget buttonCreation(String label, Icon icon, Function() onPressed) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-          horizontal: 8.0, vertical: 12.0), // Adjust vertical padding as needed
+          horizontal: 8.0, vertical: 5.0), // Adjust vertical padding as needed
       child: TextButton(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.all(16.0),

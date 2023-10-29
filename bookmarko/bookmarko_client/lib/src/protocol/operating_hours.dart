@@ -12,7 +12,7 @@ class OperatingHours extends _i1.SerializableEntity {
   OperatingHours({
     this.id,
     required this.businessId,
-    required this.day,
+    required this.dayInWeek,
     this.openTime,
     this.closeTime,
   });
@@ -25,7 +25,8 @@ class OperatingHours extends _i1.SerializableEntity {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       businessId: serializationManager
           .deserialize<int>(jsonSerialization['businessId']),
-      day: serializationManager.deserialize<String>(jsonSerialization['day']),
+      dayInWeek: serializationManager
+          .deserialize<String>(jsonSerialization['dayInWeek']),
       openTime: serializationManager
           .deserialize<DateTime?>(jsonSerialization['openTime']),
       closeTime: serializationManager
@@ -40,7 +41,7 @@ class OperatingHours extends _i1.SerializableEntity {
 
   int businessId;
 
-  String day;
+  String dayInWeek;
 
   DateTime? openTime;
 
@@ -51,7 +52,7 @@ class OperatingHours extends _i1.SerializableEntity {
     return {
       'id': id,
       'businessId': businessId,
-      'day': day,
+      'dayInWeek': dayInWeek,
       'openTime': openTime,
       'closeTime': closeTime,
     };

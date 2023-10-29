@@ -12,7 +12,7 @@ class OperatingHours extends _i1.TableRow {
   OperatingHours({
     int? id,
     required this.businessId,
-    required this.day,
+    required this.dayInWeek,
     this.openTime,
     this.closeTime,
   }) : super(id);
@@ -25,7 +25,8 @@ class OperatingHours extends _i1.TableRow {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       businessId: serializationManager
           .deserialize<int>(jsonSerialization['businessId']),
-      day: serializationManager.deserialize<String>(jsonSerialization['day']),
+      dayInWeek: serializationManager
+          .deserialize<String>(jsonSerialization['dayInWeek']),
       openTime: serializationManager
           .deserialize<DateTime?>(jsonSerialization['openTime']),
       closeTime: serializationManager
@@ -37,7 +38,7 @@ class OperatingHours extends _i1.TableRow {
 
   int businessId;
 
-  String day;
+  String dayInWeek;
 
   DateTime? openTime;
 
@@ -51,7 +52,7 @@ class OperatingHours extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'day': day,
+      'dayInWeek': dayInWeek,
       'openTime': openTime,
       'closeTime': closeTime,
     };
@@ -62,7 +63,7 @@ class OperatingHours extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'day': day,
+      'dayInWeek': dayInWeek,
       'openTime': openTime,
       'closeTime': closeTime,
     };
@@ -73,7 +74,7 @@ class OperatingHours extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'day': day,
+      'dayInWeek': dayInWeek,
       'openTime': openTime,
       'closeTime': closeTime,
     };
@@ -91,8 +92,8 @@ class OperatingHours extends _i1.TableRow {
       case 'businessId':
         businessId = value;
         return;
-      case 'day':
-        day = value;
+      case 'dayInWeek':
+        dayInWeek = value;
         return;
       case 'openTime':
         openTime = value;
@@ -227,7 +228,7 @@ class OperatingHoursTable extends _i1.Table {
 
   final businessId = _i1.ColumnInt('businessId');
 
-  final day = _i1.ColumnString('day');
+  final dayInWeek = _i1.ColumnString('dayInWeek');
 
   final openTime = _i1.ColumnDateTime('openTime');
 
@@ -237,7 +238,7 @@ class OperatingHoursTable extends _i1.Table {
   List<_i1.Column> get columns => [
         id,
         businessId,
-        day,
+        dayInWeek,
         openTime,
         closeTime,
       ];

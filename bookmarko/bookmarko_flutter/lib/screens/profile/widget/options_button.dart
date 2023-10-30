@@ -23,15 +23,17 @@ class OptionButton extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: [
+                    buttonCreation(
+                        'Edit profile',
+                        const Icon(Icons.person),
+                        () => controller.goToBioScreen(context)),
                     buttonCreation('Services', const Icon(Icons.room_service),
                         () => controller.goToServicesPage(context)),
                     buttonCreation(
-                        'Operating hours',
-                        const Icon(Icons.timelapse),
-                        () {
-                              Navigator.of(context).pop(); 
-                              controller.goToOperatingHoursScreen(context);
-                            }),
+                        'Operating hours', const Icon(Icons.timelapse), () {
+                      Navigator.of(context).pop();
+                      controller.goToOperatingHoursScreen(context);
+                    }),
                     const SizedBox(
                       height: 30,
                     ),

@@ -1,15 +1,15 @@
 import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
-import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.dart';
 import 'package:bookmarko_flutter/utils/operating_hours_form_mixin.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
   final ConnectionController _connectionController;
   final int businessId;
 
   bool _isLoading = false;
+  bool _formValidationDays = true;
+  bool _formTimeValidation = true;
   List<OperatingHours>? _operatingHours = [];
 
   // Inside the OperatingHoursController class
@@ -31,6 +31,8 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
   }
 
   bool get isLoading => _isLoading == false;
+  bool get formValidation => _formValidationDays == true;
+  bool get formTimeValidation => _formTimeValidation == true;
   List<OperatingHours> get operatingHours => _operatingHours ?? [];
 
   void setOperatingHours(List<OperatingHours> newHours) {
@@ -44,8 +46,6 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
 
     _operatingHours = (await _connectionController.client?.operatingHours
         .getHours(businessId));
-
-    print(_operatingHours);
 
     // Initialize dayClosedStatus based on the retrieved operating hours
     for (var hours in _operatingHours ?? []) {
@@ -63,8 +63,6 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
   }
 
   void updateOpenTimeForDay(DateTime? time, String selectedDay) {
-    if (time == null) return;
-
     switch (selectedDay) {
       case 'Sunday':
         selectedSundayOpenTime = time;
@@ -99,8 +97,6 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
   }
 
   void updateCloseTimeForDay(DateTime? time, String selectedDay) {
-    if (time == null) return;
-
     switch (selectedDay) {
       case 'Sunday':
         selectedSundayCloseTime = time;
@@ -135,12 +131,30 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
   }
 
   void toggleClosedStatusForDay(String day) {
-    dayClosedStatus[day] = dayClosedStatus[day] ?? false ? false : true;
-    if (dayClosedStatus[day] ?? false) {
+    // Toggle the day's status
+    dayClosedStatus[day] = !(dayClosedStatus[day] ?? false);
+
+    // If the status is now false (day is closed), set open and close times to null
+    if (!(dayClosedStatus[day] ?? true)) {
       updateOpenTimeForDay(null, day);
       updateCloseTimeForDay(null, day);
     }
+
     notifyListeners();
+  }
+
+  bool validateDaysSelected(DateTime? openTime, DateTime? closeTime) {
+    return (openTime != null && closeTime == null) ||
+            (openTime == null && closeTime != null)
+        ? false
+        : true;
+  }
+
+  bool validateCloseTimeBiggerThenOpenTime(
+      DateTime? openTime, DateTime? closeTime) {
+    return openTime != null && closeTime != null && closeTime.isAfter(openTime)
+        ? true
+        : false;
   }
 
   Future<bool> saveOperatingHours(BuildContext context, int businessId) async {
@@ -170,6 +184,16 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
     };
 
     for (var day in dayClosedStatus.keys) {
+      if (!validateDaysSelected(openTimes[day], closeTimes[day])) {
+        _formValidationDays = false;
+        return _formValidationDays;
+      }
+      if (!validateCloseTimeBiggerThenOpenTime(
+              openTimes[day], closeTimes[day]) &&
+          dayClosedStatus[day] != false) {
+        _formTimeValidation = false;
+        return _formTimeValidation;
+      }
       operatingHours.add(OperatingHours(
         businessId: businessId,
         dayInWeek: day,
@@ -187,10 +211,10 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
 
     if (context.mounted) {
       if (response) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('שעות שונו בהצלחה')));
         FocusManager.instance.primaryFocus?.unfocus();
         Navigator.pop(context);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('שעות שונו בהצלחה')));
       }
     }
 

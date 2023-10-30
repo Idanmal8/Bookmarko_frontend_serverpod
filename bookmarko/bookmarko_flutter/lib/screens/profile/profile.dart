@@ -80,7 +80,7 @@ class Profile extends StatelessWidget {
                       const Divider(),
                       PersonalInformation(business: business),
                       const Divider(),
-                      Services(services: controller.businessServices),
+                      Services(services: controller.businessServices, onDelete: controller,),
                       ServiceShortcutAddition(controller: controller),
                       const Divider(),
                       OperatingHoursWidget(operatingHours: controller.operatingHours, controller: controller,),

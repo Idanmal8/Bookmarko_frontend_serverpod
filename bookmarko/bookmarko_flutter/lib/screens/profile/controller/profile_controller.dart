@@ -1,6 +1,7 @@
 import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
+import 'package:bookmarko_flutter/screens/bio/bio_screen.dart';
 
 import 'package:bookmarko_flutter/screens/services_screen/services_edit_screen.dart';
 import 'package:bookmarko_flutter/screens/operating_hours_screen/operating_hours_screen.dart';
@@ -83,6 +84,18 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
     notifyListeners();
   }
 
+  void deleteService(int serviceId) async {
+    _isLoading = true;
+    notifyListeners();
+
+    await _connectionController.client?.services.removeService(serviceId);
+
+    _init();
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
   Future<void> goToOperatingHoursScreen(BuildContext context) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
@@ -90,6 +103,13 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
     );
 
     _init();
+  }
+
+  Future<void> goToBioScreen(BuildContext context) async{
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => BioEditScreen(businessId: businessId)),
+    );
   }
 
   void logOut() async {

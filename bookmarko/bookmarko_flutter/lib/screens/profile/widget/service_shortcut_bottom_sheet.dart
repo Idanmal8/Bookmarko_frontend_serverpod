@@ -135,7 +135,9 @@ class ServiceShortcutAddition extends StatelessWidget {
                               TextFormField(
                                 textAlign: TextAlign.left,
                                 controller: controller.servicePriceController,
-                                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                        decimal: true),
                                 decoration: const InputDecoration(
                                   hintText: 'Service price',
                                   hintStyle: TextStyle(
@@ -188,8 +190,12 @@ class ServiceShortcutAddition extends StatelessWidget {
                           child: const Text('Add service',
                               style: TextStyle(color: Colors.black)),
                           onPressed: () => {
-                            controller.addService(),
-                            Navigator.pop(context)
+                            if (controller.formkey.currentState?.validate() !=
+                                false)
+                              {
+                                controller.addService(),
+                                Navigator.pop(context)
+                              }
                           },
                         ),
                         const SizedBox(height: 20),

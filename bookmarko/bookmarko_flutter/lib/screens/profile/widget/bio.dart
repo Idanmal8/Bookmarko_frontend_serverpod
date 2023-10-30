@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/follow_button.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/messege_button.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/options_button.dart';
+import 'package:intl/intl.dart';
 
 class BioField extends StatelessWidget {
   final Business business;
@@ -43,31 +44,14 @@ class BioField extends StatelessWidget {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  business.joined.toString() ?? '',
+                  DateFormat('yyyy-MM-dd').format(business.joined) ?? '',
                   style: const TextStyle(
                     fontSize: 10,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/profile/star.png',
-                  width: 25,
-                  height: 25,
-                ),
-                const SizedBox(width: 20),
-                // const Text(
-                //   '4.9',
-                //   style: TextStyle(
-                //     fontSize: 10,
-                //   ),
-                // ),
-              ],
-            ),
+            const SizedBox(width: 20),
           ],
         ),
         const SizedBox(height: 10),
@@ -80,10 +64,10 @@ class BioField extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        const Text(
-          'As a kid i followed a dream of becoming a software engineer, now i am a software engineer and i am following a dream of becoming a barber.',
+        Text(
+          business.bio ?? '',
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
           ),
         ),

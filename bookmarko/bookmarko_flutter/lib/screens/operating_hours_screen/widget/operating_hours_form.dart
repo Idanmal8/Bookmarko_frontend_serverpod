@@ -15,6 +15,7 @@ class OperatingHoursForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: controller.formkey,
       child: Column(
         children: [
           buildDayRow('Sunday', controller.selectedSundayOpenTime,
@@ -32,10 +33,22 @@ class OperatingHoursForm extends StatelessWidget {
           buildDayRow('Saturday', controller.selectedSaturdayOpenTime,
               controller.selectedSaturdayCloseTime, controller),
           const SizedBox(height: 60),
+          if (!controller.formValidation)
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('Please select both open and close time for each day',
+                  style: TextStyle(color: Colors.red)),
+            ),
+          if(!controller.formTimeValidation)
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('Open time should be before close time',
+                  style: TextStyle(color: Colors.red)),
+            ),
           OutlinedButton(
             child: const Text('Confirm', style: TextStyle(color: Colors.black)),
             onPressed: () => {
-              controller.saveOperatingHours(context,businessId),
+              controller.saveOperatingHours(context, businessId),
             },
           ),
         ],

@@ -14,26 +14,33 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
   final AuthController _authController;
   final int businessId;
 
-  List<Service>? _businessServices;
-  List<OperatingHours>? _operatingHours;
+  List<Service> _businessServices;
+  List<OperatingHours> _operatingHours;
   bool _isLoading = false;
 
   ProfileController({
     required AuthController authController,
     required ConnectionController connectionController,
     required this.businessId,
+    required List<Service> businessServices,
+    required List<OperatingHours> operatingHours,
   })  : _connectionController = connectionController,
-        _authController = authController {
-    _init();
-  }
+        _authController = authController,
+        _businessServices = businessServices,
+        _operatingHours = operatingHours;
 
   bool get doneLoading => isLoading == false;
   bool get isLoading => _isLoading;
-  List<Service> get businessServices => [..._businessServices ?? []];
-  List<OperatingHours> get operatingHours => [..._operatingHours ?? []];
+  List<Service> get businessServices => [..._businessServices];
+  List<OperatingHours> get operatingHours => [..._operatingHours];
 
-  void setOperatingHours(List<OperatingHours> newHours) {
-    _operatingHours = newHours;
+  set businessServices(List<Service> services) {
+    _businessServices = services;
+    notifyListeners();
+  }
+
+  set operatingHours(List<OperatingHours> hours) {
+    _operatingHours = hours;
     notifyListeners();
   }
 
@@ -41,23 +48,19 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
     _isLoading = true;
     notifyListeners();
 
-    _businessServices = await _connectionController.client?.services.getServices(businessId);
+    businessServices =
+        await _connectionController.client?.services.getServices(businessId) ??
+            [];
 
-    _operatingHours?.clear();
-    
-    final hours = await _connectionController.client?.operatingHours.getHours(businessId) ?? [];
-    if (_operatingHours == null) {
-        _operatingHours = hours;
-    } else {
-        _operatingHours?.addAll(hours);
-    }
+    operatingHours.clear();
 
-    print("This is the new operating hours: $_operatingHours");
-    
+    operatingHours = await _connectionController.client?.operatingHours
+            .getHours(businessId) ?? [];
+
+
     _isLoading = false;
     notifyListeners();
-}
-
+  }
 
   Future<void> goToServicesPage(BuildContext context) async {
     await Navigator.of(context).push(
@@ -105,10 +108,10 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
     _init();
   }
 
-  Future<void> goToBioScreen(BuildContext context) async{
+  Future<void> goToBioScreen(BuildContext context, Business business) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
-          builder: (context) => BioEditScreen(businessId: businessId)),
+          builder: (context) => BioEditScreen(businessId: businessId, business: business)),
     );
   }
 

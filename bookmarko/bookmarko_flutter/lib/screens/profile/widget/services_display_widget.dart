@@ -26,6 +26,8 @@ class Services extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
                 child: ServiceGeneration(
+                    key: ValueKey(
+                        service.id), // Unique key for each ServiceGeneration
                     context: context,
                     serviceName: service.serviceName,
                     serviceDuration: service.serviceDuration,
@@ -91,7 +93,8 @@ class _ServiceGenerationState extends State<ServiceGeneration>
   Widget build(BuildContext context) {
     return GestureDetector(
       onHorizontalDragUpdate: (details) {
-        if (details.primaryDelta! < 0) {
+        final double primaryDelta = details.primaryDelta ?? 0.0;
+        if (primaryDelta < 0) {
           _slideController.forward();
         } else {
           _slideController.reverse();

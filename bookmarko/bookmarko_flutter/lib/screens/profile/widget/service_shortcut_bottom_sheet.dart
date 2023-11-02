@@ -1,4 +1,3 @@
-import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.dart';

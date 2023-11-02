@@ -33,6 +33,8 @@ class Profile extends StatelessWidget {
         connectionController: context.read<ConnectionController>(),
         authController: context.read<AuthController>(),
         businessId: business.id ?? 0,
+        businessServices: services,
+        operatingHours: operatingHours,
       ),
       child: Builder(
         builder: (context) {

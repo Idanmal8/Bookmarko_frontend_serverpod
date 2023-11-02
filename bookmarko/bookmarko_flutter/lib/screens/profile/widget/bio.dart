@@ -60,7 +60,7 @@ class BioField extends StatelessWidget {
           children: [
             const FollowButton(),
             const MessegeButton(),
-            OptionButton(controller: controller),
+            OptionButton(controller: controller, business: business),
           ],
         ),
         const SizedBox(height: 10),

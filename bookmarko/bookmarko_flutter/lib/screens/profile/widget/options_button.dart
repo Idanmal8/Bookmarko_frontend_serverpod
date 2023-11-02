@@ -1,12 +1,15 @@
+import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.dart';
 
 import 'package:flutter/material.dart';
 
 class OptionButton extends StatelessWidget {
   final ProfileController controller;
+  final Business business;
 
   const OptionButton({
     required this.controller,
+    required this.business,
     super.key,
   });
 
@@ -26,7 +29,7 @@ class OptionButton extends StatelessWidget {
                     buttonCreation(
                         'Edit profile',
                         const Icon(Icons.person),
-                        () => controller.goToBioScreen(context)),
+                        () => controller.goToBioScreen(context,business)),
                     buttonCreation('Services', const Icon(Icons.room_service),
                         () => controller.goToServicesPage(context)),
                     buttonCreation(

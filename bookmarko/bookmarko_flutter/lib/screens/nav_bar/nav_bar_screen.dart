@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:bookmarko_flutter/screens/nav_bar/controller/nav_bar_controller.dart';
-import 'package:bookmarko_flutter/screens/calendar/calendar.dart';
+import 'package:bookmarko_flutter/screens/calendar_screen/calendar.dart';
 import 'package:bookmarko_flutter/screens/profile/profile.dart';
 
 class NavBarScreen extends StatelessWidget {
@@ -64,7 +64,9 @@ class NavBarScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: const Text('Page 3'),
                     ),
-                    const Calendar(),
+                    Calendar(
+                      business: controller.businessOwner,
+                    ),
                     Profile(
                         operatingHours: controller.businessOperatingHours,
                         business: controller.businessOwner,

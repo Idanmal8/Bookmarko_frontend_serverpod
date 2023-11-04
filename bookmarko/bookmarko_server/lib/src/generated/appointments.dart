@@ -16,7 +16,8 @@ class Appointment extends _i1.TableRow {
     required this.serviceName,
     required this.serviceId,
     required this.status,
-    required this.dateAndTime,
+    required this.appointmentDate,
+    required this.appointmentTime,
     required this.paid,
   }) : super(id);
 
@@ -36,8 +37,10 @@ class Appointment extends _i1.TableRow {
           serializationManager.deserialize<int>(jsonSerialization['serviceId']),
       status:
           serializationManager.deserialize<String>(jsonSerialization['status']),
-      dateAndTime: serializationManager
-          .deserialize<DateTime>(jsonSerialization['dateAndTime']),
+      appointmentDate: serializationManager
+          .deserialize<DateTime>(jsonSerialization['appointmentDate']),
+      appointmentTime: serializationManager
+          .deserialize<DateTime>(jsonSerialization['appointmentTime']),
       paid: serializationManager.deserialize<bool>(jsonSerialization['paid']),
     );
   }
@@ -54,7 +57,9 @@ class Appointment extends _i1.TableRow {
 
   String status;
 
-  DateTime dateAndTime;
+  DateTime appointmentDate;
+
+  DateTime appointmentTime;
 
   bool paid;
 
@@ -70,7 +75,8 @@ class Appointment extends _i1.TableRow {
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,
-      'dateAndTime': dateAndTime,
+      'appointmentDate': appointmentDate,
+      'appointmentTime': appointmentTime,
       'paid': paid,
     };
   }
@@ -84,7 +90,8 @@ class Appointment extends _i1.TableRow {
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,
-      'dateAndTime': dateAndTime,
+      'appointmentDate': appointmentDate,
+      'appointmentTime': appointmentTime,
       'paid': paid,
     };
   }
@@ -98,7 +105,8 @@ class Appointment extends _i1.TableRow {
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,
-      'dateAndTime': dateAndTime,
+      'appointmentDate': appointmentDate,
+      'appointmentTime': appointmentTime,
       'paid': paid,
     };
   }
@@ -127,8 +135,11 @@ class Appointment extends _i1.TableRow {
       case 'status':
         status = value;
         return;
-      case 'dateAndTime':
-        dateAndTime = value;
+      case 'appointmentDate':
+        appointmentDate = value;
+        return;
+      case 'appointmentTime':
+        appointmentTime = value;
         return;
       case 'paid':
         paid = value;
@@ -268,7 +279,9 @@ class AppointmentTable extends _i1.Table {
 
   final status = _i1.ColumnString('status');
 
-  final dateAndTime = _i1.ColumnDateTime('dateAndTime');
+  final appointmentDate = _i1.ColumnDateTime('appointmentDate');
+
+  final appointmentTime = _i1.ColumnDateTime('appointmentTime');
 
   final paid = _i1.ColumnBool('paid');
 
@@ -280,7 +293,8 @@ class AppointmentTable extends _i1.Table {
         serviceName,
         serviceId,
         status,
-        dateAndTime,
+        appointmentDate,
+        appointmentTime,
         paid,
       ];
 }

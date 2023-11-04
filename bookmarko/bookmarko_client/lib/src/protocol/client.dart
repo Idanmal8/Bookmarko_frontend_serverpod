@@ -8,13 +8,54 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:bookmarko_client/src/protocol/assets.dart' as _i3;
-import 'package:bookmarko_client/src/protocol/business_owners.dart' as _i4;
-import 'package:bookmarko_client/src/protocol/operating_hours.dart' as _i5;
-import 'package:bookmarko_client/src/protocol/services.dart' as _i6;
-import 'package:bookmarko_client/src/protocol/users.dart' as _i7;
-import 'dart:io' as _i8;
-import 'protocol.dart' as _i9;
+import 'package:bookmarko_client/src/protocol/appointments.dart' as _i3;
+import 'package:bookmarko_client/src/protocol/assets.dart' as _i4;
+import 'package:bookmarko_client/src/protocol/business_owners.dart' as _i5;
+import 'package:bookmarko_client/src/protocol/operating_hours.dart' as _i6;
+import 'package:bookmarko_client/src/protocol/services.dart' as _i7;
+import 'package:bookmarko_client/src/protocol/users.dart' as _i8;
+import 'dart:io' as _i9;
+import 'protocol.dart' as _i10;
+
+class _EndpointAppointments extends _i1.EndpointRef {
+  _EndpointAppointments(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'appointments';
+
+  _i2.Future<bool> addAppointment(_i3.Appointment appointment) =>
+      caller.callServerEndpoint<bool>(
+        'appointments',
+        'addAppointment',
+        {'appointment': appointment},
+      );
+
+  _i2.Future<bool> removeAppointment(int id) => caller.callServerEndpoint<bool>(
+        'appointments',
+        'removeAppointment',
+        {'id': id},
+      );
+
+  _i2.Future<bool> editAppointment(_i3.Appointment appointment) =>
+      caller.callServerEndpoint<bool>(
+        'appointments',
+        'editAppointment',
+        {'appointment': appointment},
+      );
+
+  _i2.Future<List<_i3.Appointment>> getAppointments(
+    int businessId,
+    DateTime date,
+  ) =>
+      caller.callServerEndpoint<List<_i3.Appointment>>(
+        'appointments',
+        'getAppointments',
+        {
+          'businessId': businessId,
+          'date': date,
+        },
+      );
+}
 
 class _EndpointAuth extends _i1.EndpointRef {
   _EndpointAuth(_i1.EndpointCaller caller) : super(caller);
@@ -47,7 +88,7 @@ class _EndpointBusinessAssets extends _i1.EndpointRef {
   @override
   String get name => 'businessAssets';
 
-  _i2.Future<bool> addAsset(_i3.ImageAsset asset) =>
+  _i2.Future<bool> addAsset(_i4.ImageAsset asset) =>
       caller.callServerEndpoint<bool>(
         'businessAssets',
         'addAsset',
@@ -60,15 +101,15 @@ class _EndpointBusinessAssets extends _i1.EndpointRef {
         {'id': id},
       );
 
-  _i2.Future<bool> editAsset(_i3.ImageAsset asset) =>
+  _i2.Future<bool> editAsset(_i4.ImageAsset asset) =>
       caller.callServerEndpoint<bool>(
         'businessAssets',
         'editAsset',
         {'asset': asset},
       );
 
-  _i2.Future<List<_i3.ImageAsset>?> getAssets(int businessId) =>
-      caller.callServerEndpoint<List<_i3.ImageAsset>?>(
+  _i2.Future<List<_i4.ImageAsset>?> getAssets(int businessId) =>
+      caller.callServerEndpoint<List<_i4.ImageAsset>?>(
         'businessAssets',
         'getAssets',
         {'businessId': businessId},
@@ -81,7 +122,7 @@ class _EndpointBusinessOwners extends _i1.EndpointRef {
   @override
   String get name => 'businessOwners';
 
-  _i2.Future<bool> addBusiness(_i4.Business business) =>
+  _i2.Future<bool> addBusiness(_i5.Business business) =>
       caller.callServerEndpoint<bool>(
         'businessOwners',
         'addBusiness',
@@ -94,15 +135,15 @@ class _EndpointBusinessOwners extends _i1.EndpointRef {
         {'id': id},
       );
 
-  _i2.Future<bool> editBusiness(_i4.Business business) =>
+  _i2.Future<bool> editBusiness(_i5.Business business) =>
       caller.callServerEndpoint<bool>(
         'businessOwners',
         'editBusiness',
         {'business': business},
       );
 
-  _i2.Future<_i4.Business?> getBusiness(int id) =>
-      caller.callServerEndpoint<_i4.Business?>(
+  _i2.Future<_i5.Business?> getBusiness(int id) =>
+      caller.callServerEndpoint<_i5.Business?>(
         'businessOwners',
         'getBusiness',
         {'id': id},
@@ -115,8 +156,8 @@ class _EndpointBusinessOwnersInformation extends _i1.EndpointRef {
   @override
   String get name => 'businessOwnersInformation';
 
-  _i2.Future<_i4.Business?> getBusinessInformation() =>
-      caller.callServerEndpoint<_i4.Business?>(
+  _i2.Future<_i5.Business?> getBusinessInformation() =>
+      caller.callServerEndpoint<_i5.Business?>(
         'businessOwnersInformation',
         'getBusinessInformation',
         {},
@@ -142,7 +183,7 @@ class _EndpointOperatingHours extends _i1.EndpointRef {
   @override
   String get name => 'operatingHours';
 
-  _i2.Future<bool> addHours(_i5.OperatingHours hours) =>
+  _i2.Future<bool> addHours(_i6.OperatingHours hours) =>
       caller.callServerEndpoint<bool>(
         'operatingHours',
         'addHours',
@@ -155,15 +196,15 @@ class _EndpointOperatingHours extends _i1.EndpointRef {
         {'id': id},
       );
 
-  _i2.Future<bool> editHours(List<_i5.OperatingHours> operatingHoursList) =>
+  _i2.Future<bool> editHours(List<_i6.OperatingHours> operatingHoursList) =>
       caller.callServerEndpoint<bool>(
         'operatingHours',
         'editHours',
         {'operatingHoursList': operatingHoursList},
       );
 
-  _i2.Future<List<_i5.OperatingHours>> getHours(int businessId) =>
-      caller.callServerEndpoint<List<_i5.OperatingHours>>(
+  _i2.Future<List<_i6.OperatingHours>> getHours(int businessId) =>
+      caller.callServerEndpoint<List<_i6.OperatingHours>>(
         'operatingHours',
         'getHours',
         {'businessId': businessId},
@@ -176,7 +217,7 @@ class _EndpointServices extends _i1.EndpointRef {
   @override
   String get name => 'services';
 
-  _i2.Future<bool> addService(_i6.Service service) =>
+  _i2.Future<bool> addService(_i7.Service service) =>
       caller.callServerEndpoint<bool>(
         'services',
         'addService',
@@ -189,15 +230,15 @@ class _EndpointServices extends _i1.EndpointRef {
         {'id': id},
       );
 
-  _i2.Future<bool> editService(_i6.Service service) =>
+  _i2.Future<bool> editService(_i7.Service service) =>
       caller.callServerEndpoint<bool>(
         'services',
         'editService',
         {'service': service},
       );
 
-  _i2.Future<List<_i6.Service>> getServices(int businessId) =>
-      caller.callServerEndpoint<List<_i6.Service>>(
+  _i2.Future<List<_i7.Service>> getServices(int businessId) =>
+      caller.callServerEndpoint<List<_i7.Service>>(
         'services',
         'getServices',
         {'businessId': businessId},
@@ -210,7 +251,7 @@ class _EndpointUsers extends _i1.EndpointRef {
   @override
   String get name => 'users';
 
-  _i2.Future<bool> addUser(_i7.User user) => caller.callServerEndpoint<bool>(
+  _i2.Future<bool> addUser(_i8.User user) => caller.callServerEndpoint<bool>(
         'users',
         'addUser',
         {'user': user},
@@ -222,13 +263,13 @@ class _EndpointUsers extends _i1.EndpointRef {
         {'id': id},
       );
 
-  _i2.Future<bool> editUser(_i7.User user) => caller.callServerEndpoint<bool>(
+  _i2.Future<bool> editUser(_i8.User user) => caller.callServerEndpoint<bool>(
         'users',
         'editUser',
         {'user': user},
       );
 
-  _i2.Future<_i7.User?> getUser(int id) => caller.callServerEndpoint<_i7.User?>(
+  _i2.Future<_i8.User?> getUser(int id) => caller.callServerEndpoint<_i8.User?>(
         'users',
         'getUser',
         {'id': id},
@@ -238,14 +279,15 @@ class _EndpointUsers extends _i1.EndpointRef {
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i8.SecurityContext? context,
+    _i9.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i9.Protocol(),
+          _i10.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
+    appointments = _EndpointAppointments(this);
     auth = _EndpointAuth(this);
     businessAssets = _EndpointBusinessAssets(this);
     businessOwners = _EndpointBusinessOwners(this);
@@ -255,6 +297,8 @@ class Client extends _i1.ServerpodClient {
     services = _EndpointServices(this);
     users = _EndpointUsers(this);
   }
+
+  late final _EndpointAppointments appointments;
 
   late final _EndpointAuth auth;
 
@@ -274,6 +318,7 @@ class Client extends _i1.ServerpodClient {
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'appointments': appointments,
         'auth': auth,
         'businessAssets': businessAssets,
         'businessOwners': businessOwners,

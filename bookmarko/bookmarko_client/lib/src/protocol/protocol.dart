@@ -18,9 +18,10 @@ import 'review.dart' as _i8;
 import 'services.dart' as _i9;
 import 'subscriptions.dart' as _i10;
 import 'users.dart' as _i11;
-import 'package:bookmarko_client/src/protocol/assets.dart' as _i12;
-import 'package:bookmarko_client/src/protocol/operating_hours.dart' as _i13;
-import 'package:bookmarko_client/src/protocol/services.dart' as _i14;
+import 'package:bookmarko_client/src/protocol/appointments.dart' as _i12;
+import 'package:bookmarko_client/src/protocol/assets.dart' as _i13;
+import 'package:bookmarko_client/src/protocol/operating_hours.dart' as _i14;
+import 'package:bookmarko_client/src/protocol/services.dart' as _i15;
 export 'appointments.dart';
 export 'assets.dart';
 export 'business_owners.dart';
@@ -113,18 +114,23 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i11.User?>()) {
       return (data != null ? _i11.User.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<List<_i12.ImageAsset>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<_i12.ImageAsset>(e)).toList()
-          : null) as dynamic;
-    }
-    if (t == List<_i13.OperatingHours>) {
+    if (t == List<_i12.Appointment>) {
       return (data as List)
-          .map((e) => deserialize<_i13.OperatingHours>(e))
+          .map((e) => deserialize<_i12.Appointment>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i14.Service>) {
-      return (data as List).map((e) => deserialize<_i14.Service>(e)).toList()
+    if (t == _i1.getType<List<_i13.ImageAsset>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i13.ImageAsset>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == List<_i14.OperatingHours>) {
+      return (data as List)
+          .map((e) => deserialize<_i14.OperatingHours>(e))
+          .toList() as dynamic;
+    }
+    if (t == List<_i15.Service>) {
+      return (data as List).map((e) => deserialize<_i15.Service>(e)).toList()
           as dynamic;
     }
     return super.deserialize<T>(data, t);

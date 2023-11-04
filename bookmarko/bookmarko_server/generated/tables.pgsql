@@ -9,7 +9,8 @@ CREATE TABLE "appointments" (
   "serviceName" text NOT NULL,
   "serviceId" integer NOT NULL,
   "status" text NOT NULL,
-  "dateAndTime" timestamp without time zone NOT NULL,
+  "appointmentDate" timestamp without time zone NOT NULL,
+  "appointmentTime" timestamp without time zone NOT NULL,
   "paid" boolean NOT NULL
 );
 

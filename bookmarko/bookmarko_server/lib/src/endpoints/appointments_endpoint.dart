@@ -21,7 +21,8 @@ class AppointmentsEndpoint extends Endpoint {
   }
 
   Future<bool> editAppointment(Session session, Appointment appointment) async {
-    final oldAppointment = await session.db.findById<Appointment>(appointment.id ?? 0);
+    final oldAppointment =
+        await session.db.findById<Appointment>(appointment.id ?? 0);
     if (oldAppointment == null) {
       return false;
     }
@@ -29,11 +30,19 @@ class AppointmentsEndpoint extends Endpoint {
     return true;
   }
 
-  Future<List<Appointment>> getAppointments(Session session, int businessId, DateTime date) async {
+  Future<List<Appointment>> getAppointments(
+      Session session, int businessId, DateTime date) async {
     // Fetch the appointments based on the kindOfAppointment and businessId
     print('businessId: $businessId');
+
     final appointments = await Appointment.find(session,
-        where: (appointment) => appointment.businessId.equals(businessId) & appointment.appointmentDate.equals(date));
+        where: (appointment) =>
+            (appointment.businessId.equals(businessId)) &
+            (appointment.appointmentDate >=
+                DateTime(date.year, date.month, date.day)) &
+            (appointment.appointmentDate <
+                DateTime(date.year, date.month, date.day + 1)));
+
     print('appointments: $appointments');
     // If no appointments are found, return an empty list
     if (appointments.isEmpty) {

@@ -17,7 +17,6 @@ class Appointment extends _i1.TableRow {
     required this.serviceId,
     required this.status,
     required this.appointmentDate,
-    required this.appointmentTime,
     required this.paid,
   }) : super(id);
 
@@ -39,8 +38,6 @@ class Appointment extends _i1.TableRow {
           serializationManager.deserialize<String>(jsonSerialization['status']),
       appointmentDate: serializationManager
           .deserialize<DateTime>(jsonSerialization['appointmentDate']),
-      appointmentTime: serializationManager
-          .deserialize<DateTime>(jsonSerialization['appointmentTime']),
       paid: serializationManager.deserialize<bool>(jsonSerialization['paid']),
     );
   }
@@ -59,8 +56,6 @@ class Appointment extends _i1.TableRow {
 
   DateTime appointmentDate;
 
-  DateTime appointmentTime;
-
   bool paid;
 
   @override
@@ -76,7 +71,6 @@ class Appointment extends _i1.TableRow {
       'serviceId': serviceId,
       'status': status,
       'appointmentDate': appointmentDate,
-      'appointmentTime': appointmentTime,
       'paid': paid,
     };
   }
@@ -91,7 +85,6 @@ class Appointment extends _i1.TableRow {
       'serviceId': serviceId,
       'status': status,
       'appointmentDate': appointmentDate,
-      'appointmentTime': appointmentTime,
       'paid': paid,
     };
   }
@@ -106,7 +99,6 @@ class Appointment extends _i1.TableRow {
       'serviceId': serviceId,
       'status': status,
       'appointmentDate': appointmentDate,
-      'appointmentTime': appointmentTime,
       'paid': paid,
     };
   }
@@ -137,9 +129,6 @@ class Appointment extends _i1.TableRow {
         return;
       case 'appointmentDate':
         appointmentDate = value;
-        return;
-      case 'appointmentTime':
-        appointmentTime = value;
         return;
       case 'paid':
         paid = value;
@@ -281,8 +270,6 @@ class AppointmentTable extends _i1.Table {
 
   final appointmentDate = _i1.ColumnDateTime('appointmentDate');
 
-  final appointmentTime = _i1.ColumnDateTime('appointmentTime');
-
   final paid = _i1.ColumnBool('paid');
 
   @override
@@ -294,7 +281,6 @@ class AppointmentTable extends _i1.Table {
         serviceId,
         status,
         appointmentDate,
-        appointmentTime,
         paid,
       ];
 }

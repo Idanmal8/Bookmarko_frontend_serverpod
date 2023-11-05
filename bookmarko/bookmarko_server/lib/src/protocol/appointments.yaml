@@ -7,6 +7,5 @@ fields:
   serviceName: String
   serviceId: int
   status: String
-  appointmentDate: DateTime
-  appointmentTime: DateTime
+  appointmentDate : DateTime
   paid: bool

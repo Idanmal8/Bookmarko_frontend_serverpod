@@ -55,7 +55,14 @@ class Calendar extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 20),
-                    const Appointments(),
+                    if (!controller.isLoading) // Check if not loading
+                      Appointments(
+                        appointments: controller
+                            .appointments, appointmentsController: controller,
+                         // Pass the appointments from the controller
+                      )
+                    else
+                      const CircularProgressIndicator(),
                   ],
                 ),
               ),

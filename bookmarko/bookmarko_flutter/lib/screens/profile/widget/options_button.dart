@@ -30,8 +30,6 @@ class OptionButton extends StatelessWidget {
                         'Edit profile',
                         const Icon(Icons.person),
                         () => controller.goToBioScreen(context,business)),
-                    buttonCreation('Services', const Icon(Icons.room_service),
-                        () => controller.goToServicesPage(context)),
                     buttonCreation(
                         'Operating hours', const Icon(Icons.timelapse), () {
                       Navigator.of(context).pop();

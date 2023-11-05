@@ -13,6 +13,7 @@ class Appointment extends _i1.TableRow {
     int? id,
     required this.businessId,
     required this.userId,
+    required this.userName,
     required this.serviceName,
     required this.serviceId,
     required this.status,
@@ -30,6 +31,8 @@ class Appointment extends _i1.TableRow {
           .deserialize<int>(jsonSerialization['businessId']),
       userId:
           serializationManager.deserialize<int>(jsonSerialization['userId']),
+      userName: serializationManager
+          .deserialize<String>(jsonSerialization['userName']),
       serviceName: serializationManager
           .deserialize<String>(jsonSerialization['serviceName']),
       serviceId:
@@ -47,6 +50,8 @@ class Appointment extends _i1.TableRow {
   int businessId;
 
   int userId;
+
+  String userName;
 
   String serviceName;
 
@@ -67,6 +72,7 @@ class Appointment extends _i1.TableRow {
       'id': id,
       'businessId': businessId,
       'userId': userId,
+      'userName': userName,
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,
@@ -81,6 +87,7 @@ class Appointment extends _i1.TableRow {
       'id': id,
       'businessId': businessId,
       'userId': userId,
+      'userName': userName,
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,
@@ -95,6 +102,7 @@ class Appointment extends _i1.TableRow {
       'id': id,
       'businessId': businessId,
       'userId': userId,
+      'userName': userName,
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,
@@ -117,6 +125,9 @@ class Appointment extends _i1.TableRow {
         return;
       case 'userId':
         userId = value;
+        return;
+      case 'userName':
+        userName = value;
         return;
       case 'serviceName':
         serviceName = value;
@@ -262,6 +273,8 @@ class AppointmentTable extends _i1.Table {
 
   final userId = _i1.ColumnInt('userId');
 
+  final userName = _i1.ColumnString('userName');
+
   final serviceName = _i1.ColumnString('serviceName');
 
   final serviceId = _i1.ColumnInt('serviceId');
@@ -277,6 +290,7 @@ class AppointmentTable extends _i1.Table {
         id,
         businessId,
         userId,
+        userName,
         serviceName,
         serviceId,
         status,

@@ -4,6 +4,7 @@ table: appointments
 fields:
   businessId: int
   userId: int
+  userName: String
   serviceName: String
   serviceId: int
   status: String

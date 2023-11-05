@@ -6,6 +6,7 @@ CREATE TABLE "appointments" (
   "id" serial,
   "businessId" integer NOT NULL,
   "userId" integer NOT NULL,
+  "userName" text NOT NULL,
   "serviceName" text NOT NULL,
   "serviceId" integer NOT NULL,
   "status" text NOT NULL,

@@ -13,11 +13,11 @@ class Appointment extends _i1.SerializableEntity {
     this.id,
     required this.businessId,
     required this.userId,
+    required this.userName,
     required this.serviceName,
     required this.serviceId,
     required this.status,
     required this.appointmentDate,
-    required this.appointmentTime,
     required this.paid,
   });
 
@@ -31,6 +31,8 @@ class Appointment extends _i1.SerializableEntity {
           .deserialize<int>(jsonSerialization['businessId']),
       userId:
           serializationManager.deserialize<int>(jsonSerialization['userId']),
+      userName: serializationManager
+          .deserialize<String>(jsonSerialization['userName']),
       serviceName: serializationManager
           .deserialize<String>(jsonSerialization['serviceName']),
       serviceId:
@@ -39,8 +41,6 @@ class Appointment extends _i1.SerializableEntity {
           serializationManager.deserialize<String>(jsonSerialization['status']),
       appointmentDate: serializationManager
           .deserialize<DateTime>(jsonSerialization['appointmentDate']),
-      appointmentTime: serializationManager
-          .deserialize<DateTime>(jsonSerialization['appointmentTime']),
       paid: serializationManager.deserialize<bool>(jsonSerialization['paid']),
     );
   }
@@ -54,6 +54,8 @@ class Appointment extends _i1.SerializableEntity {
 
   int userId;
 
+  String userName;
+
   String serviceName;
 
   int serviceId;
@@ -61,8 +63,6 @@ class Appointment extends _i1.SerializableEntity {
   String status;
 
   DateTime appointmentDate;
-
-  DateTime appointmentTime;
 
   bool paid;
 
@@ -72,11 +72,11 @@ class Appointment extends _i1.SerializableEntity {
       'id': id,
       'businessId': businessId,
       'userId': userId,
+      'userName': userName,
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,
       'appointmentDate': appointmentDate,
-      'appointmentTime': appointmentTime,
       'paid': paid,
     };
   }

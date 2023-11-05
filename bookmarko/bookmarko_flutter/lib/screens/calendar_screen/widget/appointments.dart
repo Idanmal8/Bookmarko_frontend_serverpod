@@ -1,127 +1,123 @@
+import 'package:bookmarko_flutter/screens/calendar_screen/controller/calendar_screen_controller.dart';
+import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Appointments extends StatelessWidget {
-  const Appointments({super.key});
+  final List<Appointment> appointments;
+  final CalendarController appointmentsController;
+
+  const Appointments({
+    required this.appointments,
+    required this.appointmentsController,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const AppointmentsBoxes();
-  }
-}
+    List<TableRow> appointmentRows = [
+      // Building the header row
+      TableRow(
+        children: <Widget>[
+          headerCell('שם'),
+          headerCell('שעה'),
+          headerCell('שירות'),
+          headerCell('שילם'),
+        ],
+      ),
+      // Adding a spacer after the header
+      spacerRow(),
+    ];
 
-class AppointmentsBoxes extends StatelessWidget {
-  const AppointmentsBoxes({super.key});
+    // Building the data rows with spacers in between
+    for (var appointment in appointments) {
+      appointmentRows.add(buildAppointmentRow(appointment, context));
+      appointmentRows.add(spacerRow()); // Add spacer row
+    }
 
-  @override
-  Widget build(BuildContext context) {
     return Table(
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       columnWidths: const <int, TableColumnWidth>{
-        0: FlexColumnWidth(2.5),
-        1: FlexColumnWidth(1),
-        2: FlexColumnWidth(2),
-        3: FlexColumnWidth(1),
+        0: FlexColumnWidth(1.2), // Adjusted space for the first column
+        1: FlexColumnWidth(),
+        2: FlexColumnWidth(),
+        3: FlexColumnWidth(),
       },
+      children: appointmentRows,
+    );
+  }
+
+  // Helper function to create a spacer row
+  TableRow spacerRow() {
+    return const TableRow(
       children: [
-        TableRow(
-          children: <Widget>[
-            TableCell(
-              verticalAlignment: TableCellVerticalAlignment.middle,
-              child: Container(
-                height: 30,
-                alignment: Alignment.center,
-                child: const Text('שם'),
-              ),
-            ),
-            TableCell(
-              verticalAlignment: TableCellVerticalAlignment.middle,
-              child: Container(
-                alignment: Alignment.center,
-                child: const Text('שעה'),
-              ),
-            ),
-            TableCell(
-              verticalAlignment: TableCellVerticalAlignment.middle,
-              child: Container(
-                alignment: Alignment.center,
-                child: const Text('שירות'),
-              ),
-            ),
-            TableCell(
-              verticalAlignment: TableCellVerticalAlignment.middle,
-              child: Container(
-                alignment: Alignment.center,
-                child: const Text('שילם'),
-              ),
-            ),
-          ],
+        TableCell(
+          child: SizedBox(height: 10), // The height of the spacer
         ),
-        TableRow(children: [
-          TableCell(
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  width: 0.5,
-                ),
-                color: const Color.fromARGB(0, 0, 0, 0),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.blue,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'IM',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text('Idan Malka'),
-                ],
-              ),
-            ),
-          ),
-          TableCell(
-            child: Container(
-              alignment: Alignment.center,
-              child: const Text('19:00'),
-            ),
-          ),
-          TableCell(
-            child: Container(
-              alignment: Alignment.center,
-              child: const Text('תספורת + זקן'),
-            ),
-          ),
-          TableCell(
-            child: Container(
-              alignment: Alignment.center,
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/calendar/payments/paid_black.png',
-                  width: 25,
-                  height: 25,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-        ])
+        TableCell(
+          child: SizedBox(height: 10),
+        ),
+        TableCell(
+          child: SizedBox(height: 10),
+        ),
+        TableCell(
+          child: SizedBox(height: 10),
+        ),
       ],
+    );
+  }
+
+  TableRow buildAppointmentRow(Appointment appointment, BuildContext context) {
+    onTap() => appointmentsController.goToCustomerAppointment(context, appointment);
+
+    return TableRow(
+      children: <Widget>[
+        cell(Text(appointment.userName), onTap),
+        cell(Text(DateFormat('HH:mm').format(appointment.appointmentDate)),
+            onTap),
+        cell(Text(appointment.serviceName), onTap),
+        cell(
+          Container(
+            width: 20,
+            height: 20,
+            alignment: Alignment.center,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: appointment.paid
+                  ? Image.asset('assets/calendar/payments/paid_filled.png')
+                  : Image.asset('assets/calendar/payments/paid_black.png'),
+            ),
+          ),
+          onTap,
+        ),
+      ],
+    );
+  }
+
+  TableCell headerCell(String text) {
+    return TableCell(
+      verticalAlignment: TableCellVerticalAlignment.middle,
+      child: Container(
+        height: 30,
+        alignment: Alignment.center,
+        child: Text(text),
+      ),
+    );
+  }
+
+  TableCell cell(Widget child, VoidCallback onTap) {
+    return TableCell(
+      verticalAlignment: TableCellVerticalAlignment.middle,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            alignment: Alignment.center,
+            child: child,
+          ),
+        ),
+      ),
     );
   }
 }

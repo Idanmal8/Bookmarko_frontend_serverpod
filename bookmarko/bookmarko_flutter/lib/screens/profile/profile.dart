@@ -63,7 +63,6 @@ class Profile extends StatelessWidget {
                                 print("sd"),
                               },
                               hasBackgroundImage: false,
-                              // backgroundImage: 'as',
                             ),
                             Positioned(
                               top: MediaQuery.of(context).size.height / 4 - 75,

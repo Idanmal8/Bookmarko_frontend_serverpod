@@ -65,24 +65,21 @@ class RegistrationNamePage extends StatelessWidget {
                                 children: [
                                   SizedBox(
                                     height: 24,
-                                    child: errorMessage == null
-                                        ? null
-                                        : Row(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Text(
-                                                  errorMessage,
-                                                  style: TextStyle(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .error),
-                                                ),
-                                              ),
-                                            ],
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: Text(
+                                            errorMessage,
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .error),
                                           ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

@@ -37,7 +37,7 @@ class BusinessOwnersEndpoint extends Endpoint {
   //Edit a business by id.
   Future<bool> editBusiness(Session session, Business business) async {
     final oldBusiness = await session.db.findById<Business>(business.id ?? 0);
-    if (oldBusiness != null) {
+    if (oldBusiness == null) {
       return false;
     }
     await session.db.update(business);

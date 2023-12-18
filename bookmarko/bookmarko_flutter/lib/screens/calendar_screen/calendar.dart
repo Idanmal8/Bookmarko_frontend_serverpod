@@ -1,10 +1,9 @@
 import 'package:bookmarko_flutter/screens/calendar_screen/widget/schedual_an_appointment_bottom_sheet.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:bookmarko_client/bookmarko_client.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
-import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 
 import 'package:bookmarko_flutter/screens/calendar_screen/widget/appointments.dart';
@@ -23,7 +22,6 @@ class Calendar extends StatelessWidget {
     return ChangeNotifierProvider<CalendarController>(
       create: (context) => CalendarController(
         connectionController: context.read<ConnectionController>(),
-        authController: context.read<AuthController>(),
         business: business,
       ),
       child: Consumer<CalendarController>(
@@ -33,7 +31,9 @@ class Calendar extends StatelessWidget {
               onPressed: () {
                 showModalBottomSheet(
                   context: context,
-                  builder: (context) => SchedualAppointmentBottomSheetForm(controller: controller, selectedDate: controller.getSelectedDate),
+                  builder: (context) => SchedualAppointmentBottomSheetForm(
+                      controller: controller,
+                      selectedDate: controller.getSelectedDate),
                 );
               },
               child: const Icon(Icons.add),
@@ -65,8 +65,8 @@ class Calendar extends StatelessWidget {
                     const SizedBox(height: 20),
                     if (!controller.isLoading) // Check if not loading
                       Appointments(
-                        appointments: controller
-                            .appointments, appointmentsController: controller,
+                        appointments: controller.appointments,
+                        appointmentsController: controller,
                       )
                     else
                       const CircularProgressIndicator(),

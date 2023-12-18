@@ -1,5 +1,4 @@
 import 'package:bookmarko_client/bookmarko_client.dart';
-import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 import 'package:bookmarko_flutter/screens/edit_appointment_screen/edit_appointment_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -7,14 +6,15 @@ import 'package:flutter/material.dart';
 
 class CalendarController extends ChangeNotifier {
   final ConnectionController _connectionController;
-  final AuthController _authController;
   final Business business;
 
   DateTime selectedDate = DateTime.now();
   DateTime today = DateTime.now();
   List<Appointment> _appointments = [];
+  List<Service> _services = [];
   bool _isLoading = false;
   bool _initAppointmentList = false;
+  Service? selectedService;
   DateTime selectedHourNewAppointment = DateTime(
     DateTime.now().year,
     DateTime.now().month,
@@ -24,19 +24,25 @@ class CalendarController extends ChangeNotifier {
   );
 
   CalendarController({
-    required AuthController authController,
     required ConnectionController connectionController,
     required this.business,
-  })  : _connectionController = connectionController,
-        _authController = authController {
+  }) : _connectionController = connectionController {
     _init();
   }
 
   DateTime get getSelectedDate => selectedDate;
+  DateTime get getToday => today;
+  Service? get getSelectedService => selectedService;
   bool get isLoading => _isLoading;
   bool get initAppointmentList => _initAppointmentList;
   List<Appointment> get appointments => [..._appointments];
+  List<Service> get services => [..._services];
   DateTime get getSelectedHourNewAppointment => selectedHourNewAppointment;
+
+  set setSelectedService(Service? service) {
+    selectedService = service;
+    notifyListeners();
+  }
 
   set setSelectedHourNewAppointment(DateTime date) {
     selectedHourNewAppointment = date;
@@ -62,8 +68,11 @@ class CalendarController extends ChangeNotifier {
     _appointments = await _connectionController.client?.appointments
             .getAppointments(business.id ?? 0, today) ??
         [];
+    
+    _services = await _connectionController.client?.services
+            .getServices(business.id ?? 0) ??
+        [];
 
-    print(_appointments);
     _isLoading = false;
     notifyListeners();
 

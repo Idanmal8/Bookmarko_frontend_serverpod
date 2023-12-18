@@ -15,6 +15,13 @@ class CalendarController extends ChangeNotifier {
   List<Appointment> _appointments = [];
   bool _isLoading = false;
   bool _initAppointmentList = false;
+  DateTime selectedHourNewAppointment = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+    0,
+    0,
+  );
 
   CalendarController({
     required AuthController authController,
@@ -29,6 +36,17 @@ class CalendarController extends ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get initAppointmentList => _initAppointmentList;
   List<Appointment> get appointments => [..._appointments];
+  DateTime get getSelectedHourNewAppointment => selectedHourNewAppointment;
+
+  set setSelectedHourNewAppointment(DateTime date) {
+    selectedHourNewAppointment = date;
+    notifyListeners();
+  }
+
+  set getSelectedDate(DateTime date) {
+    selectedDate = date;
+    notifyListeners();
+  }
 
   set appointmentList(List<Appointment> appointments) {
     _appointments = appointments;

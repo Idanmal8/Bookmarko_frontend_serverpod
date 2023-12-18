@@ -1,3 +1,4 @@
+import 'package:bookmarko_flutter/screens/calendar_screen/widget/schedual_an_appointment_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -28,11 +29,18 @@ class Calendar extends StatelessWidget {
       child: Consumer<CalendarController>(
         builder: (context, controller, _) {
           return Scaffold(
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => SchedualAppointmentBottomSheetForm(controller: controller, selectedDate: controller.getSelectedDate),
+                );
+              },
+              child: const Icon(Icons.add),
+            ),
             body: SafeArea(
               child: Container(
                 padding: const EdgeInsets.all(20),
-                width: double.infinity,
-                height: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,7 +67,6 @@ class Calendar extends StatelessWidget {
                       Appointments(
                         appointments: controller
                             .appointments, appointmentsController: controller,
-                         // Pass the appointments from the controller
                       )
                     else
                       const CircularProgressIndicator(),

@@ -208,7 +208,7 @@ class OperatingHoursController extends ChangeNotifier with OperatingHoursMixin {
 
     _isLoading = false;
     notifyListeners();
-
+    
     if (context.mounted) {
       if (response) {
         FocusManager.instance.primaryFocus?.unfocus();

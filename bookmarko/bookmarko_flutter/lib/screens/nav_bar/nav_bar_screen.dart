@@ -59,11 +59,6 @@ class NavBarScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: const Text('Page 2'),
                     ),
-                    Container(
-                      color: Colors.blue,
-                      alignment: Alignment.center,
-                      child: const Text('Page 3'),
-                    ),
                     Calendar(
                       business: controller.businessOwner,
                     ),
@@ -105,19 +100,6 @@ class NavBarScreen extends StatelessWidget {
                     ),
                     icon: customers,
                     label: 'Customers',
-                  ),
-                  NavigationDestination(
-                    selectedIcon: SizedBox(
-                      child: Icon(
-                        Icons.add_box,
-                        color: controller.selectedColorPurple,
-                      ),
-                    ),
-                    icon: const Icon(
-                      Icons.add_box_outlined,
-                      size: 30,
-                    ),
-                    label: 'schedual',
                   ),
                   NavigationDestination(
                     selectedIcon: ColorFiltered(

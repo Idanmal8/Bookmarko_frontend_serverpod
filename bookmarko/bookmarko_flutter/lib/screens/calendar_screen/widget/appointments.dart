@@ -68,7 +68,8 @@ class Appointments extends StatelessWidget {
   }
 
   TableRow buildAppointmentRow(Appointment appointment, BuildContext context) {
-    onTap() => appointmentsController.goToCustomerAppointment(context, appointment);
+    onTap() =>
+        appointmentsController.goToCustomerAppointment(context, appointment);
 
     return TableRow(
       children: <Widget>[
@@ -81,12 +82,9 @@ class Appointments extends StatelessWidget {
             width: 20,
             height: 20,
             alignment: Alignment.center,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: appointment.paid
-                  ? Image.asset('assets/calendar/payments/paid_filled.png')
-                  : Image.asset('assets/calendar/payments/paid_black.png'),
-            ),
+            child: appointment.paid
+                ? Image.asset('assets/calendar/payments/paid_filled.png')
+                : Image.asset('assets/calendar/payments/paid_black.png'),
           ),
           onTap,
         ),

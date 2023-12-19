@@ -51,4 +51,44 @@ class AppointmentsEndpoint extends Endpoint {
 
     return appointments;
   }
+
+  // Future<List<DateTime>> getAvailableTimes(Session session, int businessId,
+  //     DateTime date, int timeFrameBasedOnService) async {
+
+  //   final availableTimes = <DateTime>[];
+
+  //   // Generate time slots
+  //   for (DateTime slotTime = startTime;
+  //       slotTime.add(timeFrameBasedOnService as Duration).isBefore(endTime);
+  //       slotTime = slotTime.add(timeFrameBasedOnService as Duration)) {
+  //     bool isSlotAvailable = true;
+  //     session.log(
+  //       'Oops, something went wrong 4',
+  //     );
+  //     // Check if slot overlaps with any existing appointments
+  //     for (final appointment in appointments) {
+  //       DateTime appointmentStart = appointment.appointmentDate;
+  //       DateTime appointmentEnd =
+  //           appointmentStart.add(timeFrameBasedOnService as Duration);
+
+  //       if (slotTime.isBefore(appointmentEnd) &&
+  //           slotTime
+  //               .add(timeFrameBasedOnService as Duration)
+  //               .isAfter(appointmentStart)) {
+  //         isSlotAvailable = false;
+  //         break;
+  //       }
+  //     }
+
+  //     if (isSlotAvailable) {
+  //       availableTimes.add(slotTime);
+  //     }
+  //   }
+  //   session.log(
+  //     'Oops, something went wrong 5',
+  //   );
+
+  //   return availableTimes;
+  // }
+
 }

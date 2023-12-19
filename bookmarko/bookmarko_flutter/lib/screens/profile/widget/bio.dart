@@ -21,8 +21,8 @@ class BioField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      width: MediaQuery.of(context).size.width - 20,
-      child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+      child:
+          Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
         Column(
           children: [
             Text(
@@ -55,15 +55,16 @@ class BioField extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const FollowButton(),
-            const MessegeButton(),
-            OptionButton(controller: controller, business: business),
-          ],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const FollowButton(),
+              OptionButton(controller: controller, business: business),
+            ],
+          ),
         ),
-        const SizedBox(height: 10),
         Text(
           business.bio ?? '',
           textAlign: TextAlign.center,

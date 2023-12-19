@@ -46,11 +46,11 @@ class OptionButton extends StatelessWidget {
         },
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
         child: const Text('Options',
-            style: TextStyle(color: Colors.black, fontSize: 12)),
+            style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold)),
       ),
     );
   }

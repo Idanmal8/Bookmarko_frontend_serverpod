@@ -11,6 +11,7 @@ class CalendarController extends ChangeNotifier {
   DateTime selectedDate = DateTime.now();
   DateTime today = DateTime.now();
   List<Appointment> _appointments = [];
+  List<DateTime> _availableTimes = [];
   List<Service> _services = [];
   bool _isLoading = false;
   bool _initAppointmentList = false;
@@ -22,6 +23,7 @@ class CalendarController extends ChangeNotifier {
     0,
     0,
   );
+  String _errorMessage = '';
 
   CalendarController({
     required ConnectionController connectionController,
@@ -36,8 +38,15 @@ class CalendarController extends ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get initAppointmentList => _initAppointmentList;
   List<Appointment> get appointments => [..._appointments];
+  List<DateTime> get availableTimes => [..._availableTimes];
   List<Service> get services => [..._services];
   DateTime get getSelectedHourNewAppointment => selectedHourNewAppointment;
+  String get errorMessage => _errorMessage;
+
+  set setErrorMessage(String message) {
+    _errorMessage = message;
+    notifyListeners();
+  }
 
   set setSelectedHourNewAppointment(DateTime date) {
     selectedHourNewAppointment = date;
@@ -52,6 +61,24 @@ class CalendarController extends ChangeNotifier {
   set appointmentList(List<Appointment> appointments) {
     _appointments = appointments;
     notifyListeners();
+  }
+
+  void setSelectedDate(DateTime date) {
+    selectedDate = date;
+    notifyListeners();
+  }
+
+  void setSelectedService(Service? service) {
+    selectedService = service;
+    notifyListeners();
+  }
+
+  void onDaySelected(DateTime day, DateTime focusedDay) {
+    if (!isSameDay(selectedDate, day)) {
+      selectedDate = day;
+      getAppointments(day); // Fetch appointments for the selected day.
+      notifyListeners();
+    }
   }
 
   Future<bool> _init() async {
@@ -94,14 +121,6 @@ class CalendarController extends ChangeNotifier {
     return _appointments;
   }
 
-  void onDaySelected(DateTime day, DateTime focusedDay) {
-    if (!isSameDay(selectedDate, day)) {
-      selectedDate = day;
-      getAppointments(day); // Fetch appointments for the selected day.
-      notifyListeners();
-    }
-  }
-
   Future<void> goToCustomerAppointment(
       BuildContext context, Appointment appointment) async {
     await Navigator.of(context).push(
@@ -109,5 +128,49 @@ class CalendarController extends ChangeNotifier {
           builder: (context) =>
               EditAppointmentScreenInCalendar(appointment: appointment)),
     );
+  }
+
+  void updateAvailableTimes() {
+    if (selectedDate != getSelectedDate ||
+        selectedService != getSelectedService) {
+      selectedDate = getSelectedDate;
+      selectedService = getSelectedService;
+      getAppointmentsForService(selectedDate, selectedService!);
+    }
+  }
+
+/// !ToDo - Fix this function with this steps:
+/// 1. Get the selected day operating hours from the server from the app not in the server again.
+/// 2. send it to the endpoint with the operating hours.
+/// 3. do the same with appointments that are already booked.
+/// 4. send it to the endpoint with the appointments.
+/// 5. try making the calculation in the server.
+Future<List<DateTime>> getAppointmentsForService(
+      DateTime date, Service? service) async {
+    _isLoading = true;
+    notifyListeners();
+
+    print(date);
+    print(service);
+
+    _availableTimes.clear();
+
+    if (selectedService?.serviceDuration == null) {
+      _errorMessage = 'Service duration has not been set yet';
+      _isLoading = false;
+      notifyListeners();
+      return [];
+    }
+
+    // _availableTimes = await _connectionController.client?.appointments
+    //         .getAvailableTimes(business.id ?? 0, selectedDate,
+    //             selectedService!.serviceDuration) ??
+    //     [];
+
+    _isLoading = false;
+    _initAppointmentList = false;
+    notifyListeners();
+
+    return _availableTimes;
   }
 }

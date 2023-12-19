@@ -24,56 +24,69 @@ class Calendar extends StatelessWidget {
         connectionController: context.read<ConnectionController>(),
         business: business,
       ),
-      child: Consumer<CalendarController>(
-        builder: (context, controller, _) {
-          return Scaffold(
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) => SchedualAppointmentBottomSheetForm(
-                      controller: controller,
-                      selectedDate: controller.getSelectedDate),
-                );
-              },
-              child: const Icon(Icons.add),
-            ),
-            body: SafeArea(
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TableCalendar(
-                      headerStyle: const HeaderStyle(
-                          formatButtonVisible: false,
-                          titleCentered: true,
-                          titleTextStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20)),
-                      focusedDay: controller.selectedDate,
-                      firstDay: controller.today,
-                      lastDay: DateTime.utc(2024, 3, 14),
-                      availableGestures: AvailableGestures.all,
-                      selectedDayPredicate: (day) =>
-                          isSameDay(day, controller.selectedDate),
-                      onDaySelected:
-                          (DateTime selectedDay, DateTime focusedDay) {
-                        controller.onDaySelected(selectedDay, focusedDay);
+      child: Builder(
+        builder: (context) {
+          return Consumer<CalendarController>(
+            builder: (context, controller, child) {
+              return Scaffold(
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SchedualAppointmentBottomSheetForm(
+                          controller: controller,
+                          selectedDate: controller.getSelectedDate,
+                          onDateChanged: (newDate) {
+                            // Use this callback to update the calendar
+                            controller.onDaySelected(newDate, newDate);
+                          },
+                        );
                       },
-                    ),
-                    const SizedBox(height: 20),
-                    if (!controller.isLoading) // Check if not loading
-                      Appointments(
-                        appointments: controller.appointments,
-                        appointmentsController: controller,
-                      )
-                    else
-                      const CircularProgressIndicator(),
-                  ],
+                    );
+                    controller.getAppointmentsForService(controller.getSelectedDate,
+                                controller.getSelectedService);
+                  },
+                  child: const Icon(Icons.add),
                 ),
-              ),
-            ),
+                body: SafeArea(
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TableCalendar(
+                          headerStyle: const HeaderStyle(
+                              formatButtonVisible: false,
+                              titleCentered: true,
+                              titleTextStyle: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20)),
+                          focusedDay: controller.selectedDate,
+                          firstDay: controller.today,
+                          lastDay: DateTime.utc(2050, 3, 14),
+                          availableGestures: AvailableGestures.all,
+                          selectedDayPredicate: (day) =>
+                              isSameDay(day, controller.selectedDate),
+                          onDaySelected:
+                              (DateTime selectedDay, DateTime focusedDay) {
+                            controller.onDaySelected(selectedDay, focusedDay);
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        if (!controller.isLoading) // Check if not loading
+                          Appointments(
+                            appointments: controller.appointments,
+                            appointmentsController: controller,
+                          )
+                        else
+                          const CircularProgressIndicator(),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
           );
         },
       ),

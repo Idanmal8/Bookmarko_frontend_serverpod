@@ -104,7 +104,6 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
       MaterialPageRoute(
           builder: (context) => OperatingHoursScreen(businessId: businessId)),
     );
-
     _init();
   }
 
@@ -113,6 +112,7 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
       MaterialPageRoute(
           builder: (context) => BioEditScreen(businessId: businessId, business: business)),
     );
+    _init();
   }
 
   void logOut() async {

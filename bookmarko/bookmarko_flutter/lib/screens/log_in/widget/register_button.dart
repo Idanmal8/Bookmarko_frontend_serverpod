@@ -18,12 +18,12 @@ class RegisterButtonLogInScreen extends StatelessWidget {
           const Size(200, 50),
         ),
         backgroundColor: MaterialStateProperty.all<Color>(
-          Color.fromARGB(255, 255, 255, 255),
+          const Color.fromARGB(255, 255, 255, 255),
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
-            side: BorderSide(color: Colors.black), // Black borders
+            side: const BorderSide(color: Colors.black), // Black borders
           ),
         ),
         elevation: MaterialStateProperty.all<double>(

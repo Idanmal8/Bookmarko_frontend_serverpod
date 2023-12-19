@@ -39,16 +39,6 @@ class Profile extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return Scaffold(
-            appBar: AppBar(
-              elevation: 1.0,
-              title: Text(
-                business.businessName,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
             body: Consumer<ProfileController>(
               builder: (context, controller, child) {
                 return SingleChildScrollView(
@@ -60,7 +50,7 @@ class Profile extends StatelessWidget {
                           children: [
                             ProfileBackgroundBanner(
                               onPressed: () => {
-                                print("sd"),
+                                // print("sd"),
                               },
                               hasBackgroundImage: false,
                             ),
@@ -69,7 +59,7 @@ class Profile extends StatelessWidget {
                               left: MediaQuery.of(context).size.width / 2 - 75,
                               child: ProfilePicture(
                                 onPressed: () => {
-                                  print("sd2"),
+                                  // print("sd2"),
                                 },
                                 hasImages: false,
                               ),

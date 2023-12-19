@@ -25,7 +25,6 @@ class AuthController extends ChangeNotifier {
   Future<bool> login(String phone) async {
     try {
       if (tokenKey != null) await logout();
-      print(tokenKey);
       final response = await connectionController.client?.auth.login(phone);
       if (response == null) return false;
 
@@ -42,7 +41,6 @@ class AuthController extends ChangeNotifier {
       notifyListeners();
       return true;
     } catch (error) {
-      print('Error during login: $error');
       return false;
     }
   }

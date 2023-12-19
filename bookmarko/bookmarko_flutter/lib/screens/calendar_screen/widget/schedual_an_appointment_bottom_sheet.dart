@@ -24,7 +24,6 @@ class SchedualAppointmentBottomSheetForm extends StatelessWidget {
         children: [
           TextFormField(
             textAlign: TextAlign.left,
-            // controller: controller,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter a valid name';
@@ -98,22 +97,19 @@ class SchedualAppointmentBottomSheetForm extends StatelessWidget {
               children: [
                 const Expanded(child: Text('Select a Service: ')),
                 DropdownButton<Service>(
-                  value: controller.services.isNotEmpty
-                      ? controller.services[0]
-                      : null,
+                  value: controller.getSelectedService,
                   underline: Container(),
                   items: controller.services.map((Service service) {
                     return DropdownMenuItem<Service>(
                       value: service,
-                      child: Text(service
-                          .serviceName), // Assuming 'name' is a property of Service
+                      child: Text(service.serviceName),
                     );
                   }).toList(),
                   onChanged: (Service? newValue) {
-                    controller.setSelectedService = newValue;
+                    controller.selectedService = newValue;
                   },
                   isExpanded: false,
-                ),
+                )
               ],
             ),
           ),
@@ -121,20 +117,46 @@ class SchedualAppointmentBottomSheetForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Wrap(
-              spacing: 8.0, // Horizontal space between chips
-              runSpacing: 4.0, // Vertical space between chips
-              children: <Widget>[
-                HoursBubble(isAvailable: false, time: DateTime.now(), onPressedSetTime: () {}),
-                HoursBubble(isAvailable: false, time: DateTime.now(), onPressedSetTime: () {}),
-                HoursBubble(isAvailable: true, time: DateTime.now(), onPressedSetTime: () {}),
-                HoursBubble(isAvailable: true, time: DateTime.now(), onPressedSetTime: () {}),
-                HoursBubble(isAvailable: true, time: DateTime.now(), onPressedSetTime: () {}),
-                HoursBubble(isAvailable: true, time: DateTime.now(), onPressedSetTime: () {}),
-                HoursBubble(isAvailable: true, time: DateTime.now(), onPressedSetTime: () {}),
-                HoursBubble(isAvailable: true, time: DateTime.now(), onPressedSetTime: () {}),
-                HoursBubble(isAvailable: true, time: DateTime.now(), onPressedSetTime: () {}),
-              ]
-            ),
+                spacing: 8.0, // Horizontal space between chips
+                runSpacing: 4.0, // Vertical space between chips
+                children: <Widget>[
+                  HoursBubble(
+                      isAvailable: false,
+                      time: DateTime.now(),
+                      onPressedSetTime: () {}),
+                  HoursBubble(
+                      isAvailable: false,
+                      time: DateTime.now(),
+                      onPressedSetTime: () {}),
+                  HoursBubble(
+                      isAvailable: true,
+                      time: DateTime.now(),
+                      onPressedSetTime: () {}),
+                  HoursBubble(
+                      isAvailable: true,
+                      time: DateTime.now(),
+                      onPressedSetTime: () {}),
+                  HoursBubble(
+                      isAvailable: true,
+                      time: DateTime.now(),
+                      onPressedSetTime: () {}),
+                  HoursBubble(
+                      isAvailable: true,
+                      time: DateTime.now(),
+                      onPressedSetTime: () {}),
+                  HoursBubble(
+                      isAvailable: true,
+                      time: DateTime.now(),
+                      onPressedSetTime: () {}),
+                  HoursBubble(
+                      isAvailable: true,
+                      time: DateTime.now(),
+                      onPressedSetTime: () {}),
+                  HoursBubble(
+                      isAvailable: true,
+                      time: DateTime.now(),
+                      onPressedSetTime: () {}),
+                ]),
           ),
         ],
       )),

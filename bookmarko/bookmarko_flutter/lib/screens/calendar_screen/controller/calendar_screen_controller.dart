@@ -39,11 +39,6 @@ class CalendarController extends ChangeNotifier {
   List<Service> get services => [..._services];
   DateTime get getSelectedHourNewAppointment => selectedHourNewAppointment;
 
-  set setSelectedService(Service? service) {
-    selectedService = service;
-    notifyListeners();
-  }
-
   set setSelectedHourNewAppointment(DateTime date) {
     selectedHourNewAppointment = date;
     notifyListeners();
@@ -68,10 +63,12 @@ class CalendarController extends ChangeNotifier {
     _appointments = await _connectionController.client?.appointments
             .getAppointments(business.id ?? 0, today) ??
         [];
-    
+
     _services = await _connectionController.client?.services
             .getServices(business.id ?? 0) ??
         [];
+
+    selectedService = _services.isNotEmpty ? _services.first : null;
 
     _isLoading = false;
     notifyListeners();
@@ -89,8 +86,6 @@ class CalendarController extends ChangeNotifier {
     _appointments = await _connectionController.client?.appointments
             .getAppointments(business.id ?? 0, selectedDate) ??
         [];
-
-    print(_appointments);
 
     _isLoading = false;
     _initAppointmentList = false;

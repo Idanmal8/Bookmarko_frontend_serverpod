@@ -26,7 +26,7 @@ class BioField extends StatelessWidget {
         Column(
           children: [
             Text(
-              business.businessName ?? '',
+              business.businessName,
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -36,7 +36,7 @@ class BioField extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  business.proffesion ?? '',
+                  business.proffesion,
                   style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
@@ -44,7 +44,7 @@ class BioField extends StatelessWidget {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  DateFormat('yyyy-MM-dd').format(business.joined) ?? '',
+                  DateFormat('yyyy-MM-dd').format(business.joined),
                   style: const TextStyle(
                     fontSize: 10,
                   ),

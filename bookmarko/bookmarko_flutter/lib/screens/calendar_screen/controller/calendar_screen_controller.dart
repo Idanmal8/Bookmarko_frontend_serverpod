@@ -1,6 +1,6 @@
-import 'package:bookmarko_client/bookmarko_client.dart';
-import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 import 'package:bookmarko_flutter/screens/edit_appointment_screen/edit_appointment_screen.dart';
+import 'package:bookmarko_flutter/controllers/connection_controller.dart';
+import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter/material.dart';
 
@@ -121,15 +121,6 @@ class CalendarController extends ChangeNotifier {
     return _appointments;
   }
 
-  Future<void> goToCustomerAppointment(
-      BuildContext context, Appointment appointment) async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-          builder: (context) =>
-              EditAppointmentScreenInCalendar(appointment: appointment)),
-    );
-  }
-
   void updateAvailableTimes() {
     if (selectedDate != getSelectedDate ||
         selectedService != getSelectedService) {
@@ -137,6 +128,12 @@ class CalendarController extends ChangeNotifier {
       selectedService = getSelectedService;
       getAppointmentsForService(selectedDate, selectedService!);
     }
+  }
+
+Future<void> goToEditAppointmentScreen(BuildContext context, Appointment appointment) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => EditAppointmentScreenInCalendar(appointment: appointment)),
+    );
   }
 
 /// !ToDo - Fix this function with this steps:
@@ -149,9 +146,6 @@ Future<List<DateTime>> getAppointmentsForService(
       DateTime date, Service? service) async {
     _isLoading = true;
     notifyListeners();
-
-    print(date);
-    print(service);
 
     _availableTimes.clear();
 

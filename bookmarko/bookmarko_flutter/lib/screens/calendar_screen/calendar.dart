@@ -19,6 +19,7 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var app = Appointment(appointmentDate:DateTime.now(), serviceName: "Haircut", userName: "Ella malka", userId: 1, businessId: 1, serviceId: 1, status: 'Paid', paid: true);
     return ChangeNotifierProvider<CalendarController>(
       create: (context) => CalendarController(
         connectionController: context.read<ConnectionController>(),
@@ -51,7 +52,7 @@ class Calendar extends StatelessWidget {
                 ),
                 body: SafeArea(
                   child: Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,8 +77,8 @@ class Calendar extends StatelessWidget {
                         const SizedBox(height: 20),
                         if (!controller.isLoading) // Check if not loading
                           Appointments(
-                            appointments: controller.appointments,
-                            appointmentsController: controller,
+                            appointment: app,
+                            onTapAppointment: () =>  controller.goToEditAppointmentScreen(context, app),
                           )
                         else
                           const CircularProgressIndicator(),

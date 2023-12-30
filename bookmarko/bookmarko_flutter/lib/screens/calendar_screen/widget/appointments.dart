@@ -1,121 +1,112 @@
-import 'package:bookmarko_flutter/screens/calendar_screen/controller/calendar_screen_controller.dart';
 import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Appointments extends StatelessWidget {
-  final List<Appointment> appointments;
-  final CalendarController appointmentsController;
+  final Appointment appointment;
+  final VoidCallback onTapAppointment;
 
   const Appointments({
-    required this.appointments,
-    required this.appointmentsController,
+    required this.appointment,
+    required this.onTapAppointment,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    List<TableRow> appointmentRows = [
-      // Building the header row
-      TableRow(
-        children: <Widget>[
-          headerCell('שם'),
-          headerCell('שעה'),
-          headerCell('שירות'),
-          headerCell('שילם'),
-        ],
-      ),
-      // Adding a spacer after the header
-      spacerRow(),
-    ];
+    return Hero(
+      transitionOnUserGestures: true,
+        tag: appointment.userId,
+        child: GestureDetector(
+          onTap: onTapAppointment,
+          child: Card(
+              elevation: 1,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: 50,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 234, 221, 255),
+                          shape: BoxShape.circle),
+                      child: Text(
+                        extractNameForThumbnail(appointment.userName),
+                        style: const TextStyle(
+                            fontFamily: 'VarelaRound',
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ),
+                    Container(
+                      width: 90,
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            appointment.userName,
+                            style: const TextStyle(
+                                fontSize: 15,
+                                // fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                          ),
+                          Text(
+                            appointment.serviceName,
+                            style: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 136, 136, 136)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        DateFormat('kk:mm').format(appointment.appointmentDate),
+                        style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 98, 0, 255)),
+                      ),
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        width: 25,
+                        height: 25,
+                        child: Image(
+                            image: appointment.paid
+                                ? const AssetImage(
+                                    'assets/calendar/payments/paid_filled.png')
+                                : const AssetImage(
+                                    'assets/calendar/payments/paid_black.png')))
+                  ],
+                ),
+              )),
+        ));
+    // Helper function to create a spacer row
+  }
 
-    // Building the data rows with spacers in between
-    for (var appointment in appointments) {
-      appointmentRows.add(buildAppointmentRow(appointment, context));
-      appointmentRows.add(spacerRow()); // Add spacer row
+  String extractNameForThumbnail(String name) {
+    // Split the name into an array of words
+    List<String> words = name.split(' ');
+
+    // Extract the first letter of each word and concatenate them
+    String initials = '';
+    for (String word in words) {
+      if (word.isNotEmpty) {
+        initials += word[0];
+      }
     }
 
-    return Table(
-      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      columnWidths: const <int, TableColumnWidth>{
-        0: FlexColumnWidth(1.2), // Adjusted space for the first column
-        1: FlexColumnWidth(),
-        2: FlexColumnWidth(),
-        3: FlexColumnWidth(),
-      },
-      children: appointmentRows,
-    );
-  }
-
-  // Helper function to create a spacer row
-  TableRow spacerRow() {
-    return const TableRow(
-      children: [
-        TableCell(
-          child: SizedBox(height: 10), // The height of the spacer
-        ),
-        TableCell(
-          child: SizedBox(height: 10),
-        ),
-        TableCell(
-          child: SizedBox(height: 10),
-        ),
-        TableCell(
-          child: SizedBox(height: 10),
-        ),
-      ],
-    );
-  }
-
-  TableRow buildAppointmentRow(Appointment appointment, BuildContext context) {
-    onTap() =>
-        appointmentsController.goToCustomerAppointment(context, appointment);
-
-    return TableRow(
-      children: <Widget>[
-        cell(Text(appointment.userName), onTap),
-        cell(Text(DateFormat('HH:mm').format(appointment.appointmentDate)),
-            onTap),
-        cell(Text(appointment.serviceName), onTap),
-        cell(
-          Container(
-            width: 20,
-            height: 20,
-            alignment: Alignment.center,
-            child: appointment.paid
-                ? Image.asset('assets/calendar/payments/paid_filled.png')
-                : Image.asset('assets/calendar/payments/paid_black.png'),
-          ),
-          onTap,
-        ),
-      ],
-    );
-  }
-
-  TableCell headerCell(String text) {
-    return TableCell(
-      verticalAlignment: TableCellVerticalAlignment.middle,
-      child: Container(
-        height: 30,
-        alignment: Alignment.center,
-        child: Text(text),
-      ),
-    );
-  }
-
-  TableCell cell(Widget child, VoidCallback onTap) {
-    return TableCell(
-      verticalAlignment: TableCellVerticalAlignment.middle,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            alignment: Alignment.center,
-            child: child,
-          ),
-        ),
-      ),
-    );
+    // Convert to uppercase if desired
+    return initials.toUpperCase();
   }
 }

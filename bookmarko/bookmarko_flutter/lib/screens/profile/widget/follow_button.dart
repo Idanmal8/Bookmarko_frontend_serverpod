@@ -40,6 +40,7 @@ class _FollowButtonState extends State<FollowButtonInteractive> {
 
   Widget buildButton(Color backgroundColor) {
     return SizedBox(
+      width: 100,
       child: OutlinedButton(
         onPressed:
             null, // null makes it non-clickable since we are handling the click via GestureDetector

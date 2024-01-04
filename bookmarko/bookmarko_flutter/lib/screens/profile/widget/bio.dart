@@ -3,7 +3,6 @@ import 'package:bookmarko_flutter/screens/profile/controller/profile_controller.
 import 'package:flutter/material.dart';
 
 import 'package:bookmarko_flutter/screens/profile/widget/follow_button.dart';
-import 'package:bookmarko_flutter/screens/profile/widget/messege_button.dart';
 import 'package:bookmarko_flutter/screens/profile/widget/options_button.dart';
 import 'package:intl/intl.dart';
 

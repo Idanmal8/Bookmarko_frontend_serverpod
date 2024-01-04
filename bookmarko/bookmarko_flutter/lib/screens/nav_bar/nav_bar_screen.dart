@@ -13,8 +13,8 @@ class NavBarScreen extends StatelessWidget {
     super.key,
   });
 
-  final analytics = SvgPicture.asset(
-    'assets/nav_bar_Assets/analytics.svg',
+  final home = SvgPicture.asset(
+    'assets/nav_bar_Assets/home.svg',
     width: 22,
     height: 22,
   );
@@ -87,10 +87,10 @@ class NavBarScreen extends StatelessWidget {
                     selectedIcon: ColorFiltered(
                       colorFilter: ColorFilter.mode(
                           controller.selectedColorPurple, BlendMode.srcIn),
-                      child: analytics,
+                      child: home,
                     ),
-                    icon: analytics,
-                    label: 'Analytics',
+                    icon: home,
+                    label: 'Home',
                   ),
                   NavigationDestination(
                     selectedIcon: ColorFiltered(

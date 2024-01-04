@@ -55,8 +55,8 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
     operatingHours.clear();
 
     operatingHours = await _connectionController.client?.operatingHours
-            .getHours(businessId) ?? [];
-
+            .getHours(businessId) ??
+        [];
 
     _isLoading = false;
     notifyListeners();
@@ -110,7 +110,8 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
   Future<void> goToBioScreen(BuildContext context, Business business) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
-          builder: (context) => BioEditScreen(businessId: businessId, business: business)),
+          builder: (context) =>
+              BioEditScreen(businessId: businessId, business: business)),
     );
     _init();
   }

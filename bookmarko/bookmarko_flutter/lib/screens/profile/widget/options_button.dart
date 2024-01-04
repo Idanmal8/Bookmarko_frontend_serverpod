@@ -17,40 +17,43 @@ class OptionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: OutlinedButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            builder: (BuildContext context) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    buttonCreation(
-                        'Edit profile',
-                        const Icon(Icons.person),
-                        () => controller.goToBioScreen(context,business)),
-                    buttonCreation(
-                        'Operating hours', const Icon(Icons.timelapse), () {
-                      Navigator.of(context).pop();
-                      controller.goToOperatingHoursScreen(context);
-                    }),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-        style: OutlinedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+      child: SizedBox(
+        width: 100,
+        child: OutlinedButton(
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (BuildContext context) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      buttonCreation(
+                          'Edit profile',
+                          const Icon(Icons.person),
+                          () => controller.goToBioScreen(context,business)),
+                      buttonCreation(
+                          'Operating hours', const Icon(Icons.timelapse), () {
+                        Navigator.of(context).pop();
+                        controller.goToOperatingHoursScreen(context);
+                      }),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+          style: OutlinedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
           ),
+          child: const Text('Options',
+              style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold)),
         ),
-        child: const Text('Options',
-            style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold)),
       ),
     );
   }

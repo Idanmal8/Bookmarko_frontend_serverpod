@@ -20,13 +20,21 @@ class LogInScreen extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return Scaffold(
-            resizeToAvoidBottomInset: false, // add this line
+            resizeToAvoidBottomInset: false,
             body: Consumer<LoginScreenController>(
               builder: (context, controller, _) {
                 return Stack(
                   children: [
-                    Image.asset(
-                      'assets/backgrounds/abstract_bookmarko_background.png',
+                    Container(
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            'assets/backgrounds/abstract_bookmarko_background.png',
+                          ),
+                          // This ensures the image covers the entire background
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                     Container(
                       alignment: Alignment.topCenter,

@@ -19,15 +19,15 @@ class _AppointmentConfirmationScreenState
   void initState() {
     super.initState();
 
-    final int numberOfCards = 4;
-    final int animationDuration = 500; // milliseconds
-    final int staggerDelay = 100; // milliseconds
+    const int numberOfCards = 4;
+    const int animationDuration = 500; // milliseconds
+    const int staggerDelay = 100; // milliseconds
 
     _animationControllers = List.generate(
       numberOfCards,
       (index) => AnimationController(
         vsync: this,
-        duration: Duration(milliseconds: animationDuration),
+        duration: const Duration(milliseconds: animationDuration),
       ),
     );
 

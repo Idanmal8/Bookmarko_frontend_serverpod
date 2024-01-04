@@ -1,4 +1,3 @@
-import 'package:bookmarko_flutter/screens/appointment_confirmation_screen/appointment_confirmation_screen.dart';
 import 'package:bookmarko_flutter/screens/nav_bar/nav_bar_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +46,8 @@ class MyApp extends StatelessWidget {
               home: Consumer<AuthController>(
                 builder: (context, controller, child) {
                   return controller.isLogIn
-                      ? AppointmentConfirmationScreen()
-                      : AppointmentConfirmationScreen();
+                      ? NavBarScreen()
+                      : const LogInScreen();
                 },
               ),
             ),

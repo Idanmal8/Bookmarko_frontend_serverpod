@@ -55,7 +55,9 @@ class NavBarScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: const Text('Page 1'),
                     ),
-                    const CustomersScreen(),
+                    CustomersScreen(
+                      businessCustomers: controller.businessCustomers,
+                    ),
                     Calendar(
                       business: controller.businessOwner,
                     ),

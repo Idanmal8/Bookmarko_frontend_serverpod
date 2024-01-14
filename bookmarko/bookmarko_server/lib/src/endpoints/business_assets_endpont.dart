@@ -32,7 +32,7 @@ class BusinessAssetsEndpoint extends Endpoint {
   Future<List<ImageAsset>?> getAssets(Session session, int businessId) async {
     // Fetch the assets based on the kindOfAsset and businessId
     final assets = await ImageAsset.find(session,
-        where: (asset) => asset.user_id.equals(businessId));
+        where: (asset) => asset.businessId.equals(businessId));
     print('assets: $assets');
     // If no assets are found, return an empty list
     if (assets.isEmpty) {

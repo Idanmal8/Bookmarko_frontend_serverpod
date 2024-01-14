@@ -3,7 +3,7 @@ table: reviews
 
 fields:
   businessId: int
-  userId: int
+  customerId: int
   stars: int
   review: String?
   datePublished: DateTime

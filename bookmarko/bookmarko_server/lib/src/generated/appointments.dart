@@ -12,8 +12,8 @@ class Appointment extends _i1.TableRow {
   Appointment({
     int? id,
     required this.businessId,
-    required this.userId,
-    required this.userName,
+    required this.customerId,
+    required this.customerName,
     required this.serviceName,
     required this.serviceId,
     required this.status,
@@ -29,10 +29,10 @@ class Appointment extends _i1.TableRow {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       businessId: serializationManager
           .deserialize<int>(jsonSerialization['businessId']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      userName: serializationManager
-          .deserialize<String>(jsonSerialization['userName']),
+      customerId: serializationManager
+          .deserialize<int>(jsonSerialization['customerId']),
+      customerName: serializationManager
+          .deserialize<String>(jsonSerialization['customerName']),
       serviceName: serializationManager
           .deserialize<String>(jsonSerialization['serviceName']),
       serviceId:
@@ -49,9 +49,9 @@ class Appointment extends _i1.TableRow {
 
   int businessId;
 
-  int userId;
+  int customerId;
 
-  String userName;
+  String customerName;
 
   String serviceName;
 
@@ -71,8 +71,8 @@ class Appointment extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
-      'userName': userName,
+      'customerId': customerId,
+      'customerName': customerName,
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,
@@ -86,8 +86,8 @@ class Appointment extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
-      'userName': userName,
+      'customerId': customerId,
+      'customerName': customerName,
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,
@@ -101,8 +101,8 @@ class Appointment extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
-      'userName': userName,
+      'customerId': customerId,
+      'customerName': customerName,
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,
@@ -123,11 +123,11 @@ class Appointment extends _i1.TableRow {
       case 'businessId':
         businessId = value;
         return;
-      case 'userId':
-        userId = value;
+      case 'customerId':
+        customerId = value;
         return;
-      case 'userName':
-        userName = value;
+      case 'customerName':
+        customerName = value;
         return;
       case 'serviceName':
         serviceName = value;
@@ -271,9 +271,9 @@ class AppointmentTable extends _i1.Table {
 
   final businessId = _i1.ColumnInt('businessId');
 
-  final userId = _i1.ColumnInt('userId');
+  final customerId = _i1.ColumnInt('customerId');
 
-  final userName = _i1.ColumnString('userName');
+  final customerName = _i1.ColumnString('customerName');
 
   final serviceName = _i1.ColumnString('serviceName');
 
@@ -289,8 +289,8 @@ class AppointmentTable extends _i1.Table {
   List<_i1.Column> get columns => [
         id,
         businessId,
-        userId,
-        userName,
+        customerId,
+        customerName,
         serviceName,
         serviceId,
         status,

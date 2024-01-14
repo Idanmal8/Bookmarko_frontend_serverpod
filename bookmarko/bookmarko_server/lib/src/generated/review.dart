@@ -12,7 +12,7 @@ class Review extends _i1.TableRow {
   Review({
     int? id,
     required this.businessId,
-    required this.userId,
+    required this.customerId,
     required this.stars,
     this.review,
     required this.datePublished,
@@ -26,8 +26,8 @@ class Review extends _i1.TableRow {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       businessId: serializationManager
           .deserialize<int>(jsonSerialization['businessId']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
+      customerId: serializationManager
+          .deserialize<int>(jsonSerialization['customerId']),
       stars: serializationManager.deserialize<int>(jsonSerialization['stars']),
       review: serializationManager
           .deserialize<String?>(jsonSerialization['review']),
@@ -40,7 +40,7 @@ class Review extends _i1.TableRow {
 
   int businessId;
 
-  int userId;
+  int customerId;
 
   int stars;
 
@@ -56,7 +56,7 @@ class Review extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
+      'customerId': customerId,
       'stars': stars,
       'review': review,
       'datePublished': datePublished,
@@ -68,7 +68,7 @@ class Review extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
+      'customerId': customerId,
       'stars': stars,
       'review': review,
       'datePublished': datePublished,
@@ -80,7 +80,7 @@ class Review extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
+      'customerId': customerId,
       'stars': stars,
       'review': review,
       'datePublished': datePublished,
@@ -99,8 +99,8 @@ class Review extends _i1.TableRow {
       case 'businessId':
         businessId = value;
         return;
-      case 'userId':
-        userId = value;
+      case 'customerId':
+        customerId = value;
         return;
       case 'stars':
         stars = value;
@@ -237,7 +237,7 @@ class ReviewTable extends _i1.Table {
 
   final businessId = _i1.ColumnInt('businessId');
 
-  final userId = _i1.ColumnInt('userId');
+  final customerId = _i1.ColumnInt('customerId');
 
   final stars = _i1.ColumnInt('stars');
 
@@ -249,7 +249,7 @@ class ReviewTable extends _i1.Table {
   List<_i1.Column> get columns => [
         id,
         businessId,
-        userId,
+        customerId,
         stars,
         review,
         datePublished,

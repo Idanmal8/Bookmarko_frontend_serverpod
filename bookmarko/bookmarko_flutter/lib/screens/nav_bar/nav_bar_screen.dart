@@ -1,5 +1,6 @@
 import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
+import 'package:bookmarko_flutter/screens/customers_screen/customers_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
@@ -54,11 +55,7 @@ class NavBarScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: const Text('Page 1'),
                     ),
-                    Container(
-                      color: Colors.green,
-                      alignment: Alignment.center,
-                      child: const Text('Page 2'),
-                    ),
+                    const CustomersScreen(),
                     Calendar(
                       business: controller.businessOwner,
                     ),

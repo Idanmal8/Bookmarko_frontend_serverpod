@@ -14,7 +14,7 @@ class ImageAsset extends _i1.SerializableEntity {
     required this.image_kind,
     required this.image_s3_id,
     required this.uploaded_timestamp,
-    required this.user_id,
+    required this.businessId,
   });
 
   factory ImageAsset.fromJson(
@@ -29,8 +29,8 @@ class ImageAsset extends _i1.SerializableEntity {
           .deserialize<String>(jsonSerialization['image_s3_id']),
       uploaded_timestamp: serializationManager
           .deserialize<DateTime>(jsonSerialization['uploaded_timestamp']),
-      user_id:
-          serializationManager.deserialize<int>(jsonSerialization['user_id']),
+      businessId: serializationManager
+          .deserialize<int>(jsonSerialization['businessId']),
     );
   }
 
@@ -45,7 +45,7 @@ class ImageAsset extends _i1.SerializableEntity {
 
   DateTime uploaded_timestamp;
 
-  int user_id;
+  int businessId;
 
   @override
   Map<String, dynamic> toJson() {
@@ -54,7 +54,7 @@ class ImageAsset extends _i1.SerializableEntity {
       'image_kind': image_kind,
       'image_s3_id': image_s3_id,
       'uploaded_timestamp': uploaded_timestamp,
-      'user_id': user_id,
+      'businessId': businessId,
     };
   }
 }

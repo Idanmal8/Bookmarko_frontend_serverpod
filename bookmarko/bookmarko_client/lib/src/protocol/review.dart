@@ -12,7 +12,7 @@ class Review extends _i1.SerializableEntity {
   Review({
     this.id,
     required this.businessId,
-    required this.userId,
+    required this.customerId,
     required this.stars,
     this.review,
     required this.datePublished,
@@ -26,8 +26,8 @@ class Review extends _i1.SerializableEntity {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       businessId: serializationManager
           .deserialize<int>(jsonSerialization['businessId']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
+      customerId: serializationManager
+          .deserialize<int>(jsonSerialization['customerId']),
       stars: serializationManager.deserialize<int>(jsonSerialization['stars']),
       review: serializationManager
           .deserialize<String?>(jsonSerialization['review']),
@@ -43,7 +43,7 @@ class Review extends _i1.SerializableEntity {
 
   int businessId;
 
-  int userId;
+  int customerId;
 
   int stars;
 
@@ -56,7 +56,7 @@ class Review extends _i1.SerializableEntity {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
+      'customerId': customerId,
       'stars': stars,
       'review': review,
       'datePublished': datePublished,

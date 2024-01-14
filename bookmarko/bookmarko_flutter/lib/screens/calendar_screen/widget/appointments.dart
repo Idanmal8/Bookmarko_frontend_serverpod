@@ -16,7 +16,7 @@ class Appointments extends StatelessWidget {
   Widget build(BuildContext context) {
     return Hero(
       transitionOnUserGestures: true,
-        tag: appointment.userId,
+        tag: appointment.customerId,
         child: GestureDetector(
           onTap: onTapAppointment,
           child: Card(
@@ -34,7 +34,7 @@ class Appointments extends StatelessWidget {
                           color: Color.fromARGB(255, 234, 221, 255),
                           shape: BoxShape.circle),
                       child: Text(
-                        extractNameForThumbnail(appointment.userName),
+                        extractNameForThumbnail(appointment.customerName),
                         style: const TextStyle(
                             fontFamily: 'VarelaRound',
                             fontSize: 15,
@@ -49,7 +49,7 @@ class Appointments extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            appointment.userName,
+                            appointment.customerName,
                             style: const TextStyle(
                                 fontSize: 15,
                                 // fontWeight: FontWeight.bold,

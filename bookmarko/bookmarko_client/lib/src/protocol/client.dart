@@ -13,9 +13,10 @@ import 'package:bookmarko_client/src/protocol/assets.dart' as _i4;
 import 'package:bookmarko_client/src/protocol/business_owners.dart' as _i5;
 import 'package:bookmarko_client/src/protocol/operating_hours.dart' as _i6;
 import 'package:bookmarko_client/src/protocol/services.dart' as _i7;
-import 'package:bookmarko_client/src/protocol/users.dart' as _i8;
-import 'dart:io' as _i9;
-import 'protocol.dart' as _i10;
+import 'package:bookmarko_client/src/protocol/customers.dart' as _i8;
+import 'package:bookmarko_client/src/protocol/payments.dart' as _i9;
+import 'dart:io' as _i10;
+import 'protocol.dart' as _i11;
 
 class _EndpointAppointments extends _i1.EndpointRef {
   _EndpointAppointments(_i1.EndpointCaller caller) : super(caller);
@@ -245,33 +246,57 @@ class _EndpointServices extends _i1.EndpointRef {
       );
 }
 
-class _EndpointUsers extends _i1.EndpointRef {
-  _EndpointUsers(_i1.EndpointCaller caller) : super(caller);
+class _EndpointUserCustomer extends _i1.EndpointRef {
+  _EndpointUserCustomer(_i1.EndpointCaller caller) : super(caller);
 
   @override
-  String get name => 'users';
+  String get name => 'userCustomer';
 
-  _i2.Future<bool> addUser(_i8.User user) => caller.callServerEndpoint<bool>(
-        'users',
+  _i2.Future<bool> addUser(_i8.Customer user) =>
+      caller.callServerEndpoint<bool>(
+        'userCustomer',
         'addUser',
         {'user': user},
       );
 
   _i2.Future<bool> removeUser(int id) => caller.callServerEndpoint<bool>(
-        'users',
+        'userCustomer',
         'removeUser',
         {'id': id},
       );
 
-  _i2.Future<bool> editUser(_i8.User user) => caller.callServerEndpoint<bool>(
-        'users',
+  _i2.Future<bool> editUser(_i8.Customer user) =>
+      caller.callServerEndpoint<bool>(
+        'userCustomer',
         'editUser',
         {'user': user},
       );
 
-  _i2.Future<_i8.User?> getUser(int id) => caller.callServerEndpoint<_i8.User?>(
-        'users',
-        'getUser',
+  _i2.Future<_i8.Customer?> getCustomerInformation(int id) =>
+      caller.callServerEndpoint<_i8.Customer?>(
+        'userCustomer',
+        'getCustomerInformation',
+        {'id': id},
+      );
+
+  _i2.Future<List<_i8.Customer>> getCustomers(int id) =>
+      caller.callServerEndpoint<List<_i8.Customer>>(
+        'userCustomer',
+        'getCustomers',
+        {'id': id},
+      );
+
+  _i2.Future<List<_i9.Payment?>> getCustomerPayments(int id) =>
+      caller.callServerEndpoint<List<_i9.Payment?>>(
+        'userCustomer',
+        'getCustomerPayments',
+        {'id': id},
+      );
+
+  _i2.Future<List<_i3.Appointment?>> getCustomerAppointments(int id) =>
+      caller.callServerEndpoint<List<_i3.Appointment?>>(
+        'userCustomer',
+        'getCustomerAppointments',
         {'id': id},
       );
 }
@@ -279,11 +304,11 @@ class _EndpointUsers extends _i1.EndpointRef {
 class Client extends _i1.ServerpodClient {
   Client(
     String host, {
-    _i9.SecurityContext? context,
+    _i10.SecurityContext? context,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
   }) : super(
           host,
-          _i10.Protocol(),
+          _i11.Protocol(),
           context: context,
           authenticationKeyManager: authenticationKeyManager,
         ) {
@@ -295,7 +320,7 @@ class Client extends _i1.ServerpodClient {
     example = _EndpointExample(this);
     operatingHours = _EndpointOperatingHours(this);
     services = _EndpointServices(this);
-    users = _EndpointUsers(this);
+    userCustomer = _EndpointUserCustomer(this);
   }
 
   late final _EndpointAppointments appointments;
@@ -314,7 +339,7 @@ class Client extends _i1.ServerpodClient {
 
   late final _EndpointServices services;
 
-  late final _EndpointUsers users;
+  late final _EndpointUserCustomer userCustomer;
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
@@ -326,7 +351,7 @@ class Client extends _i1.ServerpodClient {
         'example': example,
         'operatingHours': operatingHours,
         'services': services,
-        'users': users,
+        'userCustomer': userCustomer,
       };
 
   @override

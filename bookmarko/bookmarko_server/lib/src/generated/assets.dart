@@ -14,7 +14,7 @@ class ImageAsset extends _i1.TableRow {
     required this.image_kind,
     required this.image_s3_id,
     required this.uploaded_timestamp,
-    required this.user_id,
+    required this.businessId,
   }) : super(id);
 
   factory ImageAsset.fromJson(
@@ -29,8 +29,8 @@ class ImageAsset extends _i1.TableRow {
           .deserialize<String>(jsonSerialization['image_s3_id']),
       uploaded_timestamp: serializationManager
           .deserialize<DateTime>(jsonSerialization['uploaded_timestamp']),
-      user_id:
-          serializationManager.deserialize<int>(jsonSerialization['user_id']),
+      businessId: serializationManager
+          .deserialize<int>(jsonSerialization['businessId']),
     );
   }
 
@@ -42,7 +42,7 @@ class ImageAsset extends _i1.TableRow {
 
   DateTime uploaded_timestamp;
 
-  int user_id;
+  int businessId;
 
   @override
   String get tableName => 'user_assets';
@@ -54,7 +54,7 @@ class ImageAsset extends _i1.TableRow {
       'image_kind': image_kind,
       'image_s3_id': image_s3_id,
       'uploaded_timestamp': uploaded_timestamp,
-      'user_id': user_id,
+      'businessId': businessId,
     };
   }
 
@@ -65,7 +65,7 @@ class ImageAsset extends _i1.TableRow {
       'image_kind': image_kind,
       'image_s3_id': image_s3_id,
       'uploaded_timestamp': uploaded_timestamp,
-      'user_id': user_id,
+      'businessId': businessId,
     };
   }
 
@@ -76,7 +76,7 @@ class ImageAsset extends _i1.TableRow {
       'image_kind': image_kind,
       'image_s3_id': image_s3_id,
       'uploaded_timestamp': uploaded_timestamp,
-      'user_id': user_id,
+      'businessId': businessId,
     };
   }
 
@@ -98,8 +98,8 @@ class ImageAsset extends _i1.TableRow {
       case 'uploaded_timestamp':
         uploaded_timestamp = value;
         return;
-      case 'user_id':
-        user_id = value;
+      case 'businessId':
+        businessId = value;
         return;
       default:
         throw UnimplementedError();
@@ -231,7 +231,7 @@ class ImageAssetTable extends _i1.Table {
 
   final uploaded_timestamp = _i1.ColumnDateTime('uploaded_timestamp');
 
-  final user_id = _i1.ColumnInt('user_id');
+  final businessId = _i1.ColumnInt('businessId');
 
   @override
   List<_i1.Column> get columns => [
@@ -239,7 +239,7 @@ class ImageAssetTable extends _i1.Table {
         image_kind,
         image_s3_id,
         uploaded_timestamp,
-        user_id,
+        businessId,
       ];
 }
 

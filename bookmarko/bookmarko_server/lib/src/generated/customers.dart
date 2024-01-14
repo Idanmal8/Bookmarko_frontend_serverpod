@@ -8,59 +8,65 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-class User extends _i1.TableRow {
-  User({
+class Customer extends _i1.TableRow {
+  Customer({
     int? id,
-    required this.email,
-    required this.phone,
     required this.firstName,
     required this.lastName,
+    required this.phone,
+    this.email,
     required this.joined,
+    required this.businessId,
   }) : super(id);
 
-  factory User.fromJson(
+  factory Customer.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return User(
+    return Customer(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      email:
-          serializationManager.deserialize<String>(jsonSerialization['email']),
-      phone:
-          serializationManager.deserialize<String>(jsonSerialization['phone']),
       firstName: serializationManager
           .deserialize<String>(jsonSerialization['firstName']),
       lastName: serializationManager
           .deserialize<String>(jsonSerialization['lastName']),
+      phone:
+          serializationManager.deserialize<String>(jsonSerialization['phone']),
+      email:
+          serializationManager.deserialize<String?>(jsonSerialization['email']),
       joined: serializationManager
           .deserialize<DateTime>(jsonSerialization['joined']),
+      businessId: serializationManager
+          .deserialize<int>(jsonSerialization['businessId']),
     );
   }
 
-  static final t = UserTable();
-
-  String email;
-
-  String phone;
+  static final t = CustomerTable();
 
   String firstName;
 
   String lastName;
 
+  String phone;
+
+  String? email;
+
   DateTime joined;
 
+  int businessId;
+
   @override
-  String get tableName => 'users';
+  String get tableName => 'customers';
 
   @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'email': email,
-      'phone': phone,
       'firstName': firstName,
       'lastName': lastName,
+      'phone': phone,
+      'email': email,
       'joined': joined,
+      'businessId': businessId,
     };
   }
 
@@ -68,11 +74,12 @@ class User extends _i1.TableRow {
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
-      'email': email,
-      'phone': phone,
       'firstName': firstName,
       'lastName': lastName,
+      'phone': phone,
+      'email': email,
       'joined': joined,
+      'businessId': businessId,
     };
   }
 
@@ -80,11 +87,12 @@ class User extends _i1.TableRow {
   Map<String, dynamic> allToJson() {
     return {
       'id': id,
-      'email': email,
-      'phone': phone,
       'firstName': firstName,
       'lastName': lastName,
+      'phone': phone,
+      'email': email,
       'joined': joined,
+      'businessId': businessId,
     };
   }
 
@@ -97,29 +105,32 @@ class User extends _i1.TableRow {
       case 'id':
         id = value;
         return;
-      case 'email':
-        email = value;
-        return;
-      case 'phone':
-        phone = value;
-        return;
       case 'firstName':
         firstName = value;
         return;
       case 'lastName':
         lastName = value;
         return;
+      case 'phone':
+        phone = value;
+        return;
+      case 'email':
+        email = value;
+        return;
       case 'joined':
         joined = value;
+        return;
+      case 'businessId':
+        businessId = value;
         return;
       default:
         throw UnimplementedError();
     }
   }
 
-  static Future<List<User>> find(
+  static Future<List<Customer>> find(
     _i1.Session session, {
-    UserExpressionBuilder? where,
+    CustomerExpressionBuilder? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -128,8 +139,8 @@ class User extends _i1.TableRow {
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<User>(
-      where: where != null ? where(User.t) : null,
+    return session.db.find<Customer>(
+      where: where != null ? where(Customer.t) : null,
       limit: limit,
       offset: offset,
       orderBy: orderBy,
@@ -140,17 +151,17 @@ class User extends _i1.TableRow {
     );
   }
 
-  static Future<User?> findSingleRow(
+  static Future<Customer?> findSingleRow(
     _i1.Session session, {
-    UserExpressionBuilder? where,
+    CustomerExpressionBuilder? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findSingleRow<User>(
-      where: where != null ? where(User.t) : null,
+    return session.db.findSingleRow<Customer>(
+      where: where != null ? where(Customer.t) : null,
       offset: offset,
       orderBy: orderBy,
       orderDescending: orderDescending,
@@ -159,27 +170,27 @@ class User extends _i1.TableRow {
     );
   }
 
-  static Future<User?> findById(
+  static Future<Customer?> findById(
     _i1.Session session,
     int id,
   ) async {
-    return session.db.findById<User>(id);
+    return session.db.findById<Customer>(id);
   }
 
   static Future<int> delete(
     _i1.Session session, {
-    required UserExpressionBuilder where,
+    required CustomerExpressionBuilder where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<User>(
-      where: where(User.t),
+    return session.db.delete<Customer>(
+      where: where(Customer.t),
       transaction: transaction,
     );
   }
 
   static Future<bool> deleteRow(
     _i1.Session session,
-    User row, {
+    Customer row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteRow(
@@ -190,7 +201,7 @@ class User extends _i1.TableRow {
 
   static Future<bool> update(
     _i1.Session session,
-    User row, {
+    Customer row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.update(
@@ -201,7 +212,7 @@ class User extends _i1.TableRow {
 
   static Future<void> insert(
     _i1.Session session,
-    User row, {
+    Customer row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.insert(
@@ -212,13 +223,13 @@ class User extends _i1.TableRow {
 
   static Future<int> count(
     _i1.Session session, {
-    UserExpressionBuilder? where,
+    CustomerExpressionBuilder? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<User>(
-      where: where != null ? where(User.t) : null,
+    return session.db.count<Customer>(
+      where: where != null ? where(Customer.t) : null,
       limit: limit,
       useCache: useCache,
       transaction: transaction,
@@ -226,36 +237,39 @@ class User extends _i1.TableRow {
   }
 }
 
-typedef UserExpressionBuilder = _i1.Expression Function(UserTable);
+typedef CustomerExpressionBuilder = _i1.Expression Function(CustomerTable);
 
-class UserTable extends _i1.Table {
-  UserTable() : super(tableName: 'users');
+class CustomerTable extends _i1.Table {
+  CustomerTable() : super(tableName: 'customers');
 
   /// The database id, set if the object has been inserted into the
   /// database or if it has been fetched from the database. Otherwise,
   /// the id will be null.
   final id = _i1.ColumnInt('id');
 
-  final email = _i1.ColumnString('email');
-
-  final phone = _i1.ColumnString('phone');
-
   final firstName = _i1.ColumnString('firstName');
 
   final lastName = _i1.ColumnString('lastName');
 
+  final phone = _i1.ColumnString('phone');
+
+  final email = _i1.ColumnString('email');
+
   final joined = _i1.ColumnDateTime('joined');
+
+  final businessId = _i1.ColumnInt('businessId');
 
   @override
   List<_i1.Column> get columns => [
         id,
-        email,
-        phone,
         firstName,
         lastName,
+        phone,
+        email,
         joined,
+        businessId,
       ];
 }
 
-@Deprecated('Use UserTable.t instead.')
-UserTable tUser = UserTable();
+@Deprecated('Use CustomerTable.t instead.')
+CustomerTable tCustomer = CustomerTable();

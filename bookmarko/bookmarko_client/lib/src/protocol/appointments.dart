@@ -12,8 +12,8 @@ class Appointment extends _i1.SerializableEntity {
   Appointment({
     this.id,
     required this.businessId,
-    required this.userId,
-    required this.userName,
+    required this.customerId,
+    required this.customerName,
     required this.serviceName,
     required this.serviceId,
     required this.status,
@@ -29,10 +29,10 @@ class Appointment extends _i1.SerializableEntity {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       businessId: serializationManager
           .deserialize<int>(jsonSerialization['businessId']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      userName: serializationManager
-          .deserialize<String>(jsonSerialization['userName']),
+      customerId: serializationManager
+          .deserialize<int>(jsonSerialization['customerId']),
+      customerName: serializationManager
+          .deserialize<String>(jsonSerialization['customerName']),
       serviceName: serializationManager
           .deserialize<String>(jsonSerialization['serviceName']),
       serviceId:
@@ -52,9 +52,9 @@ class Appointment extends _i1.SerializableEntity {
 
   int businessId;
 
-  int userId;
+  int customerId;
 
-  String userName;
+  String customerName;
 
   String serviceName;
 
@@ -71,8 +71,8 @@ class Appointment extends _i1.SerializableEntity {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
-      'userName': userName,
+      'customerId': customerId,
+      'customerName': customerName,
       'serviceName': serviceName,
       'serviceId': serviceId,
       'status': status,

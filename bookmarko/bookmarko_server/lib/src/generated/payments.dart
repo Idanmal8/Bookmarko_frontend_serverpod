@@ -12,7 +12,7 @@ class Payment extends _i1.TableRow {
   Payment({
     int? id,
     required this.businessId,
-    required this.userId,
+    required this.customerId,
     required this.dateAndTime,
     required this.serviceId,
     required this.amount,
@@ -26,8 +26,8 @@ class Payment extends _i1.TableRow {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       businessId: serializationManager
           .deserialize<int>(jsonSerialization['businessId']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
+      customerId: serializationManager
+          .deserialize<int>(jsonSerialization['customerId']),
       dateAndTime: serializationManager
           .deserialize<DateTime>(jsonSerialization['dateAndTime']),
       serviceId:
@@ -41,7 +41,7 @@ class Payment extends _i1.TableRow {
 
   int businessId;
 
-  int userId;
+  int customerId;
 
   DateTime dateAndTime;
 
@@ -57,7 +57,7 @@ class Payment extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
+      'customerId': customerId,
       'dateAndTime': dateAndTime,
       'serviceId': serviceId,
       'amount': amount,
@@ -69,7 +69,7 @@ class Payment extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
+      'customerId': customerId,
       'dateAndTime': dateAndTime,
       'serviceId': serviceId,
       'amount': amount,
@@ -81,7 +81,7 @@ class Payment extends _i1.TableRow {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
+      'customerId': customerId,
       'dateAndTime': dateAndTime,
       'serviceId': serviceId,
       'amount': amount,
@@ -100,8 +100,8 @@ class Payment extends _i1.TableRow {
       case 'businessId':
         businessId = value;
         return;
-      case 'userId':
-        userId = value;
+      case 'customerId':
+        customerId = value;
         return;
       case 'dateAndTime':
         dateAndTime = value;
@@ -238,7 +238,7 @@ class PaymentTable extends _i1.Table {
 
   final businessId = _i1.ColumnInt('businessId');
 
-  final userId = _i1.ColumnInt('userId');
+  final customerId = _i1.ColumnInt('customerId');
 
   final dateAndTime = _i1.ColumnDateTime('dateAndTime');
 
@@ -250,7 +250,7 @@ class PaymentTable extends _i1.Table {
   List<_i1.Column> get columns => [
         id,
         businessId,
-        userId,
+        customerId,
         dateAndTime,
         serviceId,
         amount,

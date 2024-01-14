@@ -3,7 +3,7 @@ table: payments
 
 fields:
   businessId: int
-  userId: int
+  customerId: int
   dateAndTime: DateTime
   serviceId: int
   amount: double

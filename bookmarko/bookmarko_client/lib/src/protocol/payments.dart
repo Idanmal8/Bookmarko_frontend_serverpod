@@ -12,7 +12,7 @@ class Payment extends _i1.SerializableEntity {
   Payment({
     this.id,
     required this.businessId,
-    required this.userId,
+    required this.customerId,
     required this.dateAndTime,
     required this.serviceId,
     required this.amount,
@@ -26,8 +26,8 @@ class Payment extends _i1.SerializableEntity {
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       businessId: serializationManager
           .deserialize<int>(jsonSerialization['businessId']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
+      customerId: serializationManager
+          .deserialize<int>(jsonSerialization['customerId']),
       dateAndTime: serializationManager
           .deserialize<DateTime>(jsonSerialization['dateAndTime']),
       serviceId:
@@ -44,7 +44,7 @@ class Payment extends _i1.SerializableEntity {
 
   int businessId;
 
-  int userId;
+  int customerId;
 
   DateTime dateAndTime;
 
@@ -57,7 +57,7 @@ class Payment extends _i1.SerializableEntity {
     return {
       'id': id,
       'businessId': businessId,
-      'userId': userId,
+      'customerId': customerId,
       'dateAndTime': dateAndTime,
       'serviceId': serviceId,
       'amount': amount,

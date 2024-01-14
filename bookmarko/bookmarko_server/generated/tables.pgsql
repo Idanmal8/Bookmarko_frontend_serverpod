@@ -5,8 +5,8 @@
 CREATE TABLE "appointments" (
   "id" serial,
   "businessId" integer NOT NULL,
-  "userId" integer NOT NULL,
-  "userName" text NOT NULL,
+  "customerId" integer NOT NULL,
+  "customerName" text NOT NULL,
   "serviceName" text NOT NULL,
   "serviceId" integer NOT NULL,
   "status" text NOT NULL,
@@ -40,6 +40,24 @@ ALTER TABLE ONLY "business_owners"
 
 
 --
+-- Class Customer as table customers
+--
+
+CREATE TABLE "customers" (
+  "id" serial,
+  "firstName" text NOT NULL,
+  "lastName" text NOT NULL,
+  "phone" text NOT NULL,
+  "email" text,
+  "joined" timestamp without time zone NOT NULL,
+  "businessId" integer NOT NULL
+);
+
+ALTER TABLE ONLY "customers"
+  ADD CONSTRAINT customers_pkey PRIMARY KEY (id);
+
+
+--
 -- Class OperatingHours as table operating_hours
 --
 
@@ -62,7 +80,7 @@ ALTER TABLE ONLY "operating_hours"
 CREATE TABLE "payments" (
   "id" serial,
   "businessId" integer NOT NULL,
-  "userId" integer NOT NULL,
+  "customerId" integer NOT NULL,
   "dateAndTime" timestamp without time zone NOT NULL,
   "serviceId" integer NOT NULL,
   "amount" double precision NOT NULL
@@ -79,7 +97,7 @@ ALTER TABLE ONLY "payments"
 CREATE TABLE "reviews" (
   "id" serial,
   "businessId" integer NOT NULL,
-  "userId" integer NOT NULL,
+  "customerId" integer NOT NULL,
   "stars" integer NOT NULL,
   "review" text,
   "datePublished" timestamp without time zone NOT NULL
@@ -129,27 +147,10 @@ CREATE TABLE "user_assets" (
   "image_kind" text NOT NULL,
   "image_s3_id" text NOT NULL,
   "uploaded_timestamp" timestamp without time zone NOT NULL,
-  "user_id" integer NOT NULL
+  "businessId" integer NOT NULL
 );
 
 ALTER TABLE ONLY "user_assets"
   ADD CONSTRAINT user_assets_pkey PRIMARY KEY (id);
-
-
---
--- Class User as table users
---
-
-CREATE TABLE "users" (
-  "id" serial,
-  "email" text NOT NULL,
-  "phone" text NOT NULL,
-  "firstName" text NOT NULL,
-  "lastName" text NOT NULL,
-  "joined" timestamp without time zone NOT NULL
-);
-
-ALTER TABLE ONLY "users"
-  ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 

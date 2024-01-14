@@ -1,0 +1,10 @@
+class: Customer
+table: customers
+
+fields:
+  firstName: String
+  lastName: String
+  phone: String
+  email: String?
+  joined: DateTime
+  businessId: int

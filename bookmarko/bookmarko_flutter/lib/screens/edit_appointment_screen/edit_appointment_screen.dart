@@ -32,7 +32,7 @@ class EditAppointmentScreenInCalendar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Hero(
-              tag: appointment.userId,
+              tag: appointment.customerId,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
@@ -41,7 +41,7 @@ class EditAppointmentScreenInCalendar extends StatelessWidget {
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        appointment.userName,
+                        appointment.customerName,
                         style: const TextStyle(
                             fontSize: 20,
                             // fontWeight: FontWeight.bold,

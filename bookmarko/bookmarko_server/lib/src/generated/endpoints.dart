@@ -15,13 +15,13 @@ import '../endpoints/business_owners_information.dart' as _i6;
 import '../endpoints/example_endpoint.dart' as _i7;
 import '../endpoints/operating_hours_endpoint.dart' as _i8;
 import '../endpoints/services_endpoint.dart' as _i9;
-import '../endpoints/users_endpoint.dart' as _i10;
+import '../endpoints/user_customers_endpoint.dart' as _i10;
 import 'package:bookmarko_server/src/generated/appointments.dart' as _i11;
 import 'package:bookmarko_server/src/generated/assets.dart' as _i12;
 import 'package:bookmarko_server/src/generated/business_owners.dart' as _i13;
 import 'package:bookmarko_server/src/generated/operating_hours.dart' as _i14;
 import 'package:bookmarko_server/src/generated/services.dart' as _i15;
-import 'package:bookmarko_server/src/generated/users.dart' as _i16;
+import 'package:bookmarko_server/src/generated/customers.dart' as _i16;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -75,10 +75,10 @@ class Endpoints extends _i1.EndpointDispatch {
           'services',
           null,
         ),
-      'users': _i10.UsersEndpoint()
+      'userCustomer': _i10.UserCustomerEndpoint()
         ..initialize(
           server,
-          'users',
+          'userCustomer',
           null,
         ),
     };
@@ -577,16 +577,16 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
-    connectors['users'] = _i1.EndpointConnector(
-      name: 'users',
-      endpoint: endpoints['users']!,
+    connectors['userCustomer'] = _i1.EndpointConnector(
+      name: 'userCustomer',
+      endpoint: endpoints['userCustomer']!,
       methodConnectors: {
         'addUser': _i1.MethodConnector(
           name: 'addUser',
           params: {
             'user': _i1.ParameterDescription(
               name: 'user',
-              type: _i1.getType<_i16.User>(),
+              type: _i1.getType<_i16.Customer>(),
               nullable: false,
             )
           },
@@ -594,7 +594,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['users'] as _i10.UsersEndpoint).addUser(
+              (endpoints['userCustomer'] as _i10.UserCustomerEndpoint).addUser(
             session,
             params['user'],
           ),
@@ -612,7 +612,8 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['users'] as _i10.UsersEndpoint).removeUser(
+              (endpoints['userCustomer'] as _i10.UserCustomerEndpoint)
+                  .removeUser(
             session,
             params['id'],
           ),
@@ -622,7 +623,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'user': _i1.ParameterDescription(
               name: 'user',
-              type: _i1.getType<_i16.User>(),
+              type: _i1.getType<_i16.Customer>(),
               nullable: false,
             )
           },
@@ -630,13 +631,13 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['users'] as _i10.UsersEndpoint).editUser(
+              (endpoints['userCustomer'] as _i10.UserCustomerEndpoint).editUser(
             session,
             params['user'],
           ),
         ),
-        'getUser': _i1.MethodConnector(
-          name: 'getUser',
+        'getCustomerInformation': _i1.MethodConnector(
+          name: 'getCustomerInformation',
           params: {
             'id': _i1.ParameterDescription(
               name: 'id',
@@ -648,7 +649,65 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['users'] as _i10.UsersEndpoint).getUser(
+              (endpoints['userCustomer'] as _i10.UserCustomerEndpoint)
+                  .getCustomerInformation(
+            session,
+            params['id'],
+          ),
+        ),
+        'getCustomers': _i1.MethodConnector(
+          name: 'getCustomers',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['userCustomer'] as _i10.UserCustomerEndpoint)
+                  .getCustomers(
+            session,
+            params['id'],
+          ),
+        ),
+        'getCustomerPayments': _i1.MethodConnector(
+          name: 'getCustomerPayments',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['userCustomer'] as _i10.UserCustomerEndpoint)
+                  .getCustomerPayments(
+            session,
+            params['id'],
+          ),
+        ),
+        'getCustomerAppointments': _i1.MethodConnector(
+          name: 'getCustomerAppointments',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['userCustomer'] as _i10.UserCustomerEndpoint)
+                  .getCustomerAppointments(
             session,
             params['id'],
           ),

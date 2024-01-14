@@ -12,27 +12,29 @@ import 'package:serverpod/protocol.dart' as _i2;
 import 'appointments.dart' as _i3;
 import 'assets.dart' as _i4;
 import 'business_owners.dart' as _i5;
-import 'example.dart' as _i6;
-import 'operating_hours.dart' as _i7;
-import 'payments.dart' as _i8;
-import 'review.dart' as _i9;
-import 'services.dart' as _i10;
-import 'subscriptions.dart' as _i11;
-import 'users.dart' as _i12;
+import 'customers.dart' as _i6;
+import 'example.dart' as _i7;
+import 'operating_hours.dart' as _i8;
+import 'payments.dart' as _i9;
+import 'review.dart' as _i10;
+import 'services.dart' as _i11;
+import 'subscriptions.dart' as _i12;
 import 'package:bookmarko_server/src/generated/appointments.dart' as _i13;
 import 'package:bookmarko_server/src/generated/assets.dart' as _i14;
 import 'package:bookmarko_server/src/generated/operating_hours.dart' as _i15;
 import 'package:bookmarko_server/src/generated/services.dart' as _i16;
+import 'package:bookmarko_server/src/generated/customers.dart' as _i17;
+import 'package:bookmarko_server/src/generated/payments.dart' as _i18;
 export 'appointments.dart';
 export 'assets.dart';
 export 'business_owners.dart';
+export 'customers.dart';
 export 'example.dart';
 export 'operating_hours.dart';
 export 'payments.dart';
 export 'review.dart';
 export 'services.dart';
 export 'subscriptions.dart';
-export 'users.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -62,13 +64,13 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
-          name: 'userId',
+          name: 'customerId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
-          name: 'userName',
+          name: 'customerName',
           columnType: _i2.ColumnType.text,
           isNullable: false,
           dartType: 'String',
@@ -152,7 +154,7 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'DateTime',
         ),
         _i2.ColumnDefinition(
-          name: 'user_id',
+          name: 'businessId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
@@ -261,6 +263,72 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
+      name: 'customers',
+      schema: 'public',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'customers_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'firstName',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'lastName',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'phone',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'email',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'joined',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: false,
+          dartType: 'DateTime',
+        ),
+        _i2.ColumnDefinition(
+          name: 'businessId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'customers_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
       name: 'operating_hours',
       schema: 'public',
       columns: [
@@ -332,7 +400,7 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
-          name: 'userId',
+          name: 'customerId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
@@ -392,7 +460,7 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
-          name: 'userId',
+          name: 'customerId',
           columnType: _i2.ColumnType.integer,
           isNullable: false,
           dartType: 'int',
@@ -536,66 +604,6 @@ class Protocol extends _i1.SerializationManagerServer {
       ],
       managed: true,
     ),
-    _i2.TableDefinition(
-      name: 'users',
-      schema: 'public',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.integer,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'users_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'email',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'phone',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'firstName',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'lastName',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'joined',
-          columnType: _i2.ColumnType.timestampWithoutTimeZone,
-          isNullable: false,
-          dartType: 'DateTime',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'users_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
     ..._i2.Protocol.targetDatabaseDefinition.tables,
   ]);
 
@@ -617,26 +625,26 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i5.Business) {
       return _i5.Business.fromJson(data, this) as T;
     }
-    if (t == _i6.Example) {
-      return _i6.Example.fromJson(data, this) as T;
+    if (t == _i6.Customer) {
+      return _i6.Customer.fromJson(data, this) as T;
     }
-    if (t == _i7.OperatingHours) {
-      return _i7.OperatingHours.fromJson(data, this) as T;
+    if (t == _i7.Example) {
+      return _i7.Example.fromJson(data, this) as T;
     }
-    if (t == _i8.Payment) {
-      return _i8.Payment.fromJson(data, this) as T;
+    if (t == _i8.OperatingHours) {
+      return _i8.OperatingHours.fromJson(data, this) as T;
     }
-    if (t == _i9.Review) {
-      return _i9.Review.fromJson(data, this) as T;
+    if (t == _i9.Payment) {
+      return _i9.Payment.fromJson(data, this) as T;
     }
-    if (t == _i10.Service) {
-      return _i10.Service.fromJson(data, this) as T;
+    if (t == _i10.Review) {
+      return _i10.Review.fromJson(data, this) as T;
     }
-    if (t == _i11.Subscription) {
-      return _i11.Subscription.fromJson(data, this) as T;
+    if (t == _i11.Service) {
+      return _i11.Service.fromJson(data, this) as T;
     }
-    if (t == _i12.User) {
-      return _i12.User.fromJson(data, this) as T;
+    if (t == _i12.Subscription) {
+      return _i12.Subscription.fromJson(data, this) as T;
     }
     if (t == _i1.getType<_i3.Appointment?>()) {
       return (data != null ? _i3.Appointment.fromJson(data, this) : null) as T;
@@ -647,28 +655,28 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i5.Business?>()) {
       return (data != null ? _i5.Business.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i6.Example?>()) {
-      return (data != null ? _i6.Example.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i6.Customer?>()) {
+      return (data != null ? _i6.Customer.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i7.OperatingHours?>()) {
-      return (data != null ? _i7.OperatingHours.fromJson(data, this) : null)
+    if (t == _i1.getType<_i7.Example?>()) {
+      return (data != null ? _i7.Example.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i8.OperatingHours?>()) {
+      return (data != null ? _i8.OperatingHours.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i8.Payment?>()) {
-      return (data != null ? _i8.Payment.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i9.Payment?>()) {
+      return (data != null ? _i9.Payment.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i9.Review?>()) {
-      return (data != null ? _i9.Review.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i10.Review?>()) {
+      return (data != null ? _i10.Review.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i10.Service?>()) {
-      return (data != null ? _i10.Service.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i11.Service?>()) {
+      return (data != null ? _i11.Service.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i11.Subscription?>()) {
-      return (data != null ? _i11.Subscription.fromJson(data, this) : null)
+    if (t == _i1.getType<_i12.Subscription?>()) {
+      return (data != null ? _i12.Subscription.fromJson(data, this) : null)
           as T;
-    }
-    if (t == _i1.getType<_i12.User?>()) {
-      return (data != null ? _i12.User.fromJson(data, this) : null) as T;
     }
     if (t == List<_i13.Appointment>) {
       return (data as List)
@@ -689,6 +697,19 @@ class Protocol extends _i1.SerializationManagerServer {
       return (data as List).map((e) => deserialize<_i16.Service>(e)).toList()
           as dynamic;
     }
+    if (t == List<_i17.Customer>) {
+      return (data as List).map((e) => deserialize<_i17.Customer>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i18.Payment?>) {
+      return (data as List).map((e) => deserialize<_i18.Payment?>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i13.Appointment?>) {
+      return (data as List)
+          .map((e) => deserialize<_i13.Appointment?>(e))
+          .toList() as dynamic;
+    }
     try {
       return _i2.Protocol().deserialize<T>(data, t);
     } catch (_) {}
@@ -706,26 +727,26 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i5.Business) {
       return 'Business';
     }
-    if (data is _i6.Example) {
+    if (data is _i6.Customer) {
+      return 'Customer';
+    }
+    if (data is _i7.Example) {
       return 'Example';
     }
-    if (data is _i7.OperatingHours) {
+    if (data is _i8.OperatingHours) {
       return 'OperatingHours';
     }
-    if (data is _i8.Payment) {
+    if (data is _i9.Payment) {
       return 'Payment';
     }
-    if (data is _i9.Review) {
+    if (data is _i10.Review) {
       return 'Review';
     }
-    if (data is _i10.Service) {
+    if (data is _i11.Service) {
       return 'Service';
     }
-    if (data is _i11.Subscription) {
+    if (data is _i12.Subscription) {
       return 'Subscription';
-    }
-    if (data is _i12.User) {
-      return 'User';
     }
     return super.getClassNameForObject(data);
   }
@@ -741,26 +762,26 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data['className'] == 'Business') {
       return deserialize<_i5.Business>(data['data']);
     }
+    if (data['className'] == 'Customer') {
+      return deserialize<_i6.Customer>(data['data']);
+    }
     if (data['className'] == 'Example') {
-      return deserialize<_i6.Example>(data['data']);
+      return deserialize<_i7.Example>(data['data']);
     }
     if (data['className'] == 'OperatingHours') {
-      return deserialize<_i7.OperatingHours>(data['data']);
+      return deserialize<_i8.OperatingHours>(data['data']);
     }
     if (data['className'] == 'Payment') {
-      return deserialize<_i8.Payment>(data['data']);
+      return deserialize<_i9.Payment>(data['data']);
     }
     if (data['className'] == 'Review') {
-      return deserialize<_i9.Review>(data['data']);
+      return deserialize<_i10.Review>(data['data']);
     }
     if (data['className'] == 'Service') {
-      return deserialize<_i10.Service>(data['data']);
+      return deserialize<_i11.Service>(data['data']);
     }
     if (data['className'] == 'Subscription') {
-      return deserialize<_i11.Subscription>(data['data']);
-    }
-    if (data['className'] == 'User') {
-      return deserialize<_i12.User>(data['data']);
+      return deserialize<_i12.Subscription>(data['data']);
     }
     return super.deserializeByClassName(data);
   }
@@ -780,18 +801,18 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i4.ImageAsset.t;
       case _i5.Business:
         return _i5.Business.t;
-      case _i7.OperatingHours:
-        return _i7.OperatingHours.t;
-      case _i8.Payment:
-        return _i8.Payment.t;
-      case _i9.Review:
-        return _i9.Review.t;
-      case _i10.Service:
-        return _i10.Service.t;
-      case _i11.Subscription:
-        return _i11.Subscription.t;
-      case _i12.User:
-        return _i12.User.t;
+      case _i6.Customer:
+        return _i6.Customer.t;
+      case _i8.OperatingHours:
+        return _i8.OperatingHours.t;
+      case _i9.Payment:
+        return _i9.Payment.t;
+      case _i10.Review:
+        return _i10.Review.t;
+      case _i11.Service:
+        return _i11.Service.t;
+      case _i12.Subscription:
+        return _i12.Subscription.t;
     }
     return null;
   }

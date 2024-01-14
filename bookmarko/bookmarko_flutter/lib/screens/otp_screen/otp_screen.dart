@@ -11,7 +11,7 @@ import 'package:bookmarko_flutter/widgets/buttons/go_back_button.dart';
 import '../../widgets/buttons/primary_blue_button.dart';
 
 class OtpScreen extends StatelessWidget {
-  final User user;
+  final Customer user;
   const OtpScreen({
     required this.user,
     super.key,

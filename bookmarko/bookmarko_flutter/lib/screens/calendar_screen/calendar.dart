@@ -19,7 +19,7 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var app = Appointment(appointmentDate:DateTime.now(), serviceName: "Haircut", userName: "Ella malka", userId: 1, businessId: 1, serviceId: 1, status: 'Paid', paid: true);
+    var app = Appointment(appointmentDate:DateTime.now(), serviceName: "Haircut", customerName: "Ella malka", customerId: 1, businessId: 1, serviceId: 1, status: 'Paid', paid: true);
     return ChangeNotifierProvider<CalendarController>(
       create: (context) => CalendarController(
         connectionController: context.read<ConnectionController>(),

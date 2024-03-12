@@ -34,53 +34,37 @@ class CustomerCard extends StatelessWidget {
                     color: Colors.black),
               ),
             ),
-            Container(
-              width: 90,
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${customer.firstName} ${customer.lastName}',
-                    style: const TextStyle(
-                        fontSize: 15,
-                        // fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                  ),
-                  Text(
-                    customer.phone,
-                    style: const TextStyle(
-                        fontSize: 12,
-                        // fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ],
+            const SizedBox(width: 15), // Add this line
+            Expanded(
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${customer.firstName} ${customer.lastName}',
+                      style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.black),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                    ),
+                    Text(
+                      customer.phone,
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(
-              width: 90,
-              alignment: Alignment.centerLeft,
-              child: Column(
+              alignment: Alignment.center,
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    customer.email ?? '',
-                    style: const TextStyle(
-                        fontSize: 15,
-                        // fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                  ),
-                  Text(
-                    customer.joined.toString(),
-                    style: const TextStyle(
-                        fontSize: 12,
-                        // fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.phone)),
                 ],
               ),
             ),

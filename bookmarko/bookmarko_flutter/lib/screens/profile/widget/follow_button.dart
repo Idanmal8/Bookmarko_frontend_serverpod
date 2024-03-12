@@ -13,11 +13,10 @@ class FollowButtonInteractive extends StatefulWidget {
   const FollowButtonInteractive({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _FollowButtonState createState() => _FollowButtonState();
+  FollowButtonState createState() => FollowButtonState();
 }
 
-class _FollowButtonState extends State<FollowButtonInteractive> {
+class FollowButtonState extends State<FollowButtonInteractive> {
   bool isFollowed = false;
 
   @override
@@ -43,7 +42,7 @@ class _FollowButtonState extends State<FollowButtonInteractive> {
       width: 100,
       child: OutlinedButton(
         onPressed:
-            null, // null makes it non-clickable since we are handling the click via GestureDetector
+            null, 
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -52,12 +51,13 @@ class _FollowButtonState extends State<FollowButtonInteractive> {
           side: const BorderSide(
               color: Color.fromARGB(144, 0, 0, 0), width: 1.0), // Black border
         ),
-        child: Text(
-          isFollowed ? 'Following' : 'Follow',
+        
+        child: isFollowed ?  const Icon(Icons.check, color: Colors.white, size: 25,) : Text(
+          'Follow',
           style: TextStyle(
               color: isFollowed ? Colors.white : Colors.black , fontSize: 12,
               fontWeight: isFollowed ? FontWeight.bold : FontWeight.bold),
-        ),
+        ) 
       ),
     );
   }

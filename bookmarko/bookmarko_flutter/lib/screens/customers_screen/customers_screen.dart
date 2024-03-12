@@ -1,5 +1,6 @@
 import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:bookmarko_flutter/screens/customers_screen/widget/customer_card.dart';
+import 'package:bookmarko_flutter/utils/search_bar/search_bar.dart';
 import 'package:flutter/material.dart';
 
 List<Customer> mockCustomers = [
@@ -29,13 +30,28 @@ List<Customer> mockCustomers = [
   ),
 ];
 
-class CustomersScreen extends StatelessWidget {
+class CustomersScreen extends StatefulWidget {
   final List<Customer>? businessCustomers;
 
   const CustomersScreen({
     this.businessCustomers,
     super.key,
   });
+
+  @override
+  State<CustomersScreen> createState() => _CustomersScreenState();
+}
+
+class _CustomersScreenState extends State<CustomersScreen> {
+  List<Customer> filteredCustomers =
+      mockCustomers; // Initially display all customers
+
+  void handleSearch(List<Customer> results) {
+    setState(() {
+      print('Results: $mockCustomers');
+      filteredCustomers = results;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +62,14 @@ class CustomersScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CustomerCard(customer: mockCustomers[0]),
-            CustomerCard(customer: mockCustomers[1]),
-            CustomerCard(customer: mockCustomers[2]),
+            SearchBarHandler<Customer>(
+              items: mockCustomers,
+              itemToString: (Customer customer) =>
+                  '${customer.firstName} ${customer.lastName}',
+              onSearch: handleSearch,
+            ),
+            for (var customer in filteredCustomers)
+              CustomerCard(customer: customer),
           ],
         ),
       ),

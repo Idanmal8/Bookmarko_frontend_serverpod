@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePicture extends StatelessWidget {
   final VoidCallback onPressed;
-  final bool hasImages;
+  final XFile? imageFile;
 
   const ProfilePicture({
     required this.onPressed,
-    required this.hasImages,
+    required this.imageFile,
     super.key,
   });
 
@@ -23,13 +24,13 @@ class ProfilePicture extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(6.0),
-          child: hasImages
+          child: imageFile != null
               ? ClipOval(
                   child: Image.asset(
-                    'assets/profile/idan_profile.png',
+                    imageFile?.path ?? '',
                     width: 140,
                     height: 140,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitWidth,
                   ),
                 )
               : ClipOval(

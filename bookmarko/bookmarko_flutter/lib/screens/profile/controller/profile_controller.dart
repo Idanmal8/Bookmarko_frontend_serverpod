@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bookmarko_client/bookmarko_client.dart';
 import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
@@ -7,16 +9,19 @@ import 'package:bookmarko_flutter/screens/services_screen/services_edit_screen.d
 import 'package:bookmarko_flutter/screens/operating_hours_screen/operating_hours_screen.dart';
 
 import 'package:bookmarko_flutter/utils/services_form_mixin.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 
 class ProfileController extends ChangeNotifier with ServicesFormMixin {
   final ConnectionController _connectionController;
+  final ImagePicker _picker = ImagePicker();
   final AuthController _authController;
   final int businessId;
 
-  List<Service> _businessServices;
   List<OperatingHours> _operatingHours;
+  List<Service> _businessServices;
   bool _isLoading = false;
+  XFile? _profileImage;
 
   ProfileController({
     required AuthController authController,
@@ -33,9 +38,15 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
   bool get isLoading => _isLoading;
   List<Service> get businessServices => [..._businessServices];
   List<OperatingHours> get operatingHours => [..._operatingHours];
+  XFile? get profileImage => _profileImage;
 
   set businessServices(List<Service> services) {
     _businessServices = services;
+    notifyListeners();
+  }
+
+  set profileImage(XFile? image) {
+    _profileImage = image;
     notifyListeners();
   }
 
@@ -114,6 +125,18 @@ class ProfileController extends ChangeNotifier with ServicesFormMixin {
               BioEditScreen(businessId: businessId, business: business)),
     );
     _init();
+  }
+
+  Future<File?> getImage() async {
+    debugPrint('Get image');
+    profileImage =
+        await _picker.pickImage(source: ImageSource.gallery);
+
+    if (profileImage != null) {
+      return File(profileImage?.path ?? '');
+    } else {
+      return null;
+    }
   }
 
   void logOut() async {

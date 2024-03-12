@@ -45,7 +45,7 @@ class Profile extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 2.9,
+                        height: MediaQuery.of(context).size.height / 3,
                         child: Stack(
                           children: [
                             ProfileBackgroundBanner(
@@ -54,14 +54,13 @@ class Profile extends StatelessWidget {
                               },
                               hasBackgroundImage: false,
                             ),
-                            Positioned(
-                              top: MediaQuery.of(context).size.height / 4 - 75,
-                              left: MediaQuery.of(context).size.width / 2 - 75,
+                            Container(
+                              alignment: Alignment.bottomCenter,
+                              width: MediaQuery.of(context).size.width,
                               child: ProfilePicture(
                                 onPressed: () => {
-                                  // print("sd2"),
-                                },
-                                hasImages: false,
+                                  controller.getImage(),
+                                }, imageFile: controller.profileImage,
                               ),
                             ),
                           ],

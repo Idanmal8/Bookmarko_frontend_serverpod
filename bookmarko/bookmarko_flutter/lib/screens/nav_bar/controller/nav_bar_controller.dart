@@ -69,8 +69,8 @@ class NavBarController extends ChangeNotifier {
     _businessServices = (await _connectionController.client?.services
         .getServices(_businessDetails?.id ?? 0));
 
-    _businessCustomers = (await _connectionController.client?.userCustomer
-        .getCustomers(_businessDetails?.id ?? 0));
+    // _businessCustomers = (await _connectionController.client?.userCustomer
+    //     .getCustomers(_businessDetails?.id ?? 0));
 
     if (_businessDetails == null) {
       _isLoading = false;

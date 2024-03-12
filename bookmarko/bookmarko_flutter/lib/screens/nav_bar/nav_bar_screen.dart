@@ -40,6 +40,7 @@ class NavBarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenSize = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider<NavBarController>(
       create: (context) => NavBarController(
         connectionController: context.read<ConnectionController>(),
@@ -67,59 +68,49 @@ class NavBarScreen extends StatelessWidget {
                         services: controller.businessServices),
                   ][controller.currentPageIndex]
                 : const Center(child: CircularProgressIndicator()),
-            bottomNavigationBar: Container(
-              decoration: const BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: Colors.grey, // Color of the border
-                    width: 0.5, // Width of the border
+            bottomNavigationBar: NavigationBar(
+              height: screenSize * 0.07,
+              surfaceTintColor: const Color.fromARGB(255, 255, 255, 255),
+              selectedIndex: controller.currentPageIndex,
+              onDestinationSelected: controller.onDestinationSelected,
+              destinations: <Widget>[
+                NavigationDestination(
+                  selectedIcon: ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                        controller.selectedColorPurple, BlendMode.srcIn),
+                    child: home,
                   ),
+                  icon: home,
+                  label: 'Home',
                 ),
-              ),
-              child: NavigationBar(
-                height: 58,
-                surfaceTintColor: const Color.fromARGB(255, 255, 255, 255),
-                selectedIndex: controller.currentPageIndex,
-                onDestinationSelected: controller.onDestinationSelected,
-                destinations: <Widget>[
-                  NavigationDestination(
-                    selectedIcon: ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                          controller.selectedColorPurple, BlendMode.srcIn),
-                      child: home,
-                    ),
-                    icon: home,
-                    label: 'Home',
+                NavigationDestination(
+                  selectedIcon: ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                        controller.selectedColorPurple, BlendMode.srcIn),
+                    child: customers,
                   ),
-                  NavigationDestination(
-                    selectedIcon: ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                          controller.selectedColorPurple, BlendMode.srcIn),
-                      child: customers,
-                    ),
-                    icon: customers,
-                    label: 'Customers',
+                  icon: customers,
+                  label: 'Customers',
+                ),
+                NavigationDestination(
+                  selectedIcon: ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                        controller.selectedColorPurple, BlendMode.srcIn),
+                    child: calendar,
                   ),
-                  NavigationDestination(
-                    selectedIcon: ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                          controller.selectedColorPurple, BlendMode.srcIn),
-                      child: calendar,
-                    ),
-                    icon: calendar,
-                    label: 'Calendar',
+                  icon: calendar,
+                  label: 'Calendar',
+                ),
+                NavigationDestination(
+                  selectedIcon: ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                        controller.selectedColorPurple, BlendMode.srcIn),
+                    child: user,
                   ),
-                  NavigationDestination(
-                    selectedIcon: ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                          controller.selectedColorPurple, BlendMode.srcIn),
-                      child: user,
-                    ),
-                    icon: user,
-                    label: 'User',
-                  ),
-                ],
-              ),
+                  icon: user,
+                  label: 'User',
+                ),
+              ],
             ),
           );
         },

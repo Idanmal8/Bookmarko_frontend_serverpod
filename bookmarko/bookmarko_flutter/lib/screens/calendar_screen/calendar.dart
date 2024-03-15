@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 
-import 'package:bookmarko_flutter/screens/calendar_screen/widget/appointments.dart';
 import 'package:bookmarko_flutter/screens/calendar_screen/controller/calendar_screen_controller.dart';
+import 'package:bookmarko_flutter/screens/calendar_screen/widget/appointments.dart';
 
 class Calendar extends StatelessWidget {
   final Business business;
@@ -19,7 +19,63 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var app = Appointment(appointmentDate:DateTime.now(), serviceName: "Haircut", customerName: "Ella malka", customerId: 1, businessId: 1, serviceId: 1, status: 'Paid', paid: true);
+    List<Appointment> app = [
+      Appointment(
+        businessId: business.id ?? 0,
+        id: 1,
+        customerId: 1,
+        customerName: 'John Doe',
+        serviceId: 0,
+        serviceName: 'Haircut',
+        appointmentDate: DateTime.now(),
+        status: 'Approverd',
+        paid: true,
+      ),
+      Appointment(
+        businessId: business.id ?? 0,
+        id: 2,
+        customerId: 2,
+        customerName: 'Jane Doe',
+        serviceId: 0,
+        serviceName: 'Haircut',
+        appointmentDate: DateTime.now(),
+        status: 'Approverd',
+        paid: true,
+      ),
+      Appointment(
+        businessId: business.id ?? 0,
+        id: 3,
+        customerId: 3,
+        customerName: 'Idan Doe',
+        serviceId: 2,
+        serviceName: 'Dye hair',
+        appointmentDate: DateTime.now(),
+        status: 'Declined',
+        paid: false,
+      ),
+      Appointment(
+        businessId: business.id ?? 0,
+        id: 4,
+        customerId: 4,
+        customerName: 'Uiu Doe',
+        serviceId: 2,
+        serviceName: 'Dye hair',
+        appointmentDate: DateTime.now(),
+        status: 'Declined',
+        paid: false,
+      ),
+      Appointment(
+        businessId: business.id ?? 0,
+        id: 5,
+        customerId: 6,
+        customerName: 'Idan Doe',
+        serviceId: 2,
+        serviceName: 'Dye hair',
+        appointmentDate: DateTime.now(),
+        status: 'Declined',
+        paid: false,
+      ),
+    ];
     return ChangeNotifierProvider<CalendarController>(
       create: (context) => CalendarController(
         connectionController: context.read<ConnectionController>(),
@@ -45,14 +101,16 @@ class Calendar extends StatelessWidget {
                         );
                       },
                     );
-                    controller.getAppointmentsForService(controller.getSelectedDate,
-                                controller.getSelectedService);
+                    controller.getAppointmentsForService(
+                        controller.getSelectedDate,
+                        controller.getSelectedService);
                   },
                   child: const Icon(Icons.add),
                 ),
                 body: SafeArea(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,9 +134,20 @@ class Calendar extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         if (!controller.isLoading) // Check if not loading
-                          Appointments(
-                            appointment: app,
-                            onTapAppointment: () =>  controller.goToEditAppointmentScreen(context, app),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  for (var app in app)
+                                    Appointments(
+                                      appointment: app,
+                                      onTapAppointment: () =>
+                                          controller.goToEditAppointmentScreen(
+                                              context, app),
+                                    ),
+                                ],
+                              ),
+                            ),
                           )
                         else
                           const CircularProgressIndicator(),

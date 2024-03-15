@@ -15,14 +15,15 @@ class Appointments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      transitionOnUserGestures: true,
+        transitionOnUserGestures: true,
         tag: appointment.customerId,
         child: GestureDetector(
           onTap: onTapAppointment,
           child: Card(
               elevation: 1,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -54,8 +55,8 @@ class Appointments extends StatelessWidget {
                                 fontSize: 15,
                                 // fontWeight: FontWeight.bold,
                                 color: Colors.black),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
                           Text(
                             appointment.serviceName,
@@ -78,15 +79,17 @@ class Appointments extends StatelessWidget {
                       ),
                     ),
                     Container(
-                        alignment: Alignment.center,
-                        width: 25,
-                        height: 25,
-                        child: Image(
-                            image: appointment.paid
-                                ? const AssetImage(
-                                    'assets/calendar/payments/paid_filled.png')
-                                : const AssetImage(
-                                    'assets/calendar/payments/paid_black.png')))
+                      alignment: Alignment.center,
+                      width: 25,
+                      height: 25,
+                      child: Image(
+                        image: appointment.paid
+                            ? const AssetImage(
+                                'assets/calendar/payments/paid_filled.png')
+                            : const AssetImage(
+                                'assets/calendar/payments/paid_black.png'),
+                      ),
+                    ),
                   ],
                 ),
               )),

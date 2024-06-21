@@ -59,8 +59,8 @@ class NavBarController extends ChangeNotifier {
         .client?.businessOwnersInformation
         .getBusinessInformation();
 
-    _businessImages = await _connectionController.client?.businessAssets
-        .getAssets(_businessDetails?.id ?? 0);
+    // _businessImages = await _connectionController.client?.businessAssets
+    //     .getAssets(_businessDetails?.id ?? 0);
 
     _businessOperatingHours = (await _connectionController
         .client?.operatingHours

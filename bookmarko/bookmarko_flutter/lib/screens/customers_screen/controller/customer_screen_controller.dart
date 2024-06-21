@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 // that way the init will not be called more then once.
 
 class CustomerScreenController extends ChangeNotifier with SearchBarHandler {
+  // ignore: unused_field
   final ConnectionController _connectionController;
 
   CustomerScreenController({

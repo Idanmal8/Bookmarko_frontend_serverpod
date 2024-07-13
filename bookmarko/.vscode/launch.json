@@ -1,0 +1,60 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "bookmarko_client",
+            "cwd": "bookmarko_client",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "bookmarko_customer_app",
+            "cwd": "bookmarko_customer_app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "bookmarko_customer_app (profile mode)",
+            "cwd": "bookmarko_customer_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "bookmarko_customer_app (release mode)",
+            "cwd": "bookmarko_customer_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "bookmarko_flutter",
+            "cwd": "bookmarko_flutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "bookmarko_flutter (profile mode)",
+            "cwd": "bookmarko_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "bookmarko_flutter (release mode)",
+            "cwd": "bookmarko_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "bookmarko_server",
+            "cwd": "bookmarko_server",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

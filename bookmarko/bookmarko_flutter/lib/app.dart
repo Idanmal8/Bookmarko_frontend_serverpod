@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
               ),
             ],
             child: MaterialApp(
-              title: 'Driver Management',
+              title: 'Bookmarko app',
               theme: ThemeData(
                 useMaterial3: true,
                 brightness: Brightness.light,

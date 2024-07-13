@@ -19,63 +19,6 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Appointment> app = [
-      Appointment(
-        businessId: business.id ?? 0,
-        id: 1,
-        customerId: 1,
-        customerName: 'John Doe',
-        serviceId: 0,
-        serviceName: 'Haircut',
-        appointmentDate: DateTime.now(),
-        status: 'Approverd',
-        paid: true,
-      ),
-      Appointment(
-        businessId: business.id ?? 0,
-        id: 2,
-        customerId: 2,
-        customerName: 'Jane Doe',
-        serviceId: 0,
-        serviceName: 'Haircut',
-        appointmentDate: DateTime.now(),
-        status: 'Approverd',
-        paid: true,
-      ),
-      Appointment(
-        businessId: business.id ?? 0,
-        id: 3,
-        customerId: 3,
-        customerName: 'Idan Doe',
-        serviceId: 2,
-        serviceName: 'Dye hair',
-        appointmentDate: DateTime.now(),
-        status: 'Declined',
-        paid: false,
-      ),
-      Appointment(
-        businessId: business.id ?? 0,
-        id: 4,
-        customerId: 4,
-        customerName: 'Uiu Doe',
-        serviceId: 2,
-        serviceName: 'Dye hair',
-        appointmentDate: DateTime.now(),
-        status: 'Declined',
-        paid: false,
-      ),
-      Appointment(
-        businessId: business.id ?? 0,
-        id: 5,
-        customerId: 6,
-        customerName: 'Idan Doe',
-        serviceId: 2,
-        serviceName: 'Dye hair',
-        appointmentDate: DateTime.now(),
-        status: 'Declined',
-        paid: false,
-      ),
-    ];
     return ChangeNotifierProvider<CalendarController>(
       create: (context) => CalendarController(
         connectionController: context.read<ConnectionController>(),
@@ -137,15 +80,15 @@ class Calendar extends StatelessWidget {
                           Expanded(
                             child: SingleChildScrollView(
                               child: Column(
-                                children: [
-                                  for (var app in app)
-                                    Appointments(
-                                      appointment: app,
-                                      onTapAppointment: () =>
-                                          controller.goToEditAppointmentScreen(
-                                              context, app),
-                                    ),
-                                ],
+                                children:
+                                    controller.appointments.map((appointment) {
+                                  return Appointments(
+                                    appointment: appointment,
+                                    onTapAppointment: () =>
+                                        controller.goToEditAppointmentScreen(
+                                            context, appointment),
+                                  );
+                                }).toList(),
                               ),
                             ),
                           )

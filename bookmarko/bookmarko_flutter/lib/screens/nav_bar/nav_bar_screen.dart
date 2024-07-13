@@ -1,6 +1,7 @@
 import 'package:bookmarko_flutter/controllers/auth_controller.dart';
 import 'package:bookmarko_flutter/controllers/connection_controller.dart';
 import 'package:bookmarko_flutter/screens/customers_screen/customers_screen.dart';
+import 'package:bookmarko_flutter/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
@@ -51,11 +52,7 @@ class NavBarScreen extends StatelessWidget {
           return Scaffold(
             body: controller.doneLoading
                 ? <Widget>[
-                    Container(
-                      color: Colors.red,
-                      alignment: Alignment.center,
-                      child: const Text('Page 1'),
-                    ),
+                    const HomeScreen(),
                     CustomersScreen(
                       businessCustomers: controller.businessCustomers,
                     ),

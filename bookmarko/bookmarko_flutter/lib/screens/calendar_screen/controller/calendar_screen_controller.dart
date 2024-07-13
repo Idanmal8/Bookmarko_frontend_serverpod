@@ -6,16 +6,17 @@ import 'package:flutter/material.dart';
 
 class CalendarController extends ChangeNotifier {
   final ConnectionController _connectionController;
+  final List<DateTime> _availableTimes = [];
   final Business business;
 
   DateTime selectedDate = DateTime.now();
   DateTime today = DateTime.now();
   List<Appointment> _appointments = [];
-  List<DateTime> _availableTimes = [];
   List<Service> _services = [];
   bool _isLoading = false;
   bool _initAppointmentList = false;
   Service? selectedService;
+
   DateTime selectedHourNewAppointment = DateTime(
     DateTime.now().year,
     DateTime.now().month,
@@ -74,9 +75,77 @@ class CalendarController extends ChangeNotifier {
   }
 
   void onDaySelected(DateTime day, DateTime focusedDay) {
+    _appointments.clear();
+    print('onDaySelected: ${day.day}');
     if (!isSameDay(selectedDate, day)) {
       selectedDate = day;
       getAppointments(day); // Fetch appointments for the selected day.
+      print('Selected date: $selectedDate');
+      print('Datetimenow date: ${DateTime.now().day}');
+      if (day.day == DateTime.now().day) {
+        _appointments = [
+          Appointment(
+            businessId: business.id ?? 0,
+            id: 1,
+            customerId: 1,
+            customerName: 'John Doe',
+            serviceId: 0,
+            serviceName: 'Haircut',
+            appointmentDate: DateTime(DateTime.now().year, DateTime.now().month,
+                DateTime.now().day, 10, 0),
+            status: 'Approverd',
+            paid: true,
+          ),
+          Appointment(
+            businessId: business.id ?? 0,
+            id: 2,
+            customerId: 2,
+            customerName: 'Jane Doe',
+            serviceId: 0,
+            serviceName: 'Haircut',
+            appointmentDate: DateTime(DateTime.now().year, DateTime.now().month,
+                DateTime.now().day, 10, 30),
+            status: 'Approverd',
+            paid: true,
+          ),
+          Appointment(
+            businessId: business.id ?? 0,
+            id: 3,
+            customerId: 3,
+            customerName: 'Idan Doe',
+            serviceId: 2,
+            serviceName: 'Dye hair',
+            appointmentDate: DateTime(DateTime.now().year, DateTime.now().month,
+                DateTime.now().day, 12, 30),
+            status: 'Declined',
+            paid: false,
+          ),
+          Appointment(
+            businessId: business.id ?? 0,
+            id: 4,
+            customerId: 4,
+            customerName: 'Uiu Doe',
+            serviceId: 2,
+            serviceName: 'Dye hair',
+            appointmentDate: DateTime(DateTime.now().year, DateTime.now().month,
+                DateTime.now().day, 13, 30),
+            status: 'Declined',
+            paid: false,
+          ),
+          Appointment(
+            businessId: business.id ?? 0,
+            id: 5,
+            customerId: 6,
+            customerName: 'Idan Doe',
+            serviceId: 2,
+            serviceName: 'Dye hair',
+            appointmentDate: DateTime(DateTime.now().year, DateTime.now().month,
+                DateTime.now().day, 14, 0),
+            status: 'Declined',
+            paid: false,
+          ),
+        ];
+      }
       notifyListeners();
     }
   }
@@ -90,6 +159,69 @@ class CalendarController extends ChangeNotifier {
     _appointments = await _connectionController.client?.appointments
             .getAppointments(business.id ?? 0, today) ??
         [];
+
+    _appointments = [
+      Appointment(
+        businessId: business.id ?? 0,
+        id: 1,
+        customerId: 1,
+        customerName: 'John Doe',
+        serviceId: 0,
+        serviceName: 'Haircut',
+        appointmentDate: DateTime(DateTime.now().year, DateTime.now().month,
+            DateTime.now().day, 10, 0),
+        status: 'Approverd',
+        paid: true,
+      ),
+      Appointment(
+        businessId: business.id ?? 0,
+        id: 2,
+        customerId: 2,
+        customerName: 'Jane Doe',
+        serviceId: 0,
+        serviceName: 'Haircut',
+        appointmentDate: DateTime(DateTime.now().year, DateTime.now().month,
+            DateTime.now().day, 10, 30),
+        status: 'Approverd',
+        paid: true,
+      ),
+      Appointment(
+        businessId: business.id ?? 0,
+        id: 3,
+        customerId: 3,
+        customerName: 'Idan Doe',
+        serviceId: 2,
+        serviceName: 'Dye hair',
+        appointmentDate: DateTime(DateTime.now().year, DateTime.now().month,
+            DateTime.now().day, 12, 30),
+        status: 'Declined',
+        paid: false,
+      ),
+      Appointment(
+        businessId: business.id ?? 0,
+        id: 4,
+        customerId: 4,
+        customerName: 'Uiu Doe',
+        serviceId: 2,
+        serviceName: 'Dye hair',
+        appointmentDate: DateTime(DateTime.now().year, DateTime.now().month,
+            DateTime.now().day, 13, 30),
+        status: 'Declined',
+        paid: false,
+      ),
+      Appointment(
+        businessId: business.id ?? 0,
+        id: 5,
+        customerId: 6,
+        customerName: 'Idan Doe',
+        serviceId: 2,
+        serviceName: 'Dye hair',
+        appointmentDate: DateTime(DateTime.now().year, DateTime.now().month,
+            DateTime.now().day, 14, 0),
+        status: 'Declined',
+        paid: false,
+      ),
+    ];
 
     _services = await _connectionController.client?.services
             .getServices(business.id ?? 0) ??
@@ -108,11 +240,11 @@ class CalendarController extends ChangeNotifier {
     _initAppointmentList = true;
     notifyListeners();
 
-    _appointments.clear();
+    // _appointments.clear();
 
-    _appointments = await _connectionController.client?.appointments
-            .getAppointments(business.id ?? 0, selectedDate) ??
-        [];
+    // _appointments = await _connectionController.client?.appointments
+    //         .getAppointments(business.id ?? 0, selectedDate) ??
+    //     [];
 
     _isLoading = false;
     _initAppointmentList = false;
@@ -130,19 +262,22 @@ class CalendarController extends ChangeNotifier {
     }
   }
 
-Future<void> goToEditAppointmentScreen(BuildContext context, Appointment appointment) async {
+  Future<void> goToEditAppointmentScreen(
+      BuildContext context, Appointment appointment) async {
     await Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => EditAppointmentScreenInCalendar(appointment: appointment)),
+      MaterialPageRoute(
+          builder: (context) =>
+              EditAppointmentScreenInCalendar(appointment: appointment)),
     );
   }
 
-/// !ToDo - Fix this function with this steps:
-/// 1. Get the selected day operating hours from the server from the app not in the server again.
-/// 2. send it to the endpoint with the operating hours.
-/// 3. do the same with appointments that are already booked.
-/// 4. send it to the endpoint with the appointments.
-/// 5. try making the calculation in the server.
-Future<List<DateTime>> getAppointmentsForService(
+  /// !ToDo - Fix this function with this steps:
+  /// 1. Get the selected day operating hours from the server from the app not in the server again.
+  /// 2. send it to the endpoint with the operating hours.
+  /// 3. do the same with appointments that are already booked.
+  /// 4. send it to the endpoint with the appointments.
+  /// 5. try making the calculation in the server.
+  Future<List<DateTime>> getAppointmentsForService(
       DateTime date, Service? service) async {
     _isLoading = true;
     notifyListeners();

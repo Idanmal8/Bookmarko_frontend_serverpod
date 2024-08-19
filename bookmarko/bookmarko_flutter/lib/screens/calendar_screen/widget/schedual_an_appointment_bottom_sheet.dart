@@ -25,13 +25,21 @@ class SchedualAppointmentBottomSheetFormState
     extends State<SchedualAppointmentBottomSheetForm> {
   late DateTime selectedDate;
   Service? selectedService;
+  List<DateTime> availableTimes = [
+    DateTime(2022, 1, 1, 14, 30),
+    DateTime(2022, 1, 1, 15, 0),
+    DateTime(2022, 1, 1, 15, 30),
+    DateTime(2022, 1, 1, 16, 0),
+    DateTime(2022, 1, 1, 16, 30),
+    DateTime(2022, 1, 1, 17, 0),
+    DateTime(2022, 1, 1, 17, 30),
+  ];
 
   @override
   void initState() {
     super.initState();
     selectedDate = widget.controller.getSelectedDate;
     selectedService = widget.controller.getSelectedService;
-
   }
 
   @override
@@ -84,13 +92,12 @@ class SchedualAppointmentBottomSheetFormState
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: widget.controller.availableTimes.isEmpty
+              child: availableTimes.isEmpty
                   ? const Center(child: CircularProgressIndicator())
                   : Wrap(
                       spacing: 8.0, // Horizontal space between chips
                       runSpacing: 4.0, // Vertical space between chips
-                      children:
-                          widget.controller.availableTimes.map((DateTime time) {
+                      children: availableTimes.map((DateTime time) {
                         return HoursBubble(
                           isAvailable: true,
                           time: time,
@@ -100,7 +107,28 @@ class SchedualAppointmentBottomSheetFormState
                         );
                       }).toList(),
                     ),
-            )
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all(Theme.of(context).primaryColor),
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      // Handle form submission
+                    },
+                    child: const Text('Schedual Appointment', style: TextStyle(color: Colors.white),),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

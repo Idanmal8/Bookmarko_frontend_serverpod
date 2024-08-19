@@ -1,3 +1,5 @@
+import 'package:bookmarko_flutter/screens/calendar_screen/widget/schedual_an_appointment_bottom_sheet.dart';
+import 'package:bookmarko_flutter/screens/home_screen/widgets/schedual_configuration_bottom_sheet.dart';
 import 'package:bookmarko_flutter/screens/home_screen/widgets/statistic_card.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +35,20 @@ class HomeScreen extends StatelessWidget {
       ),
     ];
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return const SchedualConfigurationBottomSheet();
+            
+                
+              
+            },
+          );
+        },
+        child: const Icon(Icons.rocket_launch_rounded),
+      ),
       body: SafeArea(
         child: Column(
           children: [

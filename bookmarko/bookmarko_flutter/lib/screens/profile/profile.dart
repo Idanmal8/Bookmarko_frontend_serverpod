@@ -60,7 +60,8 @@ class Profile extends StatelessWidget {
                               child: ProfilePicture(
                                 onPressed: () => {
                                   controller.getImage(),
-                                }, imageFile: controller.profileImage,
+                                },
+                                imageFile: controller.profileImage,
                               ),
                             ),
                           ],
@@ -70,10 +71,16 @@ class Profile extends StatelessWidget {
                       const Divider(),
                       PersonalInformation(business: business),
                       const Divider(),
-                      Services(services: controller.businessServices, onDelete: controller,),
+                      Services(
+                        services: controller.businessServices,
+                        onDelete: controller,
+                      ),
                       ServiceShortcutAddition(controller: controller),
                       const Divider(),
-                      OperatingHoursWidget(operatingHours: controller.operatingHours, controller: controller,),
+                      OperatingHoursWidget(
+                        operatingHours: controller.operatingHours,
+                        controller: controller,
+                      ),
                     ],
                   ),
                 );
